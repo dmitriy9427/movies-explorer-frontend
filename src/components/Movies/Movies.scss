@@ -1,0 +1,12 @@
+.movies {
+    background-color: #202020;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1279px) {
+    .movies {
+        max-width: 708px;
+        
+    }
+}

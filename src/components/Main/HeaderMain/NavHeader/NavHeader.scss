@@ -1,0 +1,98 @@
+.header__nav-in {
+    background-color: #073042;
+    border-bottom: 3px solid #202020;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+
+
+    .header__logo-nav {
+        max-width: 38px;
+        max-height: 38px;
+        margin-left: 72px;
+    }
+
+    .header__regin_nav {
+        margin-right: 68px;
+
+        .header__regin_ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            padding-left: 0;
+            font-size: 12px;
+            line-height: 133%;
+
+            .header__registr_btn {
+
+                .reg__btn {
+                    font-style: normal;
+                    font-weight: 500;
+                    border: none;
+                    background-color: transparent;
+                    color: #FFFFFF;
+                    padding: 0;
+                    margin-right: 30px;
+                    transition: all 0.5s ease;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 0.2;
+                    }
+                }
+            }
+
+            .header__login_btn {
+                .log_btn {
+                    border: none;
+                    font-style: normal;
+                    font-weight: 500;
+                    color: #000000;
+                    padding: 8px 20px;
+                    background-color: #3DDC84;
+                    border-radius: 3px;
+                    transition: all 0.5s ease;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 0.5;
+                        background-color: #000000;
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    .header__nav-in {
+        max-width: 768px;
+
+        .header__logo-nav {
+            margin-left: 30px;
+        }
+
+        .header__regin_nav {
+            margin-right: 30px;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header__nav-in {
+        max-width: 320px;
+
+        .header__logo-nav {
+            margin-left: 14px;
+        }
+
+        .header__regin_nav {
+            margin-right: 14px;
+        }
+    }
+}

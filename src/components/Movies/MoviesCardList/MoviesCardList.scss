@@ -1,0 +1,17 @@
+.movies__card_list {
+    max-width: 1140px;
+    padding: 60px 0 1px;
+    display: grid;
+    flex-direction: column;
+    row-gap: 40px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 767px) {
+    .movies__card_list {
+        max-width: 300px;
+        margin: 0 auto;
+        row-gap: 20px;
+        padding-top: 40px;
+    }
+}

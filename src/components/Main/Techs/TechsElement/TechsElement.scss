@@ -1,0 +1,28 @@
+    .techs__element {
+        background-color: #303030;
+        border-radius: 10px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        letter-spacing: -0.04em;
+        color: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        width: 90px;
+        height: 60px;
+        margin-right: 10px;
+
+        &:last-of-type {
+            margin-right: 0px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .techs__element {
+            margin-right: 0;
+        }
+    }

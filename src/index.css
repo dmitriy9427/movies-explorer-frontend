@@ -1,0 +1,6 @@
+@import url(./vendor/fonts/InterWeb/inter.css);
+@import url(./vendor/normalize.css);
+
+html {
+  scroll-behavior: smooth;
+}

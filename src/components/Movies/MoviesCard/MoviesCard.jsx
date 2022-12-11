@@ -1,0 +1,26 @@
+import React from "react";
+import "./MoviesCard.scss";
+
+function MoviesCard(props) {
+  return (
+    <div className="movies__card">
+      <div className="movies__card_info">
+        <h3 className="movies__card_title">{props.title}</h3>
+        <p className="movies__card_duration">{props.duration}</p>
+        <button
+          type="button"
+          className="button movies__card_like movies__card_like-active"
+        />
+      </div>
+      <div className="movies__card_image">
+        <img
+          className="movies__card_img"
+          src={props.image}
+          alt="Карточка фильма"
+        />
+      </div>
+    </div>
+  );
+}
+
+export default MoviesCard;
