@@ -1,7 +1,6 @@
 .diplom {
-    margin: 0 auto;
+    margin: 0;
     max-width: 550px;
-    text-align: left;
 
     .diplom__title {
         font-style: normal;
@@ -10,7 +9,7 @@
         line-height: 24px;
         letter-spacing: -0.04em;
         color: #FFFFFF;
-        margin: 0 0 26px;
+        margin: 6px 0 22px;
     }
 
     .diplom__description {
@@ -23,7 +22,7 @@
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .diplom {
 
         .diplom__description {
@@ -33,7 +32,7 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .diplom {
         margin: 0 auto 56px;
 

@@ -12,12 +12,20 @@
         justify-content: center;
         align-items: center;
         margin: 0;
-        width: 90px;
+        width: 80px;
         height: 60px;
         margin-right: 10px;
 
         &:last-of-type {
             margin-right: 0px;
+        }
+    }
+
+    @media screen and (max-width: 1279px) {
+        .techs__element {
+            font-size: 12px;
+            line-height: 15px;
+            margin-right: 10px;
         }
     }
 

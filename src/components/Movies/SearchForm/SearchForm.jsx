@@ -5,7 +5,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 function SearchForm() {
   return (
     <div className="form">
-      <form noValidate name="search-form" className="search__form">
+      <form name="search-form" className="search__form">
         <button className="search__form_image"></button>
         <input
           type="text"

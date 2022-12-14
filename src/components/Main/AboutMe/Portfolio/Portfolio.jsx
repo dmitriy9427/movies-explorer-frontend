@@ -5,9 +5,9 @@ import "./Portfolio.scss";
 function Portfolio() {
   return (
     <section className="portfolio">
+      <h3 className="portfolio__title">Портфолио</h3>
       <ul className="portfolio__list">
-        <h3 className="portfolio__title">Портфолио</h3>
-        <li>
+        <li className="portfolio__li">
           <a
             href="https://dmitriy9427.github.io/how-to-learn/"
             target="_blank"
@@ -18,8 +18,7 @@ function Portfolio() {
             <img className="portfolio__link_img" src={strelka} alt="стрелка" />
           </a>
         </li>
-        <hr className="portfolio__link_underline" />
-        <li>
+        <li className="portfolio__li">
           <a
             href="https://dmitriy9427.github.io/russian-travel/index.html"
             target="_blank"
@@ -30,8 +29,8 @@ function Portfolio() {
             <img className="portfolio__link_img" src={strelka} alt="стрелка" />
           </a>
         </li>
-        <hr className="portfolio__link_underline" />
-        <li>
+
+        <li className="portfolio__li">
           <a
             href="https://domainname.ryabov1994.nomoredomains.icu/"
             target="_blank"

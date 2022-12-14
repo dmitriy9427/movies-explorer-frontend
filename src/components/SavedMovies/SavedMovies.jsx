@@ -7,12 +7,18 @@ import "./SavedMovies.scss";
 
 function SavedMovies() {
   return (
-    <section className="saved__movies">
-      <Header />
-      <SearchForm />
-      <SavedMoviesCardList />
-      <Footer />
-    </section>
+    <body className="saved__movies">
+      <header>
+        <Header />
+      </header>
+      <main>
+        <SearchForm />
+        <SavedMoviesCardList />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </body>
   );
 }
 

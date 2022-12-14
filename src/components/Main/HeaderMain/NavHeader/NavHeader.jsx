@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../../../images/logo.svg";
 import "./NavHeader.scss";
 
@@ -12,14 +12,14 @@ function NavHeader() {
       <nav className="header__regin_nav">
         <ul className="header__regin_ul">
           <li>
-            <NavLink to="/signup" className="header__registr_btn">
+            <Link to="/signup" className="header__reg_btn">
               <button className="reg__btn">Регистрация</button>
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <NavLink to="/signin" className="header__login_btn">
+            <Link to="/signin" className="header__login_btn">
               <button className="log_btn">Войти</button>
-            </NavLink>
+            </Link>
           </li>
         </ul>
       </nav>

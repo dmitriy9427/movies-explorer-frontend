@@ -1,13 +1,13 @@
-.notfound {
+.not-found {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     max-width: 1280px;
+    height: 100vh;
     margin: 0 auto;
 
-    .notfound__title {
-        font-family: 'Inter';
+    .not-found__title {
         font-style: normal;
         font-weight: 400;
         font-size: 140px;
@@ -17,8 +17,7 @@
         margin: 246px auto 5px;
     }
 
-    .notfound__text {
-        font-family: 'Inter';
+    .not-found__text {
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
@@ -28,8 +27,7 @@
         margin: 0 auto 184px;
     }
 
-    .notfound__back {
-        font-family: 'Inter';
+    .not-found__back {
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -41,15 +39,38 @@
     }
 }
 
-@media screen and (max-width: 768px) {
-    .notfound {
+@media screen and (max-width: 900px) {
+    .not-found {
         max-width: 768px;
 
-        .notfound__title {
+        .not-found__title {
             margin-top: 408px;
         }
-        .notfound__back {
-            margin-bottom: 222px;
+
+        .not-found__text {
+            margin: 0;
+        }
+
+        .not-found__back {
+            margin: 184px auto 222px;
+        }
+    }
+}
+
+@media screen and (max-width: 519px) {
+    .not-found {
+        .not-found__title {
+            font-size: 80px;
+            line-height: 97px;
+            margin-top: 329px;
+        }
+
+        .not-found__text {
+            margin-bottom: 0;
+        }
+
+        .not-found__back {
+            margin: 284px auto 30px;
         }
     }
 }

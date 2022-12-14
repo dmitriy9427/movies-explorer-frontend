@@ -4,13 +4,13 @@
     margin: 0 auto;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .about__projects {
         max-width: 668px;
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .about__projects {
         max-width: 284px;
     }

@@ -22,12 +22,10 @@
             padding: 0;
             margin: 0;
 
-
             .header__link {
                 color: #fff;
                 text-decoration: none;
                 margin-left: 20px;
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 500;
                 font-size: 14px;
@@ -47,10 +45,8 @@
         text-decoration: none;
         margin-left: 50px;
 
-
         .header__account-text {
             margin-right: 13px;
-            font-family: 'Inter';
             font-style: normal;
             font-weight: 500;
             font-size: 14px;
@@ -78,7 +74,13 @@
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
+    .header {
+        max-width: 800px;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .header {
         max-width: 708px;
 
@@ -93,7 +95,7 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .header {
         max-width: 292px;
     }

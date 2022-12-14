@@ -7,13 +7,19 @@ import Footer from "../Footer/Footer";
 
 function Main() {
   return (
-    <section>
-      <HeaderMain />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Footer />
-    </section>
+    <body>
+      <header>
+        <HeaderMain />
+      </header>
+      <main>
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </body>
   );
 }
 

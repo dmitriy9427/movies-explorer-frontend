@@ -6,97 +6,103 @@
     margin: 0 auto;
     padding-bottom: 125px;
 
+    .portfolio__title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 111%;
+        color: #8B8B8B;
+        mix-blend-mode: normal;
+        margin: 0 0 50px;
+    }
+
     .portfolio__list {
         list-style: none;
         padding: 0;
         margin: 0;
 
-        .portfolio__title {
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 111%;
-            color: #8B8B8B;
-            mix-blend-mode: normal;
-            margin: 0 0 50px;
-        }
-
-        .portfolio__link-a {
-            color: #fff;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all .5s ease;
-
-            &:hover {
-                opacity: 0.5;
+        .portfolio__li {
+            &:not(:last-child) {
+                border-bottom: 1px solid #424242;
             }
 
+            .portfolio__link-a {
+                color: #fff;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                text-decoration: none;
+                cursor: pointer;
+                transition: all .5s ease;
 
-            .portfolio__link_text {
-                font-style: normal;
-                font-weight: 400;
-                font-size: 30px;
-                line-height: 167%;
-                letter-spacing: -0.04em;
-                margin: 0;
+                &:hover {
+                    opacity: 0.5;
+                }
+
+                .portfolio__link_text {
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 30px;
+                    line-height: 167%;
+                    letter-spacing: -0.04em;
+                    margin: 0;
+                }
+
+                .portfolio__link_img {
+                    max-width: 29px;
+                    max-height: 50px;
+                }
             }
-
-            .portfolio__link_img {
-                max-width: 29px;
-                max-height: 50px;
-            }
-        }
-
-        .portfolio__link_underline {
-            margin: 19px 0 20px;
-            height: 1px;
-            border: none;
-            background-color: #424242;
-            padding: 0;
         }
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .portfolio {
         max-width: 668px;
         padding-bottom: 90px;
 
         .portfolio__list {
-            .portfolio__link-a {
-                .portfolio__link_text {
-                    font-size: 28px;
-                    line-height: 179%;
+            .portfolio__li {
+                .portfolio__link-a {
+                    .portfolio__link_text {
+                        font-size: 28px;
+                        line-height: 179%;
+                    }
                 }
             }
         }
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .portfolio {
         max-width: 292px;
         padding-bottom: 70px;
 
-        .portfolio__list {
-            .portfolio__title {
-                font-size: 14px;
-                line-height: 143%;
-                margin-bottom: 40px;
-            }
+        .portfolio__title {
+            font-size: 14px;
+            line-height: 143%;
+            margin-bottom: 40px;
+        }
 
-            .portfolio__link-a {
-                .portfolio__link_text {
-                    font-size: 18px;
-                    line-height: 156%;
+        .portfolio__list {
+            .portfolio__li {
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid #E6E6E6;
                 }
 
-                .portfolio__link_img {
-                    max-width: 18px;
-                    max-height: 28px;
+                .portfolio__link-a {
+                    .portfolio__link_text {
+                        font-size: 18px;
+                        line-height: 156%;
+                    }
+
+                    .portfolio__link_img {
+                        max-width: 18px;
+                        max-height: 28px;
+                    }
                 }
             }
         }

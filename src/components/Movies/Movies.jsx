@@ -7,12 +7,18 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
 function Movies() {
   return (
-    <section className="movies">
-      <Header />
-      <SearchForm />
-      <MoviesCardList />
-      <Footer />
-    </section>
+    <body className="movies">
+      <header>
+        <Header />
+      </header>
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
+      <footer>
+        <Footer />
+      </footer>
+    </body>
   );
 }
 

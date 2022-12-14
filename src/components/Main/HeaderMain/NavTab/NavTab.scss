@@ -18,12 +18,11 @@
 
             .navigation__item {
                 padding: 0;
-                margin-right: 40px;
+                margin: 0 40px 0 0;
                 color: #fff;
                 text-decoration: none;
                 border-bottom: 1px solid #FFFFFF;
                 transition: all .5s ease;
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 500;
                 font-size: 13px;
@@ -41,15 +40,17 @@
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .navigation {
         max-width: 768px;
+        padding: 26px 0 22px;
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .navigation {
         max-width: 320px;
+        padding: 24px 0;
 
         .nav {
             .navigation__items {

@@ -14,7 +14,6 @@
         margin: 22px 0 22px 22px;
 
         .movies__card_title-save {
-            font-family: 'Inter';
             font-style: normal;
             font-weight: 500;
             font-size: 18px;
@@ -23,7 +22,6 @@
         }
 
         .movies__card_duration-save {
-            font-family: 'Inter';
             font-style: normal;
             font-weight: 400;
             font-size: 11px;
@@ -43,24 +41,28 @@
             border: 0;
             outline: 0;
         }
+    }
 
-        .movies__card_image-save {
-            margin: 6px 6px;
+    .movies__card_image-save {
+        display: flex;
+
+        .movies__card_img-save {
+            margin: 6px;
         }
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .movies__card-save {
         max-width: 708px;
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .movies__card-save {
         max-width: 300px;
         flex-direction: column-reverse;
-        
+
         .movies__card_info-save {
             margin: 14px auto;
             display: grid;
@@ -93,14 +95,15 @@
                 margin-left: 74px;
             }
         }
+    }
 
-        .movies__card_image-save {
+    .movies__card_image-save {
+        width: 300px;
+        margin: 0 auto;
+
+        .movies__card_img-save {
             width: 300px;
-            margin: 0;
-
-            .movies__card_img-save {
-                width: 300px;
-            }
         }
+
     }
 }

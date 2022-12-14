@@ -1,14 +1,15 @@
 .login {
     max-width: 1280px;
     margin: 0 auto;
+    height: 100vh;
 
     .login__content {
-        height: 100vh;
         max-width: 396px;
         padding: 0;
         display: flex;
         flex-direction: column;
         margin: 0 auto;
+        height: 100vh;
 
         .login__box-greeting {
             display: flex;
@@ -23,7 +24,6 @@
             }
 
             .login__greeting {
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 500;
                 font-size: 24px;
@@ -45,7 +45,6 @@
                 flex-direction: column;
 
                 .login__form-label {
-                    font-family: 'Inter';
                     font-style: normal;
                     font-weight: 400;
                     font-size: 10px;
@@ -76,7 +75,6 @@
                 }
 
                 .profile__error {
-                    font-family: 'Inter';
                     font-style: normal;
                     font-weight: 400;
                     font-size: 10px;
@@ -93,7 +91,6 @@
             margin: 190px auto 16px;
             background-color: #4285F4;
             border-radius: 3px;
-            font-family: 'Inter';
             font-style: normal;
             font-weight: 500;
             font-size: 14px;
@@ -115,7 +112,6 @@
             margin: 0 auto;
 
             .login__box-text {
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 400;
                 font-size: 14px;
@@ -125,7 +121,6 @@
             }
 
             .login__box-link {
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 400;
                 font-size: 14px;
@@ -137,12 +132,12 @@
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .login {
         max-width: 396px;
 
         .login__content {
-            margin: 0 auto 232px;
+            margin: 0 auto;
 
             .login__box-greeting {
                 margin-top: 232px;
@@ -153,15 +148,13 @@
             }
 
             .login__button {
-                margin: 195px auto 16px;
+                margin: 179px auto 16px;
             }
         }
-
-
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .login {
         max-width: 260px;
         margin: 0 auto;

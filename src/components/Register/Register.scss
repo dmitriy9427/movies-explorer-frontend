@@ -1,6 +1,7 @@
 .register {
     max-width: 1280px;
-    margin: 0 auto;
+    margin: auto;
+    height: 100vh;
 
     .register__content {
         height: 100vh;
@@ -23,7 +24,6 @@
             }
 
             .register__greeting {
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 500;
                 font-size: 24px;
@@ -46,7 +46,6 @@
                 margin: 0;
 
                 .register__form-label {
-                    font-family: 'Inter';
                     font-style: normal;
                     font-weight: 400;
                     font-size: 10px;
@@ -80,7 +79,6 @@
             }
 
             .register__error {
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 400;
                 font-size: 10px;
@@ -90,14 +88,12 @@
             }
         }
 
-
         .register__button {
             border: none;
             padding: 13px 126px 15px 124px;
             margin: 55px auto 16px;
             background-color: #4285F4;
             border-radius: 3px;
-            font-family: 'Inter';
             font-style: normal;
             font-weight: 500;
             font-size: 14px;
@@ -119,7 +115,6 @@
             margin: 0 auto;
 
             .register__box-text {
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 400;
                 font-size: 14px;
@@ -129,14 +124,12 @@
             }
 
             .register__box-link {
-                font-family: 'Inter';
                 font-style: normal;
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 17px;
                 color: #4285F4;
                 text-decoration: none;
-
             }
         }
     }

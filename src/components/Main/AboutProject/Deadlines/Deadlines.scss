@@ -1,6 +1,6 @@
 .deadlines {
     max-width: 1140px;
-    margin: 110px auto 60px;
+    margin: 95px auto 57px;
     display: grid;
     grid-template-columns: 228px 1fr;
     grid-template-rows: 1fr 1fr;
@@ -10,7 +10,7 @@
     ;
 
     .deadlines__week_one {
-        padding: 9px 9px;
+        padding: 9px;
         background-color: #3DDC84;
         grid-area: weekone;
         font-style: normal;
@@ -43,10 +43,10 @@
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .deadlines {
         max-width: 668px;
-        margin: 73px auto 60px;
+        margin: 82px auto 40px;
         grid-template-columns: 140px 1fr;
 
         .deadlines__week_one {
@@ -55,7 +55,7 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .deadlines {
         max-width: 284px;
         grid-template-columns: 100px 1fr;

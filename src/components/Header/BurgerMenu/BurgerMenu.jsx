@@ -11,15 +11,23 @@ export default function BurgerMenu() {
         <div className="burger-menu__container">
           <button className="button burger-menu__close-icon" type="button" />
           <nav className="burger-menu__link-wrapper">
-            <Link to="/" className="button burger-menu__link">
-              Главная
-            </Link>
-            <Link to="/movies" className="button burger-menu__link">
-              Фильмы
-            </Link>
-            <Link to="/saved-movies" className="button burger-menu__link">
-              Сохраненные фильмы
-            </Link>
+            <ul className="burger-menu__links">
+              <li className="burger-menu__link-li">
+                <Link to="/" className="button burger-menu__link">
+                  Главная
+                </Link>
+              </li>
+              <li className="burger-menu__link-li">
+                <Link to="/movies" className="button burger-menu__link">
+                  Фильмы
+                </Link>
+              </li>
+              <li className="burger-menu__link-li">
+                <Link to="/saved-movies" className="button burger-menu__link">
+                  Сохраненные фильмы
+                </Link>
+              </li>
+            </ul>
           </nav>
           <div className="burger-menu__account">
             <Link to="/profile" className="button burger-menu__btn-profile">

@@ -3,9 +3,9 @@
     margin: 0 auto 101px;
     display: grid;
     grid-template-columns: 600px 1fr;
+    column-gap: 40px;
     justify-items: center;
     align-items: center;
-
 
     .student__info {
         color: #fff;
@@ -69,7 +69,7 @@
     }
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 900px) {
     .student__information {
         max-width: 668px;
         margin: 0 auto 91px;
@@ -86,6 +86,7 @@
             .student_profession {
                 font-size: 12px;
                 line-height: 150%;
+                margin-bottom: 20px;
             }
 
             .student__about {
@@ -105,7 +106,7 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 519px) {
     .student__information {
         display: flex;
         max-width: 292px;
@@ -131,7 +132,6 @@
                 line-height: 145%;
                 margin-bottom: 40px;
             }
-
         }
 
         .student__photo {

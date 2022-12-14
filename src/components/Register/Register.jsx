@@ -20,6 +20,7 @@ export default function Register() {
                 type="text"
                 name="name"
                 className="register__input register__input-name"
+                placeholder="Введите имя"
               />
             </label>
             <span className="register__error"></span>
@@ -30,6 +31,7 @@ export default function Register() {
                 type="email"
                 name="email"
                 className="register__input register__input-email"
+                placeholder="Введите почту"
               />
             </label>
             <span className="register__error"></span>
@@ -40,6 +42,7 @@ export default function Register() {
                 type="password"
                 name="password"
                 className="register__input register__input-password"
+                placeholder="Введите пароль"
               />
             </label>
             <span className="register__error"></span>

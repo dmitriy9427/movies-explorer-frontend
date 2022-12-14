@@ -1,6 +1,7 @@
 body {
   height: 100vh;
   background: #202020;
+  margin: 0 auto;
 }
 
 #root {
