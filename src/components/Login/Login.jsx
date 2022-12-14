@@ -21,6 +21,7 @@ export default function Login() {
                 name="email"
                 className="login__input login__input-email"
                 placeholder="Введите почту"
+                required
               />
             </label>
             <span className="profile__error"></span>
@@ -32,6 +33,7 @@ export default function Login() {
                 name="password"
                 className="login__input login__input-password"
                 placeholder="Введите пароль"
+                required
               />
             </label>
             <span className="profile__error"></span>
