@@ -8,7 +8,9 @@ export default function Login() {
     <section className="login">
       <div className="login__content">
         <div className="login__box-greeting">
-          <img className="login__logo" src={logo} alt="логотип" />
+          <Link to="/" className="button">
+            <img className="login__logo" src={logo} alt="логотип" />
+          </Link>
           <h3 className="login__greeting">Рады видеть!</h3>
         </div>
 

@@ -7,7 +7,7 @@ import Footer from "../Footer/Footer";
 
 function Main() {
   return (
-    <body>
+    <main>
       <header>
         <HeaderMain />
       </header>
@@ -19,7 +19,7 @@ function Main() {
       <footer>
         <Footer />
       </footer>
-    </body>
+    </main>
   );
 }
 

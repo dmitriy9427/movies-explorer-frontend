@@ -5,7 +5,7 @@ import StudentInfo from "./StudentInfo/StudentInfo";
 
 function AboutMe() {
   return (
-    <section className="student">
+    <section id="student" className="student">
       <Promo title="Студент" />
       <StudentInfo />
       <Portfolio />

@@ -8,7 +8,9 @@ export default function Register() {
     <section className="register">
       <div className="register__content">
         <div className="register__box-greeting">
-          <img className="register__logo" src={logo} alt="логотип" />
+          <Link to="/" className="button">
+            <img className="register__logo" src={logo} alt="логотип" />
+          </Link>
           <h3 className="register__greeting">Добро пожаловать!</h3>
         </div>
 

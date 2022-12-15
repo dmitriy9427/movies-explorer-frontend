@@ -7,7 +7,7 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
 function Movies() {
   return (
-    <body className="movies">
+    <section className="movies">
       <header>
         <Header />
       </header>
@@ -18,7 +18,7 @@ function Movies() {
       <footer>
         <Footer />
       </footer>
-    </body>
+    </section>
   );
 }
 

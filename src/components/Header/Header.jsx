@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import icon from "../../images/iconAccount.svg";
@@ -6,9 +6,31 @@ import "./Header.scss";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
 function Header() {
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const openModal = useCallback(() => {
+    setOpenPopup(true);
+  }, []) ;
+
+  const closeModal = (e) => {
+    e.preventDefault();
+    if (e.key === "Escape") {
+      setOpenPopup(false);
+    } else {
+      setOpenPopup(false);
+    }
+  };
+
+  React.useEffect(() => {
+    if (openModal) {
+      document.addEventListener("keydown", closeModal);
+
+    }
+    return () => document.removeEventListener("keydown", closeModal);
+  }, [openModal]);
+
   return (
     <header className="header">
-      <Link to='/' className="button">
+      <Link to="/" className="button">
         <img className="header__logo" src={logo} alt="логотип" />
       </Link>
       <nav className="header__nav">
@@ -30,8 +52,8 @@ function Header() {
           </NavLink>
         </ul>
       </nav>
-      <button className="header__button_burger-menu" />
-      <BurgerMenu />
+      <button className="header__button_burger-menu" onClick={openModal} />
+      <BurgerMenu isOpen={openPopup} onClose={closeModal} />
     </header>
   );
 }

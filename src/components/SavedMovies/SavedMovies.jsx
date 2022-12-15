@@ -7,7 +7,7 @@ import "./SavedMovies.scss";
 
 function SavedMovies() {
   return (
-    <body className="saved__movies">
+    <main className="saved__movies">
       <header>
         <Header />
       </header>
@@ -18,7 +18,7 @@ function SavedMovies() {
       <footer>
         <Footer />
       </footer>
-    </body>
+    </main>
   );
 }
 

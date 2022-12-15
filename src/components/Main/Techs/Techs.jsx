@@ -5,7 +5,7 @@ import TechsSection from "./TechsSection/TechsSection";
 
 function Techs() {
   return (
-    <section className="techs__section">
+    <section id="techs" className="techs__section">
       <Promo title="Технологии" />
       <TechsSection />
     </section>
