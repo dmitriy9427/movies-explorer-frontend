@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, { useCallback } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import icon from "../../images/iconAccount.svg";
@@ -9,13 +9,12 @@ function Header() {
   const [openPopup, setOpenPopup] = React.useState(false);
   const openModal = useCallback(() => {
     setOpenPopup(true);
-  }, []) ;
+  }, []);
 
   const closeModal = (e) => {
     e.preventDefault();
+    setOpenPopup(false);
     if (e.key === "Escape") {
-      setOpenPopup(false);
-    } else {
       setOpenPopup(false);
     }
   };
@@ -23,7 +22,6 @@ function Header() {
   React.useEffect(() => {
     if (openModal) {
       document.addEventListener("keydown", closeModal);
-
     }
     return () => document.removeEventListener("keydown", closeModal);
   }, [openModal]);

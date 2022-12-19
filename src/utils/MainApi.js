@@ -9,134 +9,120 @@ class MainApi {
     return res.ok ? res.json : Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  async register({ name, email, password }) {
-    const url = `${this._baseUrl}/signup`;
-    const res = await fetch(url, {
+  register(name, email, password) {
+    return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
-      credentials: "include",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-      body: JSON.stringify({ name, email, password }),
-    });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    return data;
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+    }).then(this._checkResponse);
   }
 
-  async login({ email, password }) {
-    const url = `${this._baseUrl}/signin`;
-    const res = await fetch(url, {
+  login(email, password) {
+    return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
-      credentials: "include",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    return data;
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    }).then(this._checkResponse);
   }
 
-  setToken() {
-    this._headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
-  }
-
-  async checkToken() {
-    const url = `${this._baseUrl}/users/me`;
-    const headers = {
-      ...this._authHeaders,
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    };
-    const res = await fetch(url, {
-      credentials: "include",
-      headers,
-    });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    return data;
+  checkToken(token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
   }
 
   // получение данных пользователя
-  async getUserProfile() {
-    const url = `${this._baseUrl}/users/me`;
-    const res = await fetch(url, {
-      credentials: "include",
-      method: "GET",
-      headers: this._authHeaders,
-    });
-    if (!res.ok) throw new Error(res.status);
-
-    const data = await res.json();
-    return data;
+  getUserProfile() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }).then(this._checkResponse);
   }
 
   // обновление данных пользователя
-  async setUserProfile({ name, email }) {
-    const url = `${this._baseUrl}/users/me`;
-    const res = await fetch(url, {
-      credentials: "include",
+  setUserProfile(name, email) {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._authHeaders,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+      },
       body: JSON.stringify({
         name: name,
         email: email,
       }),
-    });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    return data;
+    }).then(this._checkResponse);
   }
 
-  async getSaveMovies() {
-    const url = `${this._baseUrl}/save-movies`;
-    const res = await fetch(url, {
-      credentials: "include",
-      method: "GET",
-      headers: this._authHeaders,
+  getSaveMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }).then((res) => {
+      return this._checkResponse(res);
     });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    return data;
   }
 
   // добавление фильмов
-  async addMovie(movie) {
-    const url = `${this._baseUrl}/movies`;
-    const res = await fetch(url, {
-      credentials: "include",
+  addMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
-      headers: this._authHeaders,
-      body: JSON.stringify(movie),
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id.toString(),
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
+    }).then((res) => {
+      return this._checkResponse(res);
     });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    return data;
   }
 
   async deleteMovie(id) {
-    const url = `${this._baseUrl}/movies/${id}`;
-    const res = await fetch(url, {
-      credentials: "include",
+    return fetch(`${this._baseUrl}/movies/${id}`, {
       method: "DELETE",
-      headers: this._authHeaders,
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    }).then((res) => {
+      return this._checkResponser(res);
     });
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    return data;
   }
 }
 
-export const moviesApi = new MainApi({
-  baseUrl: "",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  },
+const moviesApi = new MainApi({
+  baseUrl: "https://bac.domainname.diplomryb.nomoredomains.club",
 });
+
+export default moviesApi;

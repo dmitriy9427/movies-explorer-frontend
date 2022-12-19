@@ -85,6 +85,14 @@
                 line-height: 12px;
                 color: #EE3465;
                 margin: 5px 0;
+                opacity: 0;
+                visibility: hidden;
+                overflow: hidden;
+
+                &.register__error_visible {
+                    opacity: 1;
+                    visibility: visible;
+                }
             }
         }
 
@@ -106,6 +114,11 @@
             &:hover {
                 background-color: #754f4f;
                 opacity: 0.5;
+            }
+
+            &:disabled {
+                background-color: #8B8B8B;
+                pointer-events: none;
             }
         }
 
