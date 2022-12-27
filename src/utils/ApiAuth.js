@@ -1,4 +1,4 @@
-export const BASE_URL = "https://bac.domainname.diplomryb.nomoredomains.club";
+const BASE_URL = "https://bac.domainname.diplomryb.nomoredomains.club";
 const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
@@ -69,6 +69,7 @@ const apiAuth = {
   updateUserInfo,
   getUserInfo,
   checkToken,
+  BASE_URL,
 };
 
 export default apiAuth;

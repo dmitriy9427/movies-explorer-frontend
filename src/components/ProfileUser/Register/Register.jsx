@@ -1,6 +1,6 @@
 import "./Register.css";
 import { Link } from "react-router-dom";
-import { useFormWithValidation } from "../../../utils/hoocks/useFormWithValidation";
+import { useFormWithValidation } from "../../../utils/hooks/useFormWithValidation";
 
 function Register({ onRegister, isErrorRegisterBtn, isRegisterMessage }) {
   const controlInput = useFormWithValidation();

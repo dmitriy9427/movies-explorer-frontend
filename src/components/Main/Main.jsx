@@ -1,6 +1,6 @@
 import Header from "../Header/Header";
 import MainHeader from "../Header/MainHeader/MainHeader";
-import NavTab from "./NavTab/NavTab";
+import NavTab from "./HeaderMain/NavTab/NavTab";
 import AboutProject from "./AboutProject/AboutProject";
 import Techs from "./Techs/Techs";
 import AboutMe from "./AboutMe/AboutMe";

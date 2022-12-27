@@ -1,20 +1,18 @@
-import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
-import Profile from '../ProfileUser/Profile/Profile';
-import Login from '../ProfileUser/Login/Login';
-import Register from '../ProfileUser/Register/Register';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import PageNotFound from '../PageNotFound/PageNotFound';
-import ProtectedRoute from '../ProtectedRoute';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-
-import moviesApi from '../../utils/MoviesApi';
-import mainApi from '../../utils/MainApi';
-import * as apiAuth from '../../utils/ApiAuth';
-
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import './App.css';
+import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
+import Profile from "../ProfileUser/Profile/Profile";
+import Login from "../ProfileUser/Login/Login";
+import Register from "../ProfileUser/Register/Register";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import PageNotFound from "../NotFound/NotFound";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import moviesApi from "../../utils/MoviesApi";
+import mainApi from "../../utils/MainApi";
+import apiAuth from "../../utils/ApiAuth";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import "./App.css";
 
 function App() {
   const location = useLocation();
@@ -57,18 +55,18 @@ function App() {
         .catch((err) => {
           console.error(`Данные пользователя не получены: ${err}`);
         });
-      if (JSON.parse(localStorage.getItem('filteredMovies'))) {
-        setMovies(JSON.parse(localStorage.getItem('filteredMovies')));
-        setChecked(JSON.parse(localStorage.getItem('checkbox')));
+      if (JSON.parse(localStorage.getItem("filteredMovies"))) {
+        setMovies(JSON.parse(localStorage.getItem("filteredMovies")));
+        setChecked(JSON.parse(localStorage.getItem("checkbox")));
         setCheckedSaveMovies(
-          JSON.parse(localStorage.getItem('checkboxSaveMovies'))
+          JSON.parse(localStorage.getItem("checkboxSaveMovies"))
         );
       }
     }
   }, [loggedIn]);
 
   const tokenCheck = () => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
       apiAuth
@@ -117,12 +115,12 @@ function App() {
   };
 
   const handleChangeCheckbox = (evt) => {
-    if (location.pathname === '/movies') {
+    if (location.pathname === "/movies") {
       setChecked(!checked);
-      localStorage.setItem('checkbox', !checked);
-    } else if (location.pathname === '/saved-movies') {
+      localStorage.setItem("checkbox", !checked);
+    } else if (location.pathname === "/saved-movies") {
       setCheckedSaveMovies(!checkedSaveMovies);
-      localStorage.setItem('checkboxSaveMovies', !checkedSaveMovies);
+      localStorage.setItem("checkboxSaveMovies", !checkedSaveMovies);
     }
   };
 
@@ -133,43 +131,43 @@ function App() {
   };
 
   const handleSearchMovies = (name) => {
-    if (!JSON.parse(localStorage.getItem('allMovies'))) {
+    if (!JSON.parse(localStorage.getItem("allMovies"))) {
       moviesApi
         .getAllMovies()
         .then((movies) => {
           const before = movies.slice(0, 23);
           const after = movies.slice(24);
           const arrMovies = before.concat(after);
-          localStorage.setItem('allMovies', JSON.stringify(arrMovies));
+          localStorage.setItem("allMovies", JSON.stringify(arrMovies));
         })
         .then(() => {
           setIsLoading(true);
           const searchArr = searchMovies(
-            JSON.parse(localStorage.getItem('allMovies')),
+            JSON.parse(localStorage.getItem("allMovies")),
             name
           );
           setMovies(searchArr);
           setIsNotFound(!movies.length && !isFailed);
-          localStorage.setItem('filteredMovies', JSON.stringify(searchArr));
-          localStorage.setItem('searchKeyword', name);
-          localStorage.setItem('checkbox', checked);
+          localStorage.setItem("filteredMovies", JSON.stringify(searchArr));
+          localStorage.setItem("searchKeyword", name);
+          localStorage.setItem("checkbox", checked);
           setTimeout(() => setIsLoading(false), 1000);
         })
         .catch((err) => {
           setIsFailed(true);
           console.log(err);
         });
-    } else if (JSON.parse(localStorage.getItem('allMovies'))) {
+    } else if (JSON.parse(localStorage.getItem("allMovies"))) {
       setIsLoading(true);
       const searchArr = searchMovies(
-        JSON.parse(localStorage.getItem('allMovies')),
+        JSON.parse(localStorage.getItem("allMovies")),
         name
       );
       setMovies(searchArr);
       setIsNotFound(!movies.length || !isFailed);
-      localStorage.setItem('filteredMovies', JSON.stringify(searchArr));
-      localStorage.setItem('searchKeyword', name);
-      localStorage.setItem('checkbox', checked);
+      localStorage.setItem("filteredMovies", JSON.stringify(searchArr));
+      localStorage.setItem("searchKeyword", name);
+      localStorage.setItem("checkbox", checked);
       setTimeout(() => setIsLoading(false), 1000);
     }
   };
@@ -180,7 +178,7 @@ function App() {
       .getSavedMovies()
       .then((movies) => {
         setAllSavedMovies(movies);
-        localStorage.setItem('checkboxSaveMovies', checkedSaveMovies);
+        localStorage.setItem("checkboxSaveMovies", checkedSaveMovies);
         const userSavedMovies = movies.filter((movie) => {
           return movie.owner === currentUser._id;
         });
@@ -209,9 +207,9 @@ function App() {
       })
       .catch((err) => {
         err.status !== 400
-          ? setRegisterMessage('Пользователь с таким email уже зарегистрирован')
+          ? setRegisterMessage("Пользователь с таким email уже зарегистрирован")
           : setRegisterMessage(
-              'При регистрации пользователя произошла ошибка.'
+              "При регистрации пользователя произошла ошибка."
             );
         setIsErrorRegisterBtn(true);
       });
@@ -222,11 +220,11 @@ function App() {
       .authorize(email, password)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem('jwt', res.token);
+          localStorage.setItem("jwt", res.token);
           setIsErrorLoginBtn(false);
           apiAuth.checkToken(res.token).then((res) => {
             if (res) {
-              setTimeout(() => navigate('/movies'), 800);
+              setTimeout(() => navigate("/movies"), 800);
               setLoggedIn(true);
             }
           });
@@ -234,7 +232,7 @@ function App() {
       })
       .catch((err) => {
         if (err.includes(401)) {
-          setLoginMessage('Вы ввели неправильный логин или пароль.');
+          setLoginMessage("Вы ввели неправильный логин или пароль.");
         }
         setIsErrorLoginBtn(true);
       });
@@ -257,7 +255,7 @@ function App() {
 
   const onSignOut = () => {
     localStorage.clear();
-    navigate('/');
+    navigate("/");
     setLoggedIn(false);
     setCurrentUser({});
     setIsErrorRegisterBtn(false);
@@ -276,9 +274,9 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
-        <Route path='/' element={<Main loggedIn={loggedIn} />} />
+        <Route path="/" element={<Main loggedIn={loggedIn} />} />
         <Route
-          path='/movies'
+          path="/movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <Movies
@@ -287,7 +285,7 @@ function App() {
                 isLoading={isLoading}
                 isFailed={isFailed}
                 isNotFound={isNotFound}
-                searchKeyword={localStorage.getItem('searchKeyword')}
+                searchKeyword={localStorage.getItem("searchKeyword")}
                 onCheckbox={handleChangeCheckbox}
                 checked={checked}
                 checkedSaveMovies={checkedSaveMovies}
@@ -300,7 +298,7 @@ function App() {
           }
         />
         <Route
-          path='/saved-movies'
+          path="/saved-movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <SavedMovies
@@ -309,7 +307,7 @@ function App() {
                 isLoading={isLoading}
                 isFailed={isFailed}
                 isNotFound={isNotFound}
-                searchKeyword={localStorage.getItem('searchKeyword')}
+                searchKeyword={localStorage.getItem("searchKeyword")}
                 onCheckbox={handleChangeCheckbox}
                 checked={checked}
                 checkedSaveMovies={checkedSaveMovies}
@@ -322,7 +320,7 @@ function App() {
           }
         />
         <Route
-          path='/profile'
+          path="/profile"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <Profile
@@ -334,7 +332,7 @@ function App() {
           }
         />
         <Route
-          path='/signup'
+          path="/signup"
           element={
             <Register
               onRegister={onRegister}
@@ -344,7 +342,7 @@ function App() {
           }
         />
         <Route
-          path='/signin'
+          path="/signin"
           element={
             <Login
               onLogin={onLogin}
@@ -353,7 +351,7 @@ function App() {
             />
           }
         />
-        <Route path='*' element={<PageNotFound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </CurrentUserContext.Provider>
   );

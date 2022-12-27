@@ -2,7 +2,7 @@ import "./Profile.css";
 import Header from "../../Header/Header";
 import MainMovies from "../../Header/MoviesHeader/MoviesHeader";
 import { useState, useContext } from "react";
-import { useFormWithValidation } from "../../../utils/hoocks/useFormWithValidation";
+import { useFormWithValidation } from "../../../utils/hooks/useFormWithValidation";
 import { CurrentUserContext } from "../../../contexts/CurrentUserContext";
 
 function Profile({ onUpdateUser, onSignOut, isMessageProfile }) {
