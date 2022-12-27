@@ -1,25 +1,27 @@
 class MoviesApi {
-  constructor({ baseUrl }) {
-    this._baseUrl = baseUrl;
+  constructor({ url }) {
+    this._url = url;
   }
 
-  // проверка ответа от сервера
-  _checkResponse(res) {
-    return res.ok ? res.json : Promise.reject(`Ошибка: ${res.status}`);
+  checkError(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
   }
 
-  // получение фильмов
-  getInitialMovies() {
-    return fetch(`${this._baseUrl}`, {
+  getAllMovies() {
+    return fetch(`${this._url}`, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }).then((res) => this.checkError(res));
   }
 }
 
 const moviesApi = new MoviesApi({
-  baseUrl: "https://api.nomoreparties.co/beatfilm-movies",
+  url: 'https://api.nomoreparties.co/beatfilm-movies',
 });
 
 export default moviesApi;

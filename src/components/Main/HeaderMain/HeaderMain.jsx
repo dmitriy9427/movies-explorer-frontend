@@ -5,10 +5,10 @@ import NavTab from "./NavTab/NavTab";
 import "./HeaderMain.scss";
 import Header from "../../Header/Header";
 
-function HeaderMain({ loggedIn }) {
+function HeaderMain() {
   return (
     <div className="header_main">
-      {loggedIn ? <Header /> : <NavHeader />}
+      <Header />
       <LearnProject />
       <NavTab />
     </div>

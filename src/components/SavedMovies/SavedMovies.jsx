@@ -1,10 +1,10 @@
-import React from "react";
-import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import SearchForm from "../Movies/SearchForm/SearchForm";
-import SavedMoviesCardList from "./SavedMoviesCardList/SavedMoviesCardList";
-import "./SavedMovies.scss";
+import MainMovies from "../Header/MoviesHeader/MoviesHeader";
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import Footer from "../Footer/Footer";
+import SearchForm from "../SearchForm/SearchForm";
 import Preloader from "../Movies/Preloader/Preloader";
+import "./SavedMovies.css";
 
 function SavedMovies({
   movies,
@@ -22,22 +22,25 @@ function SavedMovies({
   allSavedMovies,
 }) {
   return (
-    <main className="saved__movies">
-      <header>
-        <Header />
-      </header>
-      <main>
+    <>
+      <Header
+        color={"header__theme_black"}
+        location={"header__container_movies"}
+      >
+        <MainMovies />
+      </Header>
+      <main className="save-movies">
         <SearchForm
           onSubmit={onSubmit}
           searchKeyword={searchKeyword}
           onCheckbox={onCheckbox}
           checked={checked}
           checkedSaveMovies={checkedSaveMovies}
-        />
+        ></SearchForm>
         {isLoading ? (
           <Preloader />
         ) : (
-          <SavedMoviesCardList
+          <MoviesCardList
             checked={checked}
             checkedSaveMovies={checkedSaveMovies}
             movies={movies}
@@ -47,13 +50,11 @@ function SavedMovies({
             onSave={onSave}
             onDelete={onDelete}
             allSavedMovies={allSavedMovies}
-          />
+          ></MoviesCardList>
         )}
       </main>
-      <footer>
-        <Footer />
-      </footer>
-    </main>
+      <Footer />
+    </>
   );
 }
 

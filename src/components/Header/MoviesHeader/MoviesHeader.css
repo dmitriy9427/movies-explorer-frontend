@@ -1,0 +1,103 @@
+.navigate {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.navigate__list {
+  display: flex;
+  list-style-type: none;
+  margin: 0 0 0 44px;
+  padding: 0;
+}
+
+.navigate__item:first-of-type {
+  margin-right: 16px;
+}
+
+.navigate__movies {
+  position: relative;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  line-height: 2;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navigate__save-movies {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navigate__account {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 50px;
+  padding: 8px 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 114%;
+  transition: opacity 0.3s linear;
+}
+
+.navigate__account-text {
+  margin-right: 13px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 114%;
+}
+
+.navigate__account-icon {
+  border: none;
+  padding: 9.75px;
+  background-color: #313131;
+  border-radius: 6px;
+}
+
+.navigate__button-open {
+  display: none;
+  border: none;
+  padding: 0;
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  font: inherit;
+  color: inherit;
+  background-image: url(../../../images/burger.svg);
+  background-color: transparent;
+}
+
+.active {
+  color: #3ddc84;
+}
+
+@media screen and (max-width: 768px) {
+  .navigate__button-open {
+    display: block;
+  }
+
+  .navigate {
+    display: none;
+  }
+
+  .header__container {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .navigate__button-open {
+    margin-right: 10px;
+    width: 30px;
+    height: 43px;
+  }
+}

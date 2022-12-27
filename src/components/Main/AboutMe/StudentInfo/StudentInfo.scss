@@ -1,8 +1,8 @@
 .student__information {
-    max-width: 1140px;
+    width: calc(100% - 6.5%);
     margin: 0 auto 101px;
     display: grid;
-    grid-template-columns: 600px 1fr;
+    grid-template-columns: minmax(292px, 600px) 1fr;
     column-gap: 40px;
     justify-items: center;
     align-items: center;
@@ -73,7 +73,7 @@
     .student__information {
         max-width: 668px;
         margin: 0 auto 91px;
-        grid-template-columns: 364px 1fr;
+        column-gap: 30px;
 
         .student__info {
             max-width: 364px;
@@ -112,6 +112,7 @@
         max-width: 292px;
         flex-direction: column-reverse;
         margin-bottom: 70px;
+        column-gap: 0;
 
         .student__info {
             max-width: 292px;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Route, Routes } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -8,30 +8,30 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import apiAuth from "../../utils/ApiAuth";
 
 function App() {
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [movies, setMovies] = React.useState([]);
-  const [savedMovies, setSavedMovies] = React.useState(null);
-  const [checked, setChecked] = React.useState(true);
-  const [checkedSaveMovies, setCheckedSaveMovies] = React.useState(true);
-  const [isErrorRegisterBtn, setIsErrorRegisterBtn] = React.useState(false);
-  const [isRegisterMessage, setRegisterMessage] = React.useState(false);
-  const [isLoginMessage, setLoginMessage] = React.useState(false);
-  const [isMessageProfile, setIsMessageProfile] = React.useState(false);
-  const [isErrorLoginBtn, setIsErrorLoginBtn] = React.useState(false);
-  const [isNotFound, setIsNotFound] = React.useState(false);
-  const [isFailed, setIsFailed] = React.useState(false);
-  const [allSavedMovies, setAllSavedMovies] = React.useState([]);
-
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isErrorRegisterBtn, setIsErrorRegisterBtn] = useState(false);
+  const [isRegisterMessage, setRegisterMessage] = useState(false);
+  const [isLoginMessage, setLoginMessage] = useState(false);
+  const [isErrorLoginBtn, setIsErrorLoginBtn] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFailed, setIsFailed] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [checkedSaveMovies, setCheckedSaveMovies] = useState(true);
+  const [isMessageProfile, setIsMessageProfile] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
+  const [allSavedMovies, setAllSavedMovies] = useState([]);
 
   useEffect(() => {
     tokenCheck();
@@ -40,23 +40,24 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       mainApi
-        .getSaveMovies()
+        .getSavedMovies()
         .then((res) => {
           setSavedMovies(res);
         })
         .catch((err) => {
-          console.error(err);
+          console.log(err);
         });
-      mainApi
-        .getUserProfile()
+      apiAuth
+        .getUserInfo()
         .then((data) => {
           setCurrentUser(data);
         })
         .catch((err) => {
-          console.error(`Данные пользователя не получены ${err}`);
+          console.error(`Данные пользователя не получены: ${err}`);
         });
-      if (JSON.parse(localStorage.getItem("filterMovies"))) {
-        setMovies(JSON.parse(localStorage.getItem("filterMovies")));
+      if (JSON.parse(localStorage.getItem("filteredMovies"))) {
+        setMovies(JSON.parse(localStorage.getItem("filteredMovies")));
+        setChecked(JSON.parse(localStorage.getItem("checkbox")));
         setCheckedSaveMovies(
           JSON.parse(localStorage.getItem("checkboxSaveMovies"))
         );
@@ -68,7 +69,7 @@ function App() {
     const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
-      mainApi
+      apiAuth
         .checkToken(jwt)
         .then((res) => {
           if (res) {
@@ -77,7 +78,7 @@ function App() {
           }
         })
         .catch((err) => {
-          handleLogOut();
+          onSignOut();
           console.error(err);
         });
     }
@@ -90,7 +91,7 @@ function App() {
         setSavedMovies([data, ...savedMovies]);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   };
 
@@ -102,17 +103,18 @@ function App() {
     mainApi
       .deleteMovie(savedMovie._id)
       .then(() => {
-        const newMovieList = savedMovie.filter(
+        const newMoviesList = savedMovies.filter(
           (item) => item._id !== savedMovie._id
         );
-        setSavedMovies(newMovieList);
+
+        setSavedMovies(newMoviesList);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   };
 
-  const handleChangeCheckbox = () => {
+  const handleChangeCheckbox = (evt) => {
     if (location.pathname === "/movies") {
       setChecked(!checked);
       localStorage.setItem("checkbox", !checked);
@@ -131,7 +133,7 @@ function App() {
   const handleSearchMovies = (name) => {
     if (!JSON.parse(localStorage.getItem("allMovies"))) {
       moviesApi
-        .getInitialMovies()
+        .getAllMovies()
         .then((movies) => {
           const before = movies.slice(0, 23);
           const after = movies.slice(24);
@@ -145,7 +147,7 @@ function App() {
             name
           );
           setMovies(searchArr);
-          setIsNotFound(!movies.length || isFailed);
+          setIsNotFound(!movies.length && !isFailed);
           localStorage.setItem("filteredMovies", JSON.stringify(searchArr));
           localStorage.setItem("searchKeyword", name);
           localStorage.setItem("checkbox", checked);
@@ -195,7 +197,7 @@ function App() {
   };
 
   const onRegister = (name, email, password) => {
-    mainApi
+    apiAuth
       .register(name, email, password)
       .then((data) => {
         if (data) {
@@ -205,20 +207,22 @@ function App() {
       })
       .catch((err) => {
         err.status !== 400
-          ? setRegisterMessage("Пользователь с таким email уже зарегестрирован")
-          : setRegisterMessage("При регистрации произошла ошибка");
+          ? setRegisterMessage("Пользователь с таким email уже зарегистрирован")
+          : setRegisterMessage(
+              "При регистрации пользователя произошла ошибка."
+            );
         setIsErrorRegisterBtn(true);
       });
   };
 
   const onLogin = (email, password) => {
-    mainApi
-      .login(email, password)
+    apiAuth
+      .authorize(email, password)
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           setIsErrorLoginBtn(false);
-          mainApi.checkToken(res.token).then((res) => {
+          apiAuth.checkToken(res.token).then((res) => {
             if (res) {
               setTimeout(() => navigate("/movies"), 800);
               setLoggedIn(true);
@@ -235,8 +239,8 @@ function App() {
   };
 
   const onUpdateUser = (name, email) => {
-    mainApi
-      .setUserProfile(name, email)
+    apiAuth
+      .updateUserInfo(name, email)
       .then((data) => {
         setIsMessageProfile(true);
         setCurrentUser(data);
@@ -249,7 +253,7 @@ function App() {
       });
   };
 
-  const handleLogOut = () => {
+  const onSignOut = () => {
     localStorage.clear();
     navigate("/");
     setLoggedIn(false);
@@ -320,8 +324,8 @@ function App() {
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <Profile
-                onLogout={handleLogOut}
-                onUpdate={onUpdateUser}
+                onUpdateUser={onUpdateUser}
+                onSignOut={onSignOut}
                 isMessageProfile={isMessageProfile}
               />
             </ProtectedRoute>

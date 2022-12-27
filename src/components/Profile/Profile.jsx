@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../Header/Header";
-import CurrentUserContext from "../contexts/CurrentUserContext";
-import useFormWithValidation from "../../utils/hooks/useFormWithValidation";
-import "./Profile.scss";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useFormWithValidation } from "../../utils/hooks/useFormWithValidation";
+import "./Profile.css";
 
 export default function Profile({ onUpdateUser, onLogout, isMessageProfile }) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -52,7 +52,7 @@ export default function Profile({ onUpdateUser, onLogout, isMessageProfile }) {
         <div className="profile_content">
           <h3 className="profile__greeting">Привет, {currentUser.name}!</h3>
 
-          <form className="profile__form" onSubmit={handleSubmit}>
+          <form className="profile__form" noValidate onSubmit={handleSubmit}>
             <label className="profile__form-label">
               <span className="profile__form_label-text">Имя</span>
               <input
@@ -61,7 +61,7 @@ export default function Profile({ onUpdateUser, onLogout, isMessageProfile }) {
                 placeholder="Введите имя"
                 className="profile__input login__input-name"
                 pattern="[A-Za-zА-Яа-яЁё\s-]+"
-                onChange={controlInput.handleChange}
+                onChange={controlInput.handleChange || ""}
                 value={controlInput?.values?.name ?? currentUser.name}
                 {...(!isEditInput ? {} : { disabled: true })}
                 required
@@ -77,7 +77,7 @@ export default function Profile({ onUpdateUser, onLogout, isMessageProfile }) {
                 className="profile__input login__input-email"
                 placeholder={currentUser.email}
                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                onChange={controlInput.handleChange}
+                onChange={controlInput.handleChange || ""}
                 value={controlInput?.values?.email ?? currentUser.email}
                 {...(!isEditInput ? {} : { disabled: true })}
                 required

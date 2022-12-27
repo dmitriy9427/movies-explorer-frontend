@@ -4,66 +4,74 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-width: 1280px;
     margin: 0 auto;
 
-    .heading__image {
-        max-width: 320px;
-        max-height: 320px;
-        opacity: 0.2;
-        padding-top: 82px;
-        padding-bottom: 120px;
-        color: #FFFFFF;
-    }
+    .heading__info {
+        max-width: calc(100% - 6.5%);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: 0 auto;
 
-    .heading__title {
-        position: absolute;
-        top: 180px;
-        margin: 0;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 50px;
-        line-height: 116%;
-        text-align: center;
-        letter-spacing: -0.04em;
-        color: #FFFFFF;
-        max-width: 730px;
+        .heading__image {
+            max-width: 320px;
+            max-height: 320px;
+            opacity: 0.2;
+            padding-top: 82px;
+            padding-bottom: 120px;
+            color: #FFFFFF;
+        }
 
+        .heading__title {
+            position: absolute;
+            top: 180px;
+            margin: 0;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 50px;
+            line-height: 116%;
+            text-align: center;
+            letter-spacing: -0.04em;
+            color: #FFFFFF;
+            max-width: 730px;
+
+        }
     }
 }
 
 @media screen and (max-width: 900px) {
     .heading {
-        max-width: 768px;
+        .heading__info {
 
-        .heading__image {
-            padding-top: 220px;
-            padding-bottom: 240px;
-        }
+            .heading__image {
+                padding-top: 220px;
+                padding-bottom: 240px;
+            }
 
-        .heading__title {
-            top: 322px;
+            .heading__title {
+                top: 322px;
+            }
         }
     }
 }
 
 @media screen and (max-width: 519px) {
     .heading {
-        max-width: 320px;
+        .heading__info {
+            .heading__image {
+                opacity: 0.13;
+                padding-top: 142px;
+                padding-bottom: 177px;
+                max-width: 248px;
+                max-height: 248px;
+            }
 
-        .heading__image {
-            opacity: 0.13;
-            padding-top: 142px;
-            padding-bottom: 177px;
-            max-width: 248px;
-            max-height: 248px;
-        }
-
-        .heading__title {
-            font-size: 31px;
-            line-height: 126%;
-            max-width: 300px;
-            top: 205px;
+            .heading__title {
+                font-size: 31px;
+                line-height: 126%;
+                max-width: 300px;
+                top: 205px;
+            }
         }
     }
 }

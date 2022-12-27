@@ -1,10 +1,10 @@
-import React from "react";
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import "./Movies.scss";
-import SearchForm from "./SearchForm/SearchForm";
+import MainMovies from "../Header/MoviesHeader/MoviesHeader";
+import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
+import "./Movies.css";
+import Footer from "../Footer/Footer";
 
 function Movies({
   onSubmit,
@@ -22,11 +22,14 @@ function Movies({
   allSavedMovies,
 }) {
   return (
-    <section className="movies">
-      <header>
-        <Header />
-      </header>
-      <main>
+    <>
+      <Header
+        color={"header__theme_black"}
+        location={"header__container_movies"}
+      >
+        <MainMovies />
+      </Header>
+      <main className="movies">
         <SearchForm
           onSubmit={onSubmit}
           searchKeyword={searchKeyword}
@@ -34,6 +37,7 @@ function Movies({
           checked={checked}
           checkedSaveMovies={checkedSaveMovies}
         />
+
         {isLoading ? (
           <Preloader />
         ) : (
@@ -52,10 +56,9 @@ function Movies({
           />
         )}
       </main>
-      <footer>
-        <Footer />
-      </footer>
-    </section>
+
+      <Footer />
+    </>
   );
 }
 

@@ -1,0 +1,132 @@
+.movie-card__item {
+  background-color: #222;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-card__image {
+  width: 222px;
+  height: 122px;
+  margin: 6px 6px;
+  display: flex;
+  object-fit: cover;
+}
+
+.movie-card__description {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 22px 0 22px 22px;
+}
+
+.movie-card__title {
+  overflow: hidden;
+  margin: 0;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.movies-card__button {
+  width: 14px;
+  height: 12px;
+  background-image: url("../../../images/likedis.svg");
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0;
+  outline: 0;
+}
+
+.movies-card__button_save {
+  width: 14px;
+  height: 12px;
+  background-image: url("../../../images/likeactive.svg");
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0;
+  outline: 0;
+}
+
+.movies-card__button_delete {
+  width: 8px;
+  height: 8px;
+  background-image: url("../../../images/X.svg");
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0;
+  outline: 0;
+}
+
+.movie-card__time {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8b8b8b;
+  margin: 13px 0 30px;
+}
+
+@media screen and (max-width: 569px) {
+  .movie-card__item {
+    flex-direction: column-reverse;
+  }
+  .movie-card__description {
+    background-color: #2f2f2f;
+    width: 300px;
+    margin: 0 auto;
+    padding: 14px 0;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "title title like"
+      "duration duration duration";
+    justify-items: start;
+    align-items: center;
+  }
+
+  .movie-card__title {
+    font-size: 12px;
+    line-height: 15px;
+    grid-area: title;
+    max-width: 228px;
+    margin-left: 10px;
+  }
+
+  .movie-card__time {
+    grid-area: duration;
+    margin: 8px 0 0;
+    margin-left: 10px;
+  }
+
+  .movies-card__button {
+    grid-area: like;
+    margin-left: 74px;
+  }
+
+  .movies-card__button_delete {
+    grid-area: like;
+    margin-left: 74px;
+  }
+
+  .movie-card__image {
+    width: 300px;
+    height: 168px;
+    margin: 0;
+  }
+}

@@ -1,5 +1,5 @@
 .diplom_about {
-    max-width: 1140px;
+    width: calc(100% - 6.5%);
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -9,14 +9,12 @@
 
 @media screen and (max-width: 900px) {
     .diplom_about {
-        max-width: 668px;
         column-gap: 30px;
     }
 }
 
 @media screen and (max-width: 519px) {
     .diplom_about {
-        max-width: 284px;
         grid-template-columns: 1fr;
     }
 }

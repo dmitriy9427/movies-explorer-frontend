@@ -2,7 +2,7 @@ import React from "react";
 import "./Login.scss";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
-import useFormWithValidation from "../../utils/hooks/useFormWithValidation";
+import { useFormWithValidation } from "../../utils/hooks/useFormWithValidation";
 
 export default function Login({ onLogin, isLoginMessage, isErrorLoginBtn }) {
   const controlInput = useFormWithValidation();
