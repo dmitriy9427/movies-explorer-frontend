@@ -1,0 +1,86 @@
+.header__nav-in {
+  background-color: #073042;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px 0 20px;
+}
+.header__nav-in .header__logo-nav {
+  max-width: 38px;
+  max-height: 38px;
+  margin-left: 72px;
+}
+.header__nav-in .header__regin_nav {
+  margin-right: 68px;
+}
+.header__nav-in .header__regin_nav .header__regin_ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  margin: 0;
+}
+.header__nav-in .header__regin_nav .header__regin_ul .header__reg_btn .reg__btn {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  border: none;
+  background-color: transparent;
+  color: #FFFFFF;
+  padding: 0;
+  margin-right: 30px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+.header__nav-in .header__regin_nav .header__regin_ul .header__reg_btn .reg__btn:hover {
+  opacity: 0.2;
+}
+.header__nav-in .header__regin_nav .header__regin_ul .header__login_btn .log_btn {
+  border: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 160%;
+  color: #000000;
+  padding: 8px 20px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+.header__nav-in .header__regin_nav .header__regin_ul .header__login_btn .log_btn:hover {
+  opacity: 0.5;
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 900px) {
+  .header__nav-in .header__logo-nav {
+    margin-left: 30px;
+  }
+  .header__nav-in .header__regin_nav {
+    margin-right: 30px;
+  }
+}
+@media screen and (max-width: 519px) {
+  .header__nav-in {
+    padding: 20px 0 18px;
+  }
+  .header__nav-in .header__logo-nav {
+    margin-left: 14px;
+  }
+  .header__nav-in .header__regin_nav {
+    margin-right: 14px;
+  }
+  .header__nav-in .header__regin_nav .header__regin_ul .header__reg_btn .reg__btn {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+  .header__nav-in .header__regin_nav .header__regin_ul .header__login_btn .log_btn {
+    padding: 5px 12px;
+    font-size: 10px;
+  }
+}/*# sourceMappingURL=NavHeader.css.map */

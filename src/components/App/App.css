@@ -1,0 +1,24 @@
+.body {
+  height: 100vh;
+  background: #202020;
+  margin: 0 auto;
+}
+
+.button {
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.button:hover {
+  opacity: 0.5;
+}
+
+.root {
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1280px;
+  height: 100vh;
+  min-width: 320px;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #fff;
+}
