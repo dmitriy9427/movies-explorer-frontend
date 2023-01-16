@@ -11,17 +11,17 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import "./App.css";
 import mainApi from "../../utils/MainApi";
 
-function App() {
-  const [loggedIn, setLoggedIn] = React.useState(true);
+const App = () => {
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [errorMesage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [errorMesage, setErrorMessage] = React.useState("");
   const [checked, setChecked] = React.useState(true);
 
   const navigation = useNavigate();
-
+  // получение данных пользователя
   const getUserData = () => {
     if (loggedIn) {
       mainApi
@@ -33,9 +33,33 @@ function App() {
     }
   };
 
-  const handleUpdateUserData = ({ name, email }) => {
+  const handleRegistrationUser = ({ name, email, password }) => {
+    setIsLoading(true);
     mainApi
-      .updateUserData(name, email)
+      .registerUser(name, email, password)
+      .then((res) => {
+        handleLoginUser(res);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setErrorMessage(err.res);
+      });
+  };
+
+  const handleLoginUser = ({ email, password }) => {
+    setIsLoading(true);
+    mainApi.userLogin(email, password).then((res) => {
+      setLoggedIn(true);
+      getUserData();
+      navigation("/movies");
+      setIsLoading(false);
+    });
+  };
+
+  // редактирование данных пользователя
+  const handleEditingUserData = ({ name, email }) => {
+    mainApi
+      .editedUserData(name, email)
       .then((res) => {
         setCurrentUser(res.data);
       })
@@ -93,7 +117,7 @@ function App() {
           element={
             <Profile
               handleLogout={handleLogout}
-              handleUpdateUserData={handleUpdateUserData}
+              handleUpdateUserData={handleEditingUserData}
             />
           }
         />
@@ -103,6 +127,6 @@ function App() {
       </Routes>
     </CurrentUserContext.Provider>
   );
-}
+};
 
 export default App;

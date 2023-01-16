@@ -114,7 +114,7 @@ class MainApi {
     }).then((res) => this.checkResponseStatus(res));
   }
 
-  updateUserData(name, email) {
+  editedUserData(name, email) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       credentials: "include",
