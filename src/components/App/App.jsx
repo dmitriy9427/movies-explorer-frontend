@@ -28,7 +28,7 @@ function App() {
         .then((res) => {
           setCurrentUser(res.data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => handleLogout(err));
     }
   };
 
@@ -47,7 +47,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      tokenCheck()
+      tokenCheck();
     }
   }, [loggedIn]);
 
