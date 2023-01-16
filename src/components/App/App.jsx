@@ -32,21 +32,63 @@ function App() {
     }
   };
 
+  const handleUpdateUserData = () => {};
+
+  const handleDeleteMovie = () => {};
+
+  const tokenCheck = () => {
+    mainApi.getUserData().then((res) => {
+      if (res.data._id) {
+        setCurrentUser(res.data);
+        setLoggedIn(true);
+      }
+    });
+  };
+
   React.useEffect(() => {
     if (loggedIn) {
+      tokenCheck()
     }
   }, [loggedIn]);
+
+  const handleLogout = () => {
+    mainApi.logout().then((res) => {
+      localStorage.clear();
+      setLoggedIn(false);
+      setCurrentUser({});
+      setMovies([]);
+      setSavedMovies([]);
+      navigation("/");
+      console.log(res);
+    });
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/saved-movies"
+          element={
+            <SavedMovies
+              savedMovies={savedMovies}
+              handleDeleteMovie={handleDeleteMovie}
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              handleLogout={handleLogout}
+              handleUpdateUserData={handleUpdateUserData}
+            />
+          }
+        />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>
   );
