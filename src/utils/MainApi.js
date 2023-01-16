@@ -139,6 +139,16 @@ class MainApi {
       },
     }).then((res) => this.checkResponseStatus(res));
   }
+
+  logout() {
+    return fetch(`${this._url}/signout`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => this.checkResponseStatus(res));
+  }
 }
 
 const mainApi = new MainApi({

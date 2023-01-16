@@ -9,9 +9,10 @@ import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import "./App.css";
+import mainApi from "../../utils/MainApi";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [movies, setMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
@@ -20,9 +21,21 @@ function App() {
 
   const navigation = useNavigate();
 
-  const getUserInfo = () => {
-    
-  }
+  const getUserData = () => {
+    if (loggedIn) {
+      mainApi
+        .getDataUser()
+        .then((res) => {
+          setCurrentUser(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  React.useEffect(() => {
+    if (loggedIn) {
+    }
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
