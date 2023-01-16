@@ -17,6 +17,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [errorMesage, setErrorMessage] = useState("");
   const [checked, setChecked] = React.useState(true);
 
   const navigation = useNavigate();
@@ -32,7 +33,17 @@ function App() {
     }
   };
 
-  const handleUpdateUserData = () => {};
+  const handleUpdateUserData = ({ name, email }) => {
+    mainApi
+      .updateUserData(name, email)
+      .then((res) => {
+        setCurrentUser(res.data);
+      })
+      .catch((err) => {
+        handleLogout(err);
+        setErrorMessage(err.res);
+      });
+  };
 
   const handleDeleteMovie = () => {};
 
