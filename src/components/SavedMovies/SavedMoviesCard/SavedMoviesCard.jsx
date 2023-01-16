@@ -9,13 +9,13 @@ function SavedMoviesCard(props) {
         <p className="movies__card_duration-save">{props.duration}</p>
         <button type="button" className="button movies__card_delete-save" />
       </div>
-      <div className="movies__card_image-save">
+      <a href="" className="movies__card_image-save">
         <img
           className="movies__card_img-save"
           src={props.image}
           alt="Карточка фильма"
         />
-      </div>
+      </a>
     </div>
   );
 }

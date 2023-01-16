@@ -1,17 +1,5 @@
-.saved__movies {
-    max-width: 1140px;
-    margin: 0 auto;
-    height: 100vh;
-}
-
-@media screen and (max-width: 900px) {
-    .saved__movies {
-        max-width: 708px;
-    }
-}
-
-@media screen and (max-width: 519px) {
-    .saved__movies {
-        max-width: 300px;
-    }
+.saved-movies {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
 }

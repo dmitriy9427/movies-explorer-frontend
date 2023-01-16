@@ -3,11 +3,9 @@ import "./MoviestBtnStill.scss";
 
 function MoviestBtnStill() {
   return (
-    <div className="movies__card_list-button">
-      <button type="button" className="button movies__card_list-btn">
-        Еще
-      </button>
-    </div>
+    <button type="button" className="button movies__card_list-btn">
+      Еще
+    </button>
   );
 }
 

@@ -8,9 +8,9 @@ import Footer from "../Footer/Footer";
 function Main() {
   return (
     <body>
-      <header>
+      
         <HeaderMain />
-      </header>
+
       <main>
         <AboutProject />
         <Techs />

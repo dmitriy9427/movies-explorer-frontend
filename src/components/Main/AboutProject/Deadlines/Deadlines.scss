@@ -1,5 +1,4 @@
 .deadlines {
-    max-width: 1140px;
     margin: 95px auto 57px;
     display: grid;
     grid-template-columns: 228px 1fr;
@@ -45,7 +44,6 @@
 
 @media screen and (max-width: 900px) {
     .deadlines {
-        max-width: 668px;
         margin: 82px auto 40px;
         grid-template-columns: 140px 1fr;
 
@@ -57,7 +55,6 @@
 
 @media screen and (max-width: 519px) {
     .deadlines {
-        max-width: 284px;
         grid-template-columns: 100px 1fr;
         margin: 55px auto 30px;
 

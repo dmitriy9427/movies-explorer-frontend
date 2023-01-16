@@ -6,7 +6,7 @@ import "./AboutProject.scss";
 
 function AboutProject() {
   return (
-    <div className="about__projects">
+    <div id="about-project" className="about__projects">
       <Promo title="О проекте" />
       <DiplomAbout />
       <Deadlines />

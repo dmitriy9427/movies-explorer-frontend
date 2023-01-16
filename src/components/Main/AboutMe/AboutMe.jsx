@@ -2,6 +2,7 @@ import React from "react";
 import Promo from "../AboutProject/Promo/Promo";
 import Portfolio from "./Portfolio/Portfolio";
 import StudentInfo from "./StudentInfo/StudentInfo";
+import "./AboutMe.scss";
 
 function AboutMe() {
   return (

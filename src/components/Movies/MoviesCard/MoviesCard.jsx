@@ -12,13 +12,9 @@ function MoviesCard(props) {
           className="button movies__card_like movies__card_like-active"
         />
       </div>
-      <div className="movies__card_image">
-        <img
-          className="movies__card_img"
-          src={props.image}
-          alt="Карточка фильма"
-        />
-      </div>
+      <a className="movies__card_image" href="">
+        <img className="movies__card_img" src={props.image} alt="" />
+      </a>
     </div>
   );
 }

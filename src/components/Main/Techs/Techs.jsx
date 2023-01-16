@@ -5,9 +5,11 @@ import TechsSection from "./TechsSection/TechsSection";
 
 function Techs() {
   return (
-    <section className="techs__section">
-      <Promo title="Технологии" />
-      <TechsSection />
+    <section id="techs" className="techs__section">
+      <div className="tech">
+        <Promo title="Технологии" />
+        <TechsSection />
+      </div>
     </section>
   );
 }

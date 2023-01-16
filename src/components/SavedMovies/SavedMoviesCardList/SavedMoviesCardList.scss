@@ -1,5 +1,29 @@
+.saved__movies_card-list {
+    margin: 0 auto;
+    padding: 77px 0 80px;
+    width: calc(100% - 6.5%);
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+
+    .saved__movies_card_list_type-not-found {
+        margin: 0 auto;
+        font-size: 20px;
+        text-align: center;
+        color: #3DDC84;
+    }
+
+    .saved__movies_list_type-error {
+        margin: 0;
+        font-weight: 400;
+        font-size: 19px;
+        text-align: center;
+        color: #3DDC84;
+    }
+}
+
 @media screen and (max-width: 519px) {
-    .movies__card_list {
+    .saved__movies_card-list {
         padding-bottom: 140px;
     }
 }

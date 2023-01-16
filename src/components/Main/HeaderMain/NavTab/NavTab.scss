@@ -1,12 +1,12 @@
 .navigation {
-    max-width: 1280px;
     margin: 0 auto;
     padding: 24px 0;
     background-color: #272727;
 
-    .nav {
+    .navi {
         display: flex;
         align-items: center;
+        margin: 0;
 
         .navigation__items {
             list-style: none;
@@ -35,6 +35,11 @@
                 &:last-of-type {
                     margin: 0;
                 }
+
+                .navigation__item-a {
+                    color: #fff;
+                    text-decoration: none;
+                }
             }
         }
     }
@@ -42,14 +47,12 @@
 
 @media screen and (max-width: 900px) {
     .navigation {
-        max-width: 768px;
         padding: 26px 0 22px;
     }
 }
 
 @media screen and (max-width: 519px) {
     .navigation {
-        max-width: 320px;
         padding: 24px 0;
 
         .nav {

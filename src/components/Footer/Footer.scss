@@ -2,7 +2,7 @@
     display: flex;
     text-align: center;
     flex-direction: column;
-    max-width: 1140px;
+    max-width: calc(100% - 6.5%);
     margin: 79px auto 0;
 
     .footer__text {
@@ -70,7 +70,6 @@
 
 @media screen and (max-width: 900px) {
     .footer {
-        max-width: 708px;
         margin: 0 auto;
 
         .footer__text {
@@ -81,7 +80,6 @@
 
 @media screen and (max-width: 519px) {
     .footer {
-        max-width: 300px;
 
         .footer__text {
             font-size: 12px;

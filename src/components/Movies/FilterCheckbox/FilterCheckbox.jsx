@@ -4,8 +4,14 @@ import "./FilterCheckbox.scss";
 function FilterCheckbox() {
   return (
     <div className="checkbox">
-      <button className="checkbox__button checkbox__button_active" />
       <p className="checkbox__title">Короткометражки</p>
+      <input
+        type="checkbox"
+        className="checkbox__button"
+        id="custom-checkbox"
+        name="custom-checkbox"
+      />
+      <label className="checkbox__btn" htmlFor="custom-checkbox"></label>
     </div>
   );
 }

@@ -4,7 +4,6 @@
     justify-content: space-between;
     align-items: center;
     background-color: #2F2F2F;
-    max-width: 1140px;
 
     .movies__card_info {
         color: #ffffff;
@@ -64,15 +63,10 @@
     }
 }
 
-@media screen and (max-width: 900px) {
-    .movies__card {
-        max-width: 708px;
-    }
-}
-
 @media screen and (max-width: 519px) {
     .movies__card {
         max-width: 300px;
+        margin: 0 auto;
         flex-direction: column-reverse;
 
         .movies__card_info {

@@ -1,5 +1,4 @@
 .portfolio {
-    max-width: 1140px;
     display: flex;
     flex-direction: column;
     text-align: start;
@@ -59,7 +58,6 @@
 
 @media screen and (max-width: 900px) {
     .portfolio {
-        max-width: 668px;
         padding-bottom: 90px;
 
         .portfolio__list {
@@ -77,7 +75,6 @@
 
 @media screen and (max-width: 519px) {
     .portfolio {
-        max-width: 292px;
         padding-bottom: 70px;
 
         .portfolio__title {

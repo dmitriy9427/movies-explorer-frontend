@@ -13,7 +13,7 @@ function Movies() {
       </header>
       <main>
         <SearchForm />
-        <MoviesCardList />
+        <MoviesCardList zz/>
       </main>
       <footer>
         <Footer />

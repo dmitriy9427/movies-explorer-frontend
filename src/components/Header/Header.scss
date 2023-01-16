@@ -1,9 +1,11 @@
 .header {
     display: flex;
     justify-content: space-between;
-    margin: 28px auto 18px;
-    max-width: 1140px;
+    margin: 0 auto;
+    padding: 28px 0 18px;
+    width: calc(100% - 6.5%);
     align-items: center;
+    background-color: transparent;
 
     .header__logo {
         width: 38px;
@@ -31,7 +33,7 @@
                 font-size: 14px;
                 line-height: 129%;
 
-                &.link {
+                .link {
                     font-weight: 400;
                 }
             }
@@ -74,16 +76,8 @@
     }
 }
 
-@media screen and (max-width: 900px) {
-    .header {
-        max-width: 800px;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .header {
-        max-width: 708px;
-
         .header__nav {
             display: none;
         }
@@ -92,11 +86,5 @@
             display: flex;
             margin-left: auto;
         }
-    }
-}
-
-@media screen and (max-width: 519px) {
-    .header {
-        max-width: 292px;
     }
 }
