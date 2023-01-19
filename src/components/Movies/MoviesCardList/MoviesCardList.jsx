@@ -1,23 +1,30 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import card from "../../../images/image.png";
-import "./MoviesCardList.scss";
 import MoviestBtnStill from "../MoviestBtnStill/MoviestBtnStill";
+import "./MoviesCardList.scss";
 
-function MoviesCardList() {
+const MoviesCardList = (props) => {
   return (
     <section className="movies__card_list">
       <div className="movies__card_list-container">
-        <MoviesCard title="33 слова о дизайне" duration="1ч 42м" image={card} />
-        <MoviesCard title="33 слова о дизайне" duration="1ч 42м" image={card} />
-        <MoviesCard title="33 слова о дизайне" duration="1ч 42м" image={card} />
-        <MoviesCard title="33 слова о дизайне" duration="1ч 42м" image={card} />
-        <MoviesCard title="33 слова о дизайне" duration="1ч 42м" image={card} />
-
+        {props.movies.map((movie) => {
+          return (
+            <MoviesCard
+              movie={movie}
+              savedMovies={props.savedMovies}
+              handleDeleteMovie={props.handleDeleteMovie}
+              key={movie.id}
+              name={movie.nameRU}
+              duration={movie.duration}
+              trailerLink={movie.trailerLink}
+              thumbnail={`https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`}
+            />
+          );
+        })}
         <MoviestBtnStill />
       </div>
     </section>
   );
-}
+};
 
 export default MoviesCardList;

@@ -129,16 +129,16 @@ class MainApi {
     }).then((res) => this.checkResponseStatus(res));
   }
 
-  checkToken(token) {
-    return fetch(`${this._url}/users/me`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => this.checkResponseStatus(res));
-  }
+  // checkToken(token) {
+  //   return fetch(`${this._url}/users/me`, {
+  //     method: "GET",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   }).then((res) => this.checkResponseStatus(res));
+  // }
 
   logout() {
     return fetch(`${this._url}/signout`, {

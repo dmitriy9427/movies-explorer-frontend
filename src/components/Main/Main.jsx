@@ -7,9 +7,8 @@ import Footer from "../Footer/Footer";
 
 function Main() {
   return (
-    <body>
-      
-        <HeaderMain />
+    <div>
+      <HeaderMain />
 
       <main>
         <AboutProject />
@@ -19,7 +18,7 @@ function Main() {
       <footer>
         <Footer />
       </footer>
-    </body>
+    </div>
   );
 }
 

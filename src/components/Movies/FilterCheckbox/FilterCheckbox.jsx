@@ -1,7 +1,7 @@
 import React from "react";
 import "./FilterCheckbox.scss";
 
-function FilterCheckbox() {
+function FilterCheckbox(props) {
   return (
     <div className="checkbox">
       <p className="checkbox__title">Короткометражки</p>
@@ -10,6 +10,8 @@ function FilterCheckbox() {
         className="checkbox__button"
         id="custom-checkbox"
         name="custom-checkbox"
+        checked={props.checked}
+        onChange={props.handleChangeCheckbox}
       />
       <label className="checkbox__btn" htmlFor="custom-checkbox"></label>
     </div>
