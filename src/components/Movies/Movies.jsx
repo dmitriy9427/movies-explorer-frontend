@@ -4,7 +4,16 @@ import SearchForm from "./SearchForm/SearchForm";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
-
+import {
+  MAX_SCREEN_RESOLUTION_1280,
+  MAX_SCREEN_RESOLUTION_519,
+  SHOW_MOWIES_ON_THE_PAGE_8,
+  SHOW_MOWIES_ON_THE_PAGE_5,
+  SHOW_MOWIES_ON_THE_PAGE_3,
+  ADD_MOVIES_3,
+  ADD_MOVIES_2,
+  ADD_MOVIES_1,
+} from "../../utils/constants";
 import "./Movies.scss";
 
 const Movies = (props) => {
@@ -15,19 +24,22 @@ const Movies = (props) => {
   };
 
   const handleResize = () => {
-    const receivedFilms = JSON.parse(localStorage.getItem("foundMovies"));
+    const receivedFilms = JSON.parse(localStorage.getItem("receivedFilms"));
     if (receivedFilms === null) {
       return;
     }
-    if (windowWidth >= 1280) {
-      props.setMovies(receivedFilms.slice(0, 12));
-      props.setMoreMovies(3);
-    } else if (windowWidth > 480 && windowWidth < 1280) {
-      props.setMovies(receivedFilms.slice(0, 8));
-      props.setMoreMovies(2);
-    } else if (windowWidth <= 480) {
-      props.setMovies(receivedFilms.slice(0, 5));
-      props.setMoreMovies(2);
+    if (windowWidth >= MAX_SCREEN_RESOLUTION_1280) {
+      props.setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_8));
+      props.setMoreMovies(ADD_MOVIES_3);
+    } else if (
+      windowWidth > MAX_SCREEN_RESOLUTION_519 &&
+      windowWidth < MAX_SCREEN_RESOLUTION_1280
+    ) {
+      props.setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_5));
+      props.setMoreMovies(ADD_MOVIES_2);
+    } else if (windowWidth <= MAX_SCREEN_RESOLUTION_519) {
+      props.setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_3));
+      props.setMoreMovies(ADD_MOVIES_1);
     }
   };
 
@@ -47,7 +59,8 @@ const Movies = (props) => {
         <Preloader />
       ) : (
         <MoviesCardList
-          movies={props.movies}
+            movies={props.movies}
+            moreMovies={props.moreMovies}
           savedMovies={props.savedMovies}
           handleSaveMovie={props.handleSaveMovie}
           handleShowingMoreMovies={props.handleShowingMoreMovies}

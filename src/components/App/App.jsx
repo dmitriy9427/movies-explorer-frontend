@@ -27,7 +27,29 @@ const App = () => {
   const navigation = useNavigate();
   const location = useLocation();
 
-  // получение данных пользователя!
+  // получение токена!
+  const tokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      mainApi
+        .checkToken(localStorage.getItem("jwt"))
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+            navigation(location.pathname);
+          }
+        })
+        .catch((err) => {
+          handleLogout();
+          console.error(err);
+        });
+    }
+  };
+
+  // использование токена!
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
+
   const getUserData = () => {
     if (loggedIn) {
       mainApi
@@ -35,9 +57,25 @@ const App = () => {
         .then((res) => {
           setCurrentUser(res);
         })
-        .catch((err) => handleLogout(err));
+        .catch((err) => console.log(err));
     }
   };
+
+  const getDataMovies = () => {
+    if (loggedIn) {
+      mainApi
+        .getMovies()
+        .then((savedMovies) => {
+          setSavedMovies(savedMovies);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  React.useEffect(() => {
+    getUserData();
+    getDataMovies();
+  }, []);
 
   // регистрация пользователя!
   const handleRegistrationUser = (name, email, password) => {
@@ -69,7 +107,6 @@ const App = () => {
             if (res) {
               setTimeout(() => navigation("/movies"), 600);
               setLoggedIn(true);
-              getUserData();
             }
           });
         }
@@ -125,17 +162,6 @@ const App = () => {
       });
   };
 
-  const getSavedMovies = () => {
-    mainApi
-      .getMovies()
-      .then((savedMovies) => {
-        setSavedMovies(savedMovies);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-
   // добавление фильма!
   const handleSaveMovie = (movie) => {
     mainApi
@@ -161,42 +187,11 @@ const App = () => {
       });
   };
 
-  // получение токена!
-  const tokenCheck = () => {
-    mainApi
-      .checkToken()
-      .then((res) => {
-        if (res.data._id) {
-          setLoggedIn(true);
-          localStorage.setItem("loggedIn", true);
-          setCurrentUser(res.data);
-        }
-      })
-      .catch((err) => {
-        setErrorMessage(err.res);
-      });
-  };
-
-  // использование токена!
-  React.useEffect(() => {
-    if (loggedIn) {
-      tokenCheck();
-    }
-  }, [loggedIn]);
-
-  React.useEffect(() => {
-    const path = location.pathname;
-    getUserData();
-    getSavedMovies();
-
-    navigation(path);
-  }, []);
-
   // выход из системы
   const handleLogout = () => {
     mainApi.logout().then((res) => {
-      navigation("/");
       localStorage.clear();
+      navigation("/");
       setLoggedIn(false);
       setCurrentUser({});
       setMovies([]);
@@ -222,6 +217,7 @@ const App = () => {
                 handleSearch={handleSearch}
                 handleShowingMoreMovies={handleShowingMoreMovies}
                 setMoreMovies={setMoreMovies}
+                moreMovies={moreMovies}
                 handleDeleteMovie={handleDeleteMovie}
                 handleSaveMovie={handleSaveMovie}
                 errorMessage={errorMessage}

@@ -13,21 +13,8 @@ class MainApi {
       // credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-    }).then((res) => this.checkResponseStatus(res));
-  }
-
-  setDataUser({ name, email }) {
-    return fetch(`${this._url}/users/me`, {
-      method: "PATCH",
-      // credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-      }),
     }).then((res) => this.checkResponseStatus(res));
   }
 
@@ -82,6 +69,11 @@ class MainApi {
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
     }).then((res) => this.checkResponseStatus(res));
   }
 
@@ -128,7 +120,6 @@ class MainApi {
   checkToken(token) {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -138,8 +129,6 @@ class MainApi {
 
   logout() {
     return fetch(`${this._url}/signout`, {
-      method: "GET",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
