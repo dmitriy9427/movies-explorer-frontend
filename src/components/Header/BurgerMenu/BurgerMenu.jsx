@@ -3,13 +3,17 @@ import "./BurgerMenu.scss";
 import { Link } from "react-router-dom";
 import account from "../../../images/iconAccount.svg";
 
-export default function BurgerMenu() {
+const BurgerMenu = ({ openModal, closePopup }) => {
   return (
     <div className="burger">
-      <div className="modal open close" />
-      <div className="burger-menu open close">
+      <div className={`modal ${openModal ? "open" : "close"}`} />
+      <div className={`burger-menu  ${openModal ? "open" : "close"}`}>
         <div className="burger-menu__container">
-          <button className="button burger-menu__close-icon" type="button" />
+          <button
+            className="button burger-menu__close-icon"
+            onClick={closePopup}
+            type="button"
+          />
           <nav className="burger-menu__link-wrapper">
             <ul className="burger-menu__links">
               <li className="burger-menu__link-li">
@@ -43,4 +47,6 @@ export default function BurgerMenu() {
       </div>
     </div>
   );
-}
+};
+
+export default BurgerMenu;

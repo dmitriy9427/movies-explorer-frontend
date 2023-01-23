@@ -2,7 +2,7 @@ import React from "react";
 import "./DiplomAbout.scss";
 import DiplomDesc from "../DiplomDesc/DiplomDesc";
 
-function DiplomAbout() {
+const DiplomAbout = () => {
   return (
     <div className="diplom_about">
       <DiplomDesc

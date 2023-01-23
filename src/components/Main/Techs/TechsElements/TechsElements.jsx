@@ -1,7 +1,7 @@
 import React from "react";
 import TechsElement from "../TechsElement/TechsElement";
 
-function TechsElements() {
+const TechsElements = () => {
   return (
     <div className="techs-elements">
       <TechsElement technology="HTML" />

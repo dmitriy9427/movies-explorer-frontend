@@ -11,6 +11,9 @@
   font-family: Inter, Arial, Helvetica, sans-serif;
   color: #fff;
 }
+.main {
+  background-color: #202020;
+}
 
 .button {
   cursor: pointer;

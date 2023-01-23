@@ -4,7 +4,7 @@ import DiplomAbout from "./DiplomAbout/DiplomAbout";
 import Promo from "./Promo/Promo";
 import "./AboutProject.scss";
 
-function AboutProject() {
+const AboutProject = () => {
   return (
     <div id="about-project" className="about__projects">
       <Promo title="О проекте" />
@@ -12,6 +12,6 @@ function AboutProject() {
       <Deadlines />
     </div>
   );
-}
+};
 
 export default AboutProject;

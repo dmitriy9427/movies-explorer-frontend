@@ -4,7 +4,7 @@ import Portfolio from "./Portfolio/Portfolio";
 import StudentInfo from "./StudentInfo/StudentInfo";
 import "./AboutMe.scss";
 
-function AboutMe() {
+const AboutMe = () => {
   return (
     <section className="student">
       <Promo title="Студент" />

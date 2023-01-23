@@ -21,7 +21,6 @@ class MainApi {
   getMovies() {
     return fetch(`${this._url}/movies`, {
       method: "GET",
-      // credentials: "include",
       headers: {
         headers: {
           "Content-Type": "application/json",
@@ -39,15 +38,6 @@ class MainApi {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
-      body: JSON.stringify({
-        duration: movie.duration,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
-        trailerLink: movie.trailerLink,
-        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-        movieId: movie.id.toString(),
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
-      }),
     }).then((res) => this.checkResponseStatus(res));
   }
 
@@ -129,6 +119,7 @@ class MainApi {
 
   logout() {
     return fetch(`${this._url}/signout`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },

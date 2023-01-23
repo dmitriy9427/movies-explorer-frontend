@@ -2,13 +2,23 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import icon from "../../images/iconAccount.svg";
-import "./Header.scss";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import "./Header.scss";
 
-function Header() {
+const Header = () => {
+  const [openModal, setOpenModal] = React.useState(false);
+
+  const openPopup = () => {
+    setOpenModal(true);
+  };
+
+  const closePopup = () => {
+    setOpenModal(false);
+  };
+
   return (
     <header className="header">
-      <Link to='/' className="button">
+      <Link to="/" className="button">
         <img className="header__logo" src={logo} alt="логотип" />
       </Link>
       <nav className="header__nav">
@@ -30,10 +40,10 @@ function Header() {
           </NavLink>
         </ul>
       </nav>
-      <button className="header__button_burger-menu" />
-      <BurgerMenu />
+      <button onClick={openPopup} className="header__button_burger-menu" />
+      <BurgerMenu openModal={openModal} closePopup={closePopup} />
     </header>
   );
-}
+};
 
 export default Header;

@@ -2,7 +2,7 @@ import React from "react";
 import strelka from "../../../../images/strelka.svg";
 import "./Portfolio.scss";
 
-function Portfolio() {
+const Portfolio = () => {
   return (
     <section className="portfolio">
       <h3 className="portfolio__title">Портфолио</h3>
@@ -44,6 +44,6 @@ function Portfolio() {
       </ul>
     </section>
   );
-}
+};
 
 export default Portfolio;

@@ -1,16 +1,24 @@
 import React from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
-import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRoute from "./ProtectedRoute";
+import {
+  MAX_SCREEN_RESOLUTION_1280,
+  MAX_SCREEN_RESOLUTION_519,
+  SHOW_MOWIES_ON_THE_PAGE_5,
+  SHOW_MOWIES_ON_THE_PAGE_4,
+  SHOW_MOWIES_ON_THE_PAGE_3,
+  ADD_MOVIES_3,
+} from "../../utils/constants";
 import "./App.css";
 
 const App = () => {
@@ -23,6 +31,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = React.useState("");
   const [errorRegBtn, setErrorRegBtn] = React.useState(false);
   const [errorLoginBtn, setErrorLoginBtn] = React.useState(false);
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -135,17 +144,43 @@ const App = () => {
     setMovies(foundMovies.slice(0, movies.length + moreMovies));
   };
 
-  const handleSearch = (movieName, isShortFilms) => {
-    getMovies(movieName, isShortFilms);
+  const handleCheckWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
   };
+
+  const handleResize = () => {
+    const receivedFilms = JSON.parse(localStorage.getItem("foundMovies"));
+    if (receivedFilms === null) {
+      return;
+    }
+    if (windowWidth >= MAX_SCREEN_RESOLUTION_1280) {
+      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_5));
+      setMoreMovies(ADD_MOVIES_3);
+    }
+    if (
+      windowWidth > MAX_SCREEN_RESOLUTION_519 &&
+      windowWidth < MAX_SCREEN_RESOLUTION_1280
+    ) {
+      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_4));
+      setMoreMovies(ADD_MOVIES_3);
+    }
+    if (windowWidth <= MAX_SCREEN_RESOLUTION_519) {
+      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_3));
+      setMoreMovies(ADD_MOVIES_3);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("resize", handleCheckWindowWidth);
+  }, [windowWidth]);
 
   // получение фильмов
   const getMovies = (movieName, isShortFilms) => {
     setIsLoading(true);
     moviesApi
       .getMoviesApi()
-      .then((res) => {
-        const searchMovies = res.filter((movie) =>
+      .then((data) => {
+        const searchMovies = data.filter((movie) =>
           movie.nameRU.toLowerCase().includes(movieName.toLowerCase())
         );
         const foundMovies = isShortFilms
@@ -155,11 +190,17 @@ const App = () => {
         localStorage.setItem("movieName", movieName);
         localStorage.setItem("isShortFilms", isShortFilms);
         setIsLoading(false);
+        handleResize();
       })
       .catch((err) => {
         setIsLoading(false);
         console.log(err);
+        setErrorMessage();
       });
+  };
+
+  const handleSearch = (movieName, isShortFilms) => {
+    getMovies(movieName, isShortFilms);
   };
 
   // добавление фильма!
@@ -167,23 +208,23 @@ const App = () => {
     mainApi
       .addMovie(movie)
       .then((data) => {
-        setSavedMovies([...savedMovies, data]);
+        setSavedMovies([data, ...savedMovies]);
       })
       .catch((err) => {
-        setErrorMessage(err);
+        setErrorMessage(`Не удалось добавить фильм ${err}`);
       });
   };
 
   // удаление фильма!
   const handleDeleteMovie = (movie) => {
-    const deleteMovie = savedMovies.find((el) => el._id === movie._id);
+    const deleteMovie = savedMovies.find((el) => el.movieId === movie.movieId);
     mainApi
-      .deleteMovie(deleteMovie._id)
+      .deleteMovie(deleteMovie)
       .then(() => {
         setSavedMovies(savedMovies.filter((el) => el._id !== deleteMovie._id));
       })
       .catch((err) => {
-        setErrorMessage("Не удалось удалить фильм");
+        console.log(`Не удалось удалить фильм. ${err}`);
       });
   };
 
@@ -203,14 +244,13 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main loggedIn={loggedIn} />} />
         <Route
           path="/movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
               <Movies
                 isLoading={isLoading}
-                keyWord={localStorage.getItem("movieName")}
                 movies={movies}
                 setMovies={setMovies}
                 savedMovies={savedMovies}
@@ -233,7 +273,6 @@ const App = () => {
                 isLoading={isLoading}
                 savedMovies={savedMovies}
                 handleDeleteMovie={handleDeleteMovie}
-                errorMessage={errorMessage}
               />
             </ProtectedRoute>
           }

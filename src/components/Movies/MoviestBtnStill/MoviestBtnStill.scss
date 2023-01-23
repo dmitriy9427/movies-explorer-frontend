@@ -12,6 +12,10 @@
         background-color: transparent;
     }
 
+    .movies__card_list-btn-none {
+        display: none;
+    }
+
     @media screen and (max-width: 519px) {
         .movies__card_list-btn {
             width: 220px;

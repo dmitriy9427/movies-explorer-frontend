@@ -1,7 +1,7 @@
 import React from "react";
 import "./Deadlines.scss";
 
-function Deadlines() {
+const Deadlines = () => {
   return (
     <div className="deadlines">
       <p className="deadlines__week_one">1 неделя</p>

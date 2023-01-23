@@ -1,22 +1,16 @@
 import React from "react";
 import "./MoviestBtnStill.scss";
 
-function MoviestBtnStill(props) {
+const MoviestBtnStill = ({ handleShowingMoreMovies }) => {
   return (
-    <>
-      {props.movies.length > 0 || props.moreMovies > props.movies.length ? (
-        <button
-          type="button"
-          onClick={props.handleShowingMoreMovies}
-          className="button movies__card_list-btn"
-        >
-          Еще
-        </button>
-      ) : (
-        ""
-      )}
-    </>
+    <button
+      className="button movies__card_list-btn"
+      type="button"
+      onClick={handleShowingMoreMovies}
+    >
+      Еще
+    </button>
   );
-}
+};
 
 export default MoviestBtnStill;

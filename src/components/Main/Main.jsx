@@ -5,21 +5,16 @@ import HeaderMain from "./HeaderMain/HeaderMain";
 import Techs from "./Techs/Techs";
 import Footer from "../Footer/Footer";
 
-function Main() {
+const Main = ({ loggedIn }) => {
   return (
-    <div>
-      <HeaderMain />
-
-      <main>
-        <AboutProject />
-        <Techs />
-        <AboutMe />
-      </main>
-      <footer>
-        <Footer />
-      </footer>
+    <div className="main">
+      <HeaderMain loggedIn={loggedIn} />
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+      <Footer />
     </div>
   );
-}
+};
 
 export default Main;

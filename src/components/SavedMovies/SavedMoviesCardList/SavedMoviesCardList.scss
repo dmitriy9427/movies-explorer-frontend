@@ -6,15 +6,9 @@
     grid-template-columns: 1fr;
     row-gap: 20px;
 
-    .saved__movies_card_list_type-not-found {
+    .saved__movies_card-list-error {
+        display: flex;
         margin: 0 auto;
-        font-size: 20px;
-        text-align: center;
-        color: #3DDC84;
-    }
-
-    .saved__movies_list_type-error {
-        margin: 0;
         font-weight: 400;
         font-size: 19px;
         text-align: center;

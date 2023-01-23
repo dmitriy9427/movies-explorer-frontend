@@ -3,31 +3,55 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import MoviestBtnStill from "../MoviestBtnStill/MoviestBtnStill";
 import "./MoviesCardList.scss";
 
-const MoviesCardList = (props) => {
+const MoviesCardList = ({
+  movies,
+  savedMovies,
+  handleSaveMovie,
+  handleShowingMoreMovies,
+  handleDeleteMovie,
+  errorMessage,
+}) => {
+  const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
+
   return (
     <section className="movies__card_list">
-      {props.movies.map((movie) => {
+      {movies.map((movie) => {
         return (
           <MoviesCard
             {...movie}
             key={movie.id}
-            savedMovies={props.savedMovies}
-            handleDeleteMovie={props.handleDeleteMovie}
-            handleSaveMovie={props.handleSaveMovie}
+            savedMovies={savedMovies}
+            handleDeleteMovie={handleDeleteMovie}
+            handleSaveMovie={handleSaveMovie}
+            isOnlySaved={false}
           />
         );
       })}
 
-      {props.movies.length === 0 ? (
-        <span className="movies__card_list-error">Ничего не найдено</span>
+      {movies.length === 0 ? (
+        <span className="movies__card_list-error">Ничего не найдено!</span>
       ) : (
         ""
       )}
 
-      <MoviestBtnStill
-        movies={props.movies}
-        handleShowingMoreMovies={props.handleShowingMoreMovies}
-      />
+      {errorMessage ? (
+        <span className="movies__card_list-error">
+          Во время запроса произошла ошибка. Возможно, проблема с соединением
+          или сервер недоступен. Подождите немного и попробуйте ещё раз
+        </span>
+      ) : (
+        ""
+      )}
+      {movies.length === 0 ? (
+        ""
+      ) : movies.length < foundMovies.length ? (
+        <MoviestBtnStill
+          movies={movies}
+          handleShowingMoreMovies={handleShowingMoreMovies}
+        />
+      ) : (
+        ""
+      )}
     </section>
   );
 };

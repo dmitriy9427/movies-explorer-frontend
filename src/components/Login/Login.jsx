@@ -1,17 +1,17 @@
 import React from "react";
-import "./Login.scss";
-import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
 import useFormValidation from "../../utils/hooks/useFormValidation";
+import "./Login.scss";
 
-const Login = (props) => {
+const Login = ({ handleLoginUser, errorMessage, errorLoginBtn }) => {
   const { handleChange, values, errors, isValid, resetForm } =
-    useFormValidation(props.handleLoginUser);
+    useFormValidation(handleLoginUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = values;
-    props.handleLoginUser(email, password);
+    handleLoginUser(email, password);
     resetForm();
   };
 
@@ -35,7 +35,7 @@ const Login = (props) => {
                 name="email"
                 className="login__input login__input-email"
                 placeholder="Введите почту"
-                value={values?.email}
+                value={values?.email || ""}
                 onChange={handleChange}
                 required
               />

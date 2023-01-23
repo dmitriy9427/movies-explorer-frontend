@@ -59,6 +59,8 @@
 
         .movies__card_img {
             margin: 6px 6px;
+            width: 220px;
+            height: 122px;
         }
     }
 }
@@ -102,11 +104,12 @@
         }
 
         .movies__card_image {
-            width: 300px;
             margin: 0;
 
             .movies__card_img {
                 width: 300px;
+                height: 168px;
+                margin: 0;
             }
         }
     }

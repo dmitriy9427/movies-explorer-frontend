@@ -1,6 +1,6 @@
 import React from "react";
 
-function TechsBlock() {
+const TechsBlock = () => {
   return (
     <div className="techs__block">
       <h2 className="techs__title">7 технологий</h2>

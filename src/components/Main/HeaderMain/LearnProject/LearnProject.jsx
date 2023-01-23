@@ -2,7 +2,7 @@ import React from "react";
 import "./LearnProject.scss";
 import tableWork from "../../../../images/tableP.png";
 
-function LearnProject() {
+const LearnProject = () => {
   return (
     <section className="heading">
       <img
@@ -15,6 +15,6 @@ function LearnProject() {
       </h1>
     </section>
   );
-}
+};
 
 export default LearnProject;

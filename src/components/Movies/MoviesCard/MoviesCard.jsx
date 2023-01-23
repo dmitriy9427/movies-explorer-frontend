@@ -1,52 +1,66 @@
 import React from "react";
 import "./MoviesCard.scss";
 
-const MoviesCard = (props) => {
-  const thumbnail = `https://api.nomoreparties.co/${props.image.formats.thumbnail.url}`;
-  const duration = () => {
-    if (props.duration > 60) {
-      return ((props.duration / 60) | 0) + "ч " + (props.duration % 60) + "м";
+const MoviesCard = ({
+  movie,
+  nameRU,
+  trailerLink,
+  image,
+  duration,
+  savedMovies,
+  handleDeleteMovie,
+  handleSaveMovie,
+}) => {
+  const thumbnailMovie = `https://api.nomoreparties.co/${image.formats.thumbnail.url}`;
+  const durationMovie = () => {
+    if (duration > 60) {
+      return ((duration / 60) | 0) + "ч " + (duration % 60) + "м";
     }
-    if (props.duration === 60) {
-      return props.duration / 60 + "ч";
+    if (duration === 60) {
+      return duration / 60 + "ч";
     } else {
-      return props.duration + "м";
+      return duration + "м";
     }
   };
 
   const isSaved = (movie) => {
-    return props.savedMovies.some((item) => item.movieId === movie.id);
+    return savedMovies.some((item) => item.movieId === movie.id);
   };
 
-  const handleMovieSave = () => {
-    props.handleSaveMovie(props.movie);
-  };
+  let buttonClassName = isSaved
+    ? "button movies__card_like movies__card_like-active"
+    : "button movies__card_like";
 
-  const handleDeleteMovie = () => {
-    props.handleDeleteMovie(props.movie);
+  // const handleMovieSave = () => {
+  //   handleSaveMovie(movie);
+  // };
+
+  // const handleMovieDelete = () => {
+  //   handleDeleteMovie(movie);
+  // };
+
+  const handleSaveClick = () => {
+    if (isSaved) {
+      handleDeleteMovie(savedMovies.filter((m) => m.movieId === movie.id)[0]);
+    } else {
+      handleSaveMovie(movie);
+    }
   };
 
   return (
     <div className="movies__card">
       <div className="movies__card_info">
-        <h3 className="movies__card_title">{props.nameRU}</h3>
-        <p className="movies__card_duration">{duration()}</p>
-        {isSaved(props.movie) ? (
-          <button
-            type="button"
-            onClick={handleDeleteMovie}
-            className="button movies__card_like movies__card_like-active"
-          />
-        ) : (
-          <button
-            type="button"
-            onClick={handleMovieSave}
-            className="button movies__card_like"
-          />
-        )}
+        <h3 className="movies__card_title">{nameRU}</h3>
+        <p className="movies__card_duration">{durationMovie()}</p>
+
+        <button
+          type="button"
+          onClick={handleSaveClick}
+          className={buttonClassName}
+        />
       </div>
-      <a className="movies__card_image" href={props.trailerLink}>
-        <img className="movies__card_img" src={thumbnail} alt={props.nameRU} />
+      <a className="movies__card_image" href={trailerLink}>
+        <img className="movies__card_img" src={thumbnailMovie} alt={nameRU} />
       </a>
     </div>
   );

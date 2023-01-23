@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../../../images/logo.svg";
 import "./NavHeader.scss";
 
-function NavHeader() {
+const NavHeader = () => {
   return (
     <header className="header__nav-in">
       <Link to="/" className="button">
@@ -25,6 +25,6 @@ function NavHeader() {
       </nav>
     </header>
   );
-}
+};
 
 export default NavHeader;

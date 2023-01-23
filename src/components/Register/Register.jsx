@@ -1,19 +1,20 @@
 import React from "react";
-import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Register.scss";
 
-export default function Register(props) {
+const Register = ({ handleRegistrationUser, errorMessage, errorRegBtn }) => {
   const { handleChange, values, errors, isValid, resetForm } =
     useFormValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = values;
-    props.handleRegistrationUser(name, email, password);
+    handleRegistrationUser(name, email, password);
     resetForm();
   };
+
   return (
     <section className="register">
       <div className="register__content">
@@ -33,7 +34,7 @@ export default function Register(props) {
                 className="register__input register__input-name"
                 placeholder="Введите имя"
                 pattern="[A-Za-zА-Яа-яЁё\s-]+"
-                value={values?.name}
+                value={values?.name || ""}
                 onChange={handleChange}
                 minLength="2"
                 required
@@ -50,7 +51,7 @@ export default function Register(props) {
                 className="register__input register__input-email"
                 placeholder="Введите почту"
                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                value={values?.email}
+                value={values?.email || ""}
                 onChange={handleChange}
                 required
               />
@@ -77,8 +78,8 @@ export default function Register(props) {
               <span className="register__error">{errors.password}</span>
             )}
           </fieldset>
-          {props.errorRegBtn ? (
-            <span className="register__error">{props.errorMessage}</span>
+          {errorRegBtn ? (
+            <span className="register__error">{errorMessage}</span>
           ) : (
             ""
           )}
@@ -104,4 +105,6 @@ export default function Register(props) {
       </div>
     </section>
   );
-}
+};
+
+export default Register;

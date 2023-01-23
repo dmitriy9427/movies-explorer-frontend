@@ -2,7 +2,7 @@ import React from "react";
 import TechsBlock from "../TechsBlock/TechsBlock";
 import TechsElements from "../TechsElements/TechsElements";
 
-function TechsSection() {
+const TechsSection = () => {
   return (
     <div className="techs">
       <TechsBlock />

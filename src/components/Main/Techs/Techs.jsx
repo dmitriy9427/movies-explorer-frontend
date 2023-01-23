@@ -1,9 +1,9 @@
 import React from "react";
 import Promo from "../AboutProject/Promo/Promo";
-import "./Techs.scss";
 import TechsSection from "./TechsSection/TechsSection";
+import "./Techs.scss";
 
-function Techs() {
+const Techs = () => {
   return (
     <section id="techs" className="techs__section">
       <div className="tech">
