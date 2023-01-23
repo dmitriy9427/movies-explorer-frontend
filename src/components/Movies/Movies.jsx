@@ -1,48 +1,63 @@
 import React from "react";
 import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import "./Movies.scss";
 import SearchForm from "./SearchForm/SearchForm";
-import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
+import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import Footer from "../Footer/Footer";
 
-function Movies(props) {
-  const [checked, setChecked] = useState(true);
-  const [showMovies, setShowMovies] = React.useState([]);
+import "./Movies.scss";
 
-  function handleSearchMovies(text) {
-    if (props.movies.length < 1) {
-      props.getMovies();
-    }
-  }
+const Movies = (props) => {
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
-  // обработчик для чекбокса
-  const handleChangeCheckbox = () => {
-    setChecked(!checked);
-    localStorage.setItem("checkbox", !checked);
+  const handleCheckWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
   };
+
+  const handleResize = () => {
+    const receivedFilms = JSON.parse(localStorage.getItem("foundMovies"));
+    if (receivedFilms === null) {
+      return;
+    }
+    if (windowWidth >= 1280) {
+      props.setMovies(receivedFilms.slice(0, 12));
+      props.setMoreMovies(3);
+    } else if (windowWidth > 480 && windowWidth < 1280) {
+      props.setMovies(receivedFilms.slice(0, 8));
+      props.setMoreMovies(2);
+    } else if (windowWidth <= 480) {
+      props.setMovies(receivedFilms.slice(0, 5));
+      props.setMoreMovies(2);
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("resize", handleCheckWindowWidth);
+  }, [windowWidth]);
+
   return (
     <div className="movies">
       <Header />
       <SearchForm
-        handleSearch={props.getMovies}
-        checked={checked}
-        handleChangeCheckbox={handleChangeCheckbox}
+        handleResize={handleResize}
+        handleSearch={props.handleSearch}
+        keyWord={props.keyWord}
       />
-      \
       {props.isLoading ? (
         <Preloader />
       ) : (
         <MoviesCardList
           movies={props.movies}
           savedMovies={props.savedMovies}
-          handleAddSaveMovies={props.handleAddSaveMovies}
+          handleSaveMovie={props.handleSaveMovie}
+          handleShowingMoreMovies={props.handleShowingMoreMovies}
           handleDeleteMovie={props.handleDeleteMovie}
+          errorMessage={props.errorMessage}
         />
       )}
       <Footer />
     </div>
   );
-}
+};
 
 export default Movies;

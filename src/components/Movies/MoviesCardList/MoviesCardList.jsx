@@ -10,19 +10,23 @@ const MoviesCardList = (props) => {
         {props.movies.map((movie) => {
           return (
             <MoviesCard
-              movie={movie}
+              {...movie}
+              key={movie.id}
               savedMovies={props.savedMovies}
               handleDeleteMovie={props.handleDeleteMovie}
-              key={movie.id}
-              name={movie.nameRU}
-              duration={movie.duration}
-              trailerLink={movie.trailerLink}
-              thumbnail={`https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`}
+              handleSaveMovie={props.handleSaveMovie}
             />
           );
         })}
-        <MoviestBtnStill />
       </div>
+      {props.movies.length === 0 ? <span>Ничего не найдено</span> : ""}
+      {props.movies.length > 0 ? (
+        <MoviestBtnStill
+          handleShowingMoreMovies={props.handleShowingMoreMovies}
+        />
+      ) : (
+        ""
+      )}
     </section>
   );
 };

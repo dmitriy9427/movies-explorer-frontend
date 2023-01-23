@@ -11,7 +11,7 @@ function FilterCheckbox(props) {
         id="custom-checkbox"
         name="custom-checkbox"
         checked={props.checked}
-        onChange={props.handleChangeCheckbox}
+        onChange={props.onChange}
       />
       <label className="checkbox__btn" htmlFor="custom-checkbox"></label>
     </div>

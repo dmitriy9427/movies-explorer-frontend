@@ -1,9 +1,13 @@
 import React from "react";
 import "./MoviestBtnStill.scss";
 
-function MoviestBtnStill() {
+function MoviestBtnStill(props) {
   return (
-    <button type="button" className="button movies__card_list-btn">
+    <button
+      type="button"
+      onClick={props.handleShowingMoreMovies}
+      className="button movies__card_list-btn"
+    >
       Еще
     </button>
   );

@@ -10,7 +10,7 @@ class MainApi {
   getDataUser() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,7 +20,7 @@ class MainApi {
   setDataUser({ name, email }) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -34,7 +34,7 @@ class MainApi {
   getMovies() {
     return fetch(`${this._url}/movies`, {
       method: "GET",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         headers: {
           "Content-Type": "application/json",
@@ -47,17 +47,13 @@ class MainApi {
   addMovie(movie) {
     return fetch(`${this._url}/movies`, {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
       body: JSON.stringify({
-        country: movie.country,
-        director: movie.director,
         duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
         image: `https://api.nomoreparties.co${movie.image.url}`,
         trailerLink: movie.trailerLink,
         thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
@@ -71,7 +67,7 @@ class MainApi {
   deleteMovie(id) {
     return fetch(`${this._url}/movies/${id}`, {
       method: "DELETE",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -82,7 +78,7 @@ class MainApi {
   registerUser(name, email, password) {
     return fetch(`${this._url}/signup`, {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -92,7 +88,7 @@ class MainApi {
   userLogin(email, password) {
     return fetch(`${this._url}/signin`, {
       method: "POST",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -106,7 +102,7 @@ class MainApi {
   getUserData() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -117,7 +113,7 @@ class MainApi {
   editedUserData(name, email) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -129,21 +125,21 @@ class MainApi {
     }).then((res) => this.checkResponseStatus(res));
   }
 
-  // checkToken(token) {
-  //   return fetch(`${this._url}/users/me`, {
-  //     method: "GET",
-  //     credentials: "include",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   }).then((res) => this.checkResponseStatus(res));
-  // }
+  checkToken(token) {
+    return fetch(`${this._url}/users/me`, {
+      method: "GET",
+      // credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => this.checkResponseStatus(res));
+  }
 
   logout() {
     return fetch(`${this._url}/signout`, {
       method: "GET",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

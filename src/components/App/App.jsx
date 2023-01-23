@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Main from "../Main/Main";
@@ -7,78 +7,99 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import "./App.css";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import ProtectedRoute from "./ProtectedRoute";
+import "./App.css";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [moreMovies, setMoreMovies] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [errorMesage, setErrorMessage] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [errorRegBtn, setErrorRegBtn] = React.useState(false);
+  const [errorLoginBtn, setErrorLoginBtn] = React.useState(false);
 
   const navigation = useNavigate();
+  const location = useLocation();
 
-  // получение данных пользователя
+  // получение данных пользователя!
   const getUserData = () => {
     if (loggedIn) {
       mainApi
         .getDataUser()
         .then((res) => {
-          setCurrentUser(res.data);
+          setCurrentUser(res);
         })
         .catch((err) => handleLogout(err));
     }
   };
 
-  // регистрация пользователя
-  const handleRegistrationUser = ({ name, email, password }) => {
-    setIsLoading(true);
+  // регистрация пользователя!
+  const handleRegistrationUser = (name, email, password) => {
     mainApi
       .registerUser(name, email, password)
       .then((res) => {
-        handleLoginUser(res);
-        setIsLoading(false);
+        if (res) {
+          handleLoginUser(email, password);
+        }
+        setErrorRegBtn(false);
       })
       .catch((err) => {
-        setErrorMessage(err.res);
+        if (err.status !== 400) {
+          setErrorMessage("При регистрации пользователя произошла ошибка.");
+          setErrorRegBtn(true);
+        }
       });
   };
 
-  // вход пользователя
-  const handleLoginUser = ({ email, password }) => {
-    setIsLoading(true);
+  // вход пользователя!
+  const handleLoginUser = (email, password) => {
     mainApi
       .userLogin(email, password)
       .then((res) => {
-        setLoggedIn(true);
-        getUserData();
-        navigation("/movies");
-        setIsLoading(false);
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setErrorLoginBtn(false);
+          mainApi.checkToken(res.token).then((res) => {
+            if (res) {
+              setTimeout(() => navigation("/movies"), 600);
+              setLoggedIn(true);
+              getUserData();
+            }
+          });
+        }
       })
-      .catch((err) => {
-        setErrorMessage("Что-то пошло не так ...");
+      .catch(() => {
+        setErrorMessage("Вы ввели неправильный логин или пароль.");
         setLoggedIn(false);
-        console.log(err.status);
+        setErrorLoginBtn(true);
       });
   };
 
-  // редактирование данных пользователя
+  // редактирование данных пользователя!
   const handleEditingUserData = ({ name, email }) => {
-    setIsLoading(true);
     mainApi
       .editedUserData(name, email)
-      .then((res) => {
-        setCurrentUser(res.data);
-        setIsLoading(false);
+      .then(() => {
+        setCurrentUser(name, email);
       })
       .catch((err) => {
-        handleLogout(err);
-        setErrorMessage(err.res);
+        setErrorMessage("Не удалось редактировать данные");
       });
+  };
+
+  const handleShowingMoreMovies = () => {
+    const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
+    setMovies(foundMovies.slice(0, movies.length + moreMovies));
+  };
+
+  const handleSearch = (movieName, isShortFilms) => {
+    getMovies(movieName, isShortFilms);
   };
 
   // получение фильмов
@@ -87,74 +108,100 @@ const App = () => {
     moviesApi
       .getMoviesApi()
       .then((res) => {
-        let searchMovies = res.filter((movie) =>
+        const searchMovies = res.filter((movie) =>
           movie.nameRU.toLowerCase().includes(movieName.toLowerCase())
         );
         const foundMovies = isShortFilms
           ? searchMovies.filter((item) => item.duration <= 40)
           : searchMovies;
+        localStorage.setItem("foundMovies", JSON.stringify(foundMovies));
+        localStorage.setItem("movieName", movieName);
+        localStorage.setItem("isShortFilms", isShortFilms);
         setIsLoading(false);
       })
       .catch((err) => {
-        setErrorMessage(err.res);
+        setIsLoading(false);
+        console.log(err);
       });
   };
 
-  // добавление фильма
-  const handleAddSaveMovies = (movie) => {
+  const getSavedMovies = () => {
+    mainApi
+      .getMovies()
+      .then((savedMovies) => {
+        setSavedMovies(savedMovies);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  // добавление фильма!
+  const handleSaveMovie = (movie) => {
     mainApi
       .addMovie(movie)
       .then((data) => {
         setSavedMovies([...savedMovies, data]);
       })
       .catch((err) => {
-        setErrorMessage(err.res);
+        setErrorMessage(err);
       });
   };
 
-  // удаление фильма
+  // удаление фильма!
   const handleDeleteMovie = (movie) => {
-    const deleteMovie = savedMovies.find(
-      (el) => el._id === movie._id && el.owner === currentUser._id
-    );
-    if (!deleteMovie) return;
+    const deleteMovie = savedMovies.find((el) => el._id === movie._id);
     mainApi
       .deleteMovie(deleteMovie._id)
       .then(() => {
         setSavedMovies(savedMovies.filter((el) => el._id !== deleteMovie._id));
       })
       .catch((err) => {
+        setErrorMessage("Не удалось удалить фильм");
+      });
+  };
+
+  // получение токена!
+  const tokenCheck = () => {
+    mainApi
+      .checkToken()
+      .then((res) => {
+        if (res.data._id) {
+          setLoggedIn(true);
+          localStorage.setItem("loggedIn", true);
+          setCurrentUser(res.data);
+        }
+      })
+      .catch((err) => {
         setErrorMessage(err.res);
       });
   };
 
-  // получение токена
-  const tokenCheck = () => {
-    mainApi.getUserData().then((res) => {
-      if (res.data._id) {
-        setCurrentUser(res.data);
-        setLoggedIn(true);
-      }
-    });
-  };
-
-  // использование токена
+  // использование токена!
   React.useEffect(() => {
     if (loggedIn) {
       tokenCheck();
     }
   }, [loggedIn]);
 
+  React.useEffect(() => {
+    const path = location.pathname;
+    getUserData();
+    getSavedMovies();
+
+    navigation(path);
+  }, []);
+
   // выход из системы
   const handleLogout = () => {
     mainApi.logout().then((res) => {
+      navigation("/");
       localStorage.clear();
       setLoggedIn(false);
       setCurrentUser({});
       setMovies([]);
       setSavedMovies([]);
-      navigation("/");
-      console.log(res);
+      setErrorRegBtn(false);
     });
   };
 
@@ -165,44 +212,55 @@ const App = () => {
         <Route
           path="/movies"
           element={
-            <Movies
-              movies={movies}
-              keyWord={localStorage.getItem("KeyWord")}
-              getMovies={getMovies}
-              handleDeleteMovie={handleDeleteMovie}
-              savedMovies={savedMovies}
-              isLoading={isLoading}
-              handleAddSaveMovies={handleAddSaveMovies}
-            />
+            <ProtectedRoute loggedIn={loggedIn}>
+              <Movies
+                isLoading={isLoading}
+                keyWord={localStorage.getItem("movieName")}
+                movies={movies}
+                setMovies={setMovies}
+                savedMovies={savedMovies}
+                handleSearch={handleSearch}
+                handleShowingMoreMovies={handleShowingMoreMovies}
+                setMoreMovies={setMoreMovies}
+                handleDeleteMovie={handleDeleteMovie}
+                handleSaveMovie={handleSaveMovie}
+                errorMessage={errorMessage}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/saved-movies"
           element={
-            <SavedMovies
-              savedMovies={savedMovies}
-              handleDeleteMovie={handleDeleteMovie}
-            />
+            <ProtectedRoute loggedIn={loggedIn}>
+              <SavedMovies
+                isLoading={isLoading}
+                savedMovies={savedMovies}
+                handleDeleteMovie={handleDeleteMovie}
+                errorMessage={errorMessage}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/profile"
           element={
-            <Profile
-              handleLogout={handleLogout}
-              handleUpdateUserData={handleEditingUserData}
-              errorMesage={errorMesage}
-              setErrorMessage={setErrorMessage}
-            />
+            <ProtectedRoute loggedIn={loggedIn}>
+              <Profile
+                handleLogout={handleLogout}
+                handleUpdateUserData={handleEditingUserData}
+                errorMessage={errorMessage}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/signin"
           element={
             <Login
-              handleLogin={handleLoginUser}
-              errorMesage={errorMesage}
-              setErrorMessage={setErrorMessage}
+              handleLoginUser={handleLoginUser}
+              errorMessage={errorMessage}
+              errorLoginBtn={errorLoginBtn}
             />
           }
         />
@@ -210,13 +268,13 @@ const App = () => {
           path="/signup"
           element={
             <Register
-              register={handleRegistrationUser}
-              errorMesage={errorMesage}
-              setErrorMessage={setErrorMessage}
+              handleRegistrationUser={handleRegistrationUser}
+              errorMessage={errorMessage}
+              errorRegBtn={errorRegBtn}
             />
           }
         />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>
   );

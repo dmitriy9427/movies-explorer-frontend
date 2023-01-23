@@ -2,26 +2,29 @@ import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.scss";
 
-function SearchForm(props) {
-  
+const SearchForm = (props) => {
   const [movieName, setMovieName] = React.useState("");
-  function handleChangeMovieName(e) {
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChangeMovieName = (e) => {
     setMovieName(e.target.value);
   }
-  function handleChangeCheckbox(e) {
+  const handleChangeCheckbox = (e) => {
     const isShortFilms = e.target.checked;
-    setCheckox(isShortFilms);
+    setChecked(isShortFilms);
     props.handleSearch(movieName, isShortFilms);
+    props.handleResize();
   }
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    props.handleSearch(movieName, checkox);
+    props.handleSearch(movieName, checked);
+    props.handleResize();
   }
 
   React.useEffect(() => {
-    setMovieName(props.defaultValue);
-    setCheckox(JSON.parse(localStorage.getItem("shortFilms")) || false);
+    setMovieName(props.keyWord);
+    setChecked(JSON.parse(localStorage.getItem("shortFilms")) || false);
   }, []);
 
   return (
@@ -46,7 +49,7 @@ function SearchForm(props) {
         </button>
       </form>
       <span className="search__form_input-error"></span>
-      <FilterCheckbox checked={checkox} onChange={handleChangeCheckbox} />
+      <FilterCheckbox checked={checked} onChange={handleChangeCheckbox} />
     </div>
   );
 }

@@ -10,7 +10,6 @@ class MoviesApi {
   getMoviesApi() {
     return fetch(`${this.url}`, {
       method: "GET",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -19,7 +18,7 @@ class MoviesApi {
 }
 
 const moviesApi = new MoviesApi({
-    url: "https://api.nomoreparties.co/beatfilm-movies",
+  url: "https://api.nomoreparties.co/beatfilm-movies",
 });
 
 export default moviesApi;

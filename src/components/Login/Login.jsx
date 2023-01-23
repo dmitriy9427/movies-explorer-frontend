@@ -2,8 +2,19 @@ import React from "react";
 import "./Login.scss";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import useFormValidation from "../../utils/hooks/useFormValidation";
 
-export default function Login() {
+const Login = (props) => {
+  const { handleChange, values, errors, isValid, resetForm } =
+    useFormValidation(props.handleLoginUser);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = values;
+    props.handleLoginUser(email, password);
+    resetForm();
+  };
+
   return (
     <section className="login">
       <div className="login__content">
@@ -15,7 +26,7 @@ export default function Login() {
           <h3 className="login__greeting">Рады видеть!</h3>
         </div>
 
-        <form className="login__form">
+        <form className="login__form" onSubmit={handleSubmit}>
           <fieldset className="login__form-content">
             <label className="login__form-label">
               <span className="login__form_label-text">E-mail</span>
@@ -24,11 +35,14 @@ export default function Login() {
                 name="email"
                 className="login__input login__input-email"
                 placeholder="Введите почту"
+                value={values?.email}
+                onChange={handleChange}
                 required
               />
             </label>
-            <span className="profile__error"></span>
-
+            {errors?.email && (
+              <span className="login__error">{errors.email}</span>
+            )}
             <label className="login__form-label">
               <span className="login__form_label-text">Пароль</span>
               <input
@@ -36,16 +50,26 @@ export default function Login() {
                 name="password"
                 className="login__input login__input-password"
                 placeholder="Введите пароль"
+                value={values?.password}
+                onChange={handleChange}
                 required
               />
             </label>
-            <span className="profile__error"></span>
+            {errors?.password && (
+              <span className="login__error">{errors.password}</span>
+            )}
           </fieldset>
+          <button
+            type="submit"
+            className={
+              isValid ? "login__button" : "login__button login__button_disabled"
+            }
+            disabled={!isValid}
+          >
+            Войти
+          </button>
         </form>
 
-        <button type="submit" className="login__button">
-          Войти
-        </button>
         <div className="login__box">
           <p className="login__box-text">Ещё не зарегистрированы?</p>
           <Link to="/signup" className="button login__box-link">
@@ -55,4 +79,6 @@ export default function Login() {
       </div>
     </section>
   );
-}
+};
+
+export default Login;

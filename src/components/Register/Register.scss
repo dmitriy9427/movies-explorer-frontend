@@ -84,7 +84,7 @@
                 font-size: 10px;
                 line-height: 12px;
                 color: #EE3465;
-                margin: 5px 0;
+                margin: 0 0 5px;
             }
         }
 
@@ -103,10 +103,33 @@
             cursor: pointer;
             transition: all 0.5s ease;
 
+            &_disabled {
+                background: rgba(248, 248, 248, .5);
+                cursor: not-allowed;
+                pointer-events: none;
+                color: #FFFFFF;
+            }
+
             &:hover {
                 background-color: #754f4f;
                 opacity: 0.5;
             }
+        }
+
+        .register__button_disabled {
+            border: none;
+            padding: 13px 126px 15px 124px;
+            margin: 55px auto 16px;
+            border-radius: 3px;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            text-align: center;
+            background: rgba(248, 248, 248, .5);
+            cursor: not-allowed;
+            pointer-events: none;
+
         }
 
         .register__box {
@@ -148,7 +171,7 @@
                         }
 
                         .register__error {
-                            margin: 5px auto;
+                            margin: 0 auto;
                         }
                     }
                 }
