@@ -21,10 +21,8 @@ class MainApi {
   getMovies() {
     return fetch(`${this._url}/movies`, {
       headers: {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     }).then((res) => this.checkResponseStatus(res));
   }
@@ -52,8 +50,8 @@ class MainApi {
     }).then((res) => this.checkResponseStatus(res));
   }
 
-  deleteMovie(id) {
-    return fetch(`${this._url}/movies/${id}`, {
+  deleteMovie(_id) {
+    return fetch(`${this._url}/movies/${_id}`, {
       method: "DELETE",
       // credentials: "include",
       headers: {
@@ -130,7 +128,7 @@ class MainApi {
 
   logout() {
     return fetch(`${this._url}/signout`, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },

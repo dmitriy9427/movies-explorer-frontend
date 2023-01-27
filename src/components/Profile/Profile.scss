@@ -1,6 +1,4 @@
 .profile {
-    height: 100vh;
-    background-color: #202020;
     max-width: calc(100% - 6.5%);
     margin: 0 auto;
 
@@ -71,15 +69,15 @@
                 margin: 0;
             }
 
-            .profile__button_type-info {
+            .profile__success {
                 color: aqua;
                 margin: 40px auto;
             }
 
             .profile__button_type-save {
                 background-color: #4285F4;
-                border-radius: 10px;
                 color: #FFFFFF;
+                border-radius: 10px;
                 margin-top: 70px;
                 padding: 10px 0;
                 border: 0;
@@ -90,6 +88,16 @@
                     opacity: 0.5;
                     cursor: auto;
                 }
+            }
+
+            .profile__button_type-save-disabled {
+                background: #F9F9F9;
+                color: #A0A0A0;
+                border-radius: 10px;
+                margin-top: 70px;
+                padding: 10px 0;
+                border: 0;
+                outline: 0;
             }
         }
 

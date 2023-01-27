@@ -2,7 +2,7 @@ import React from "react";
 import "./SavedMoviesCard.scss";
 
 const SavedMoviesCard = ({
-  movie,
+  savedMovie,
   handleDeleteMovie,
   duration,
   thumbnail,
@@ -21,17 +21,18 @@ const SavedMoviesCard = ({
   };
 
   const handleMovieDelete = () => {
-    handleDeleteMovie(movie);
+    handleDeleteMovie(savedMovie);
   };
+
   return (
     <div className="movies__card-save">
       <div className="movies__card_info-save">
         <h3 className="movies__card_title-save">{nameRU}</h3>
         <p className="movies__card_duration-save">{durationSavedMovie()}</p>
         <button
+          onClick={handleMovieDelete}
           type="button"
           className="button movies__card_delete-save"
-          onClick={handleMovieDelete}
         />
       </div>
       <a

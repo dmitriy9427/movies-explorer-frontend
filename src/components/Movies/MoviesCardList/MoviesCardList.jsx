@@ -11,7 +11,7 @@ const MoviesCardList = ({
   handleDeleteMovie,
   errorMessage,
 }) => {
-  const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
+  const foundMovies = JSON.parse(localStorage.getItem("receivedFilms"));
 
   return (
     <section className="movies__card_list">

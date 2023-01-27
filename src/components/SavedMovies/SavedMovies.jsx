@@ -31,7 +31,7 @@ const SavedMovies = ({ isLoading, savedMovies, handleDeleteMovie }) => {
         savedMovies.some((m) => item.movieId === m.movieId)
       )
     );
-  }, [savedMovies]);
+  }, []);
 
   React.useEffect(() => {
     initialFilteredMovies();
@@ -45,7 +45,7 @@ const SavedMovies = ({ isLoading, savedMovies, handleDeleteMovie }) => {
         <Preloader />
       ) : (
         <SavedMoviesCardList
-          savedMovies={savedMovies}
+          savedMovies={filteredMovies}
           handleDeleteMovie={handleDeleteMovie}
         />
       )}

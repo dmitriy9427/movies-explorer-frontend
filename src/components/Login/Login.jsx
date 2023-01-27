@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Login.scss";
 
-const Login = ({ handleLoginUser, errorMessage, errorLoginBtn }) => {
+const Login = ({ handleLoginUser, errorMessage }) => {
   const { handleChange, values, errors, isValid, resetForm } =
     useFormValidation(handleLoginUser);
 
@@ -50,7 +50,7 @@ const Login = ({ handleLoginUser, errorMessage, errorLoginBtn }) => {
                 name="password"
                 className="login__input login__input-password"
                 placeholder="Введите пароль"
-                value={values?.password}
+                value={values?.password || ""}
                 onChange={handleChange}
                 required
               />

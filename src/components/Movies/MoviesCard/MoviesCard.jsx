@@ -32,7 +32,7 @@ const MoviesCard = ({
   const handleSaveClick = () => {
     if (isSaved) {
       handleDeleteMovie(savedMovies.filter((m) => m.movieId === movie.id)[0]);
-      console.log("del");
+      
     } else {
       handleSaveMovie(movie);
     }

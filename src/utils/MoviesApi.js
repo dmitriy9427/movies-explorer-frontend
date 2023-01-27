@@ -1,6 +1,6 @@
 class MoviesApi {
   constructor({ url }) {
-    this.url = url;
+    this._url = url;
   }
 
   checkResponseStatus(res) {
@@ -8,8 +8,7 @@ class MoviesApi {
   }
 
   getMoviesApi() {
-    return fetch(`${this.url}`, {
-      method: "GET",
+    return fetch(`${this._url}`, {
       headers: {
         "Content-Type": "application/json",
       },

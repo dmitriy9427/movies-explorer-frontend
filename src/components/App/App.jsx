@@ -74,17 +74,19 @@ const App = () => {
     if (loggedIn) {
       mainApi
         .getMovies()
-        .then((savedMovies) => {
-          setSavedMovies(savedMovies);
+        .then((res) => {
+          setSavedMovies(res);
         })
         .catch((err) => console.log(err));
     }
   };
 
   React.useEffect(() => {
-    getUserData();
-    getDataMovies();
-  }, []);
+    if (loggedIn) {
+      getUserData();
+      getDataMovies();
+    }
+  }, [loggedIn]);
 
   // регистрация пользователя!
   const handleRegistrationUser = (name, email, password) => {
@@ -120,22 +122,23 @@ const App = () => {
           });
         }
       })
-      .catch(() => {
+      .catch((err) => {
         setErrorMessage("Вы ввели неправильный логин или пароль.");
         setLoggedIn(false);
         setErrorLoginBtn(true);
+        console.log(`Не удалось выполнить вход ${err}`);
       });
   };
 
   // редактирование данных пользователя!
-  const handleEditingUserData = ({ name, email }) => {
+  const handleEditingUserData = (name, email) => {
     mainApi
       .editedUserData(name, email)
-      .then(() => {
-        setCurrentUser(name, email);
+      .then((data) => {
+        setCurrentUser(data);
       })
       .catch((err) => {
-        setErrorMessage("Не удалось редактировать данные");
+        console.log(`Не удалось редактировать данные ${err}`);
       });
   };
 
@@ -149,7 +152,7 @@ const App = () => {
   };
 
   const handleResize = () => {
-    const receivedFilms = JSON.parse(localStorage.getItem("foundMovies"));
+    const receivedFilms = JSON.parse(localStorage.getItem("receivedFilms"));
     if (receivedFilms === null) {
       return;
     }
@@ -186,9 +189,9 @@ const App = () => {
         const foundMovies = isShortFilms
           ? searchMovies.filter((item) => item.duration <= 40)
           : searchMovies;
-        localStorage.setItem("foundMovies", JSON.stringify(foundMovies));
-        localStorage.setItem("movieName", movieName);
+        localStorage.setItem("receivedFilms", JSON.stringify(foundMovies));
         localStorage.setItem("isShortFilms", isShortFilms);
+        localStorage.setItem("searchMovie", movieName);
         setIsLoading(false);
         handleResize();
       })
@@ -209,7 +212,6 @@ const App = () => {
       .addMovie(movie)
       .then((data) => {
         setSavedMovies([data, ...savedMovies]);
-        console.log(setSavedMovies([data, ...savedMovies]));
       })
       .catch((err) => {
         console.log(`Не удалось добавить фильм ${err}`);
@@ -218,7 +220,9 @@ const App = () => {
 
   // удаление фильма!
   const handleDeleteMovie = (movie) => {
-    const deleteMovie = savedMovies.find((el) => el.movieId === movie.movieId);
+    const deleteMovie = savedMovies.find((el) => {
+      return el.movieId === movie.movieId;
+    });
     mainApi
       .deleteMovie(deleteMovie._id)
       .then(() => {
@@ -226,21 +230,18 @@ const App = () => {
       })
       .catch((err) => {
         console.log(`Не удалось удалить фильм. ${err}`);
-        setErrorMessage(err);
       });
   };
 
   // выход из системы
   const handleLogout = () => {
-    mainApi.logout().then((res) => {
-      localStorage.clear();
-      navigation("/");
-      setLoggedIn(false);
-      setCurrentUser({});
-      setMovies([]);
-      setSavedMovies([]);
-      setErrorRegBtn(false);
-    });
+    localStorage.clear();
+    navigation("/");
+    setLoggedIn(false);
+    setCurrentUser({});
+    setMovies([]);
+    setSavedMovies([]);
+    setErrorRegBtn(false);
   };
 
   return (
