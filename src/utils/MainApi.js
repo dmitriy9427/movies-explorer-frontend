@@ -20,7 +20,6 @@ class MainApi {
 
   getMovies() {
     return fetch(`${this._url}/movies`, {
-      method: "GET",
       headers: {
         headers: {
           "Content-Type": "application/json",
@@ -33,11 +32,23 @@ class MainApi {
   addMovie(movie) {
     return fetch(`${this._url}/movies`, {
       method: "POST",
-      // credentials: "include",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
     }).then((res) => this.checkResponseStatus(res));
   }
 

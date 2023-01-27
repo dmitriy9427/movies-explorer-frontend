@@ -5,11 +5,10 @@ const SavedMoviesCard = ({
   movie,
   handleDeleteMovie,
   duration,
+  thumbnail,
   trailerLink,
-  image,
   nameRU,
 }) => {
-  const thumbnailSavedMovie = `https://api.nomoreparties.co/${image.formats.thumbnail.url}`;
   const durationSavedMovie = () => {
     if (duration > 60) {
       return ((duration / 60) | 0) + "ч " + (duration % 60) + "м";
@@ -35,12 +34,13 @@ const SavedMoviesCard = ({
           onClick={handleMovieDelete}
         />
       </div>
-      <a href={trailerLink} className="movies__card_image-save">
-        <img
-          className="movies__card_img-save"
-          src={thumbnailSavedMovie}
-          alt={nameRU}
-        />
+      <a
+        href={trailerLink}
+        target="_blank"
+        rel="noreferrer"
+        className="movies__card_image-save"
+      >
+        <img className="movies__card_img-save" src={thumbnail} alt={nameRU} />
       </a>
     </div>
   );

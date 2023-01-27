@@ -19,11 +19,11 @@ const MoviesCardList = ({
         return (
           <MoviesCard
             {...movie}
+            movie={movie}
             key={movie.id}
             savedMovies={savedMovies}
             handleDeleteMovie={handleDeleteMovie}
             handleSaveMovie={handleSaveMovie}
-            isOnlySaved={false}
           />
         );
       })}
