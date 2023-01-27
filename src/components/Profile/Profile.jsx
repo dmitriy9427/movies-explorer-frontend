@@ -53,7 +53,6 @@ const Profile = ({ handleLogout, handleUpdateUserData, errorMessage }) => {
               <input
                 type="text"
                 name="name"
-                placeholder="Введите имя"
                 className="profile__input login__input-name"
                 disabled={disabledInput}
                 onChange={handleChange}
@@ -73,7 +72,6 @@ const Profile = ({ handleLogout, handleUpdateUserData, errorMessage }) => {
               <input
                 type="email"
                 name="email"
-                placeholder="Введите почту"
                 className="profile__input login__input-email"
                 disabled={disabledInput}
                 onChange={handleChange}
