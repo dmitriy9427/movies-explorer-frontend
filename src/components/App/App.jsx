@@ -32,6 +32,7 @@ const App = () => {
   const [errorRegBtn, setErrorRegBtn] = React.useState(false);
   const [errorLoginBtn, setErrorLoginBtn] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  const [success, setSuccess] = React.useState(true);
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -135,10 +136,16 @@ const App = () => {
     mainApi
       .editedUserData(name, email)
       .then((data) => {
+        setSuccess(true);
         setCurrentUser(data);
       })
       .catch((err) => {
         console.log(`Не удалось редактировать данные ${err}`);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setSuccess(false);
+        }, 1000);
       });
   };
 
@@ -287,7 +294,7 @@ const App = () => {
               <Profile
                 handleLogout={handleLogout}
                 handleUpdateUserData={handleEditingUserData}
-                errorMessage={errorMessage}
+                success={success}
               />
             </ProtectedRoute>
           }

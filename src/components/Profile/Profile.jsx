@@ -4,25 +4,21 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Profile.scss";
 
-const Profile = ({ handleLogout, handleUpdateUserData, errorMessage }) => {
+const Profile = ({ handleLogout, handleUpdateUserData, success }) => {
   const currentUser = React.useContext(CurrentUserContext);
 
   const { handleChange, values, errors, isValid, resetForm, setValues } =
     useFormValidation(handleUpdateUserData);
 
   const [disabledInput, setDisabledInput] = React.useState(true);
-  const [success, setSuccess] = React.useState(false);
 
   React.useEffect(() => {
     setValues(currentUser);
   }, [currentUser]);
 
-  const handleProfileEdit = () => {
-    setDisabledInput((state) => !state);
-  };
-
-  const handleSave = () => {
-    setSuccess((state) => !state);
+  const handleProfileEdit = (e) => {
+    e.preventDefault();
+    setDisabledInput((disabledInput) => !disabledInput);
   };
 
   const handleSubmit = (e) => {
@@ -35,6 +31,11 @@ const Profile = ({ handleLogout, handleUpdateUserData, errorMessage }) => {
     } else {
       handleUpdateUserData(name, email);
     }
+
+    setTimeout(() => {
+      setDisabledInput((disabledInput) => !disabledInput);
+    }, 1000);
+
     resetForm();
   };
 
@@ -53,10 +54,11 @@ const Profile = ({ handleLogout, handleUpdateUserData, errorMessage }) => {
               <input
                 type="text"
                 name="name"
+                placeholder={currentUser.name}
                 className="profile__input login__input-name"
                 disabled={disabledInput}
                 onChange={handleChange}
-                value={values?.name || ""}
+                value={values?.name ?? currentUser.name}
                 required
               />
             </label>
@@ -75,7 +77,7 @@ const Profile = ({ handleLogout, handleUpdateUserData, errorMessage }) => {
                 className="profile__input login__input-email"
                 disabled={disabledInput}
                 onChange={handleChange}
-                value={values?.email || ""}
+                value={values?.email || currentUser.email}
               />
             </label>
             {errors?.email ? (
@@ -84,46 +86,49 @@ const Profile = ({ handleLogout, handleUpdateUserData, errorMessage }) => {
               ""
             )}
 
-            {success ? (
-              <span className="profile__success">
-                Изменение данные прошло успешно
-              </span>
-            ) : (
-              ""
-            )}
-            {disabledInput ? (
-              <ul className="profile__list">
-                <li className="profile__item">
-                  <button
-                    onClick={handleProfileEdit}
-                    className="button profile__edit"
-                  >
-                    Редактировать
-                  </button>
-                </li>
-                <li className="profile__item">
-                  <button
-                    onClick={handleLogout}
-                    className="button profile__logout"
-                  >
-                    Выйти из аккаунта
-                  </button>
-                </li>
-              </ul>
-            ) : (
-              <button
-                type="submit"
-                onClick={handleSave}
-                className={
-                  isValid
-                    ? "button profile__button_type-save"
-                    : "button profile__button_type-save-disabled"
-                }
-              >
-                Сохранить
-              </button>
+            {!disabledInput && (
+              <>
+                {success ? (
+                  <span className="profile__success">
+                    Изменение данные прошло успешно
+                  </span>
+                ) : (
+                  ""
+                )}
+                <button
+                  type="submit"
+                  disabled={!isValid}
+                  className={
+                    isValid
+                      ? "button profile__button_type-save"
+                      : "profile__button_type-save-disabled"
+                  }
+                >
+                  Сохранить
+                </button>
+              </>
             )}
           </form>
+          {disabledInput && (
+            <ul className="profile__list">
+              <li className="profile__item">
+                <button
+                  onClick={handleProfileEdit}
+                  className="button profile__edit"
+                >
+                  Редактировать
+                </button>
+              </li>
+              <li className="profile__item">
+                <button
+                  onClick={handleLogout}
+                  className="button profile__logout"
+                >
+                  Выйти из аккаунта
+                </button>
+              </li>
+            </ul>
+          )}
         </div>
       </main>
     </section>
