@@ -45,7 +45,7 @@ const SavedMovies = ({ isLoading, savedMovies, handleDeleteMovie }) => {
         <Preloader />
       ) : (
         <SavedMoviesCardList
-        filteredMovies={filteredMovies}
+          filteredMovies={filteredMovies}
           handleDeleteMovie={handleDeleteMovie}
         />
       )}

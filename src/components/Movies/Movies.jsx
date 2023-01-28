@@ -15,6 +15,7 @@ const Movies = ({
   handleDeleteMovie,
   handleSaveMovie,
   errorMessage,
+  errorAddMessage,
 }) => {
   return (
     <div className="movies">
@@ -30,6 +31,7 @@ const Movies = ({
           handleShowingMoreMovies={handleShowingMoreMovies}
           handleDeleteMovie={handleDeleteMovie}
           errorMessage={errorMessage}
+          errorAddMessage={errorAddMessage}
         />
       )}
       <Footer />

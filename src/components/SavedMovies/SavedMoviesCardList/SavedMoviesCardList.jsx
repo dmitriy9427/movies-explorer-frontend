@@ -18,7 +18,7 @@ const SavedMoviesCardList = ({ filteredMovies, handleDeleteMovie }) => {
 
       {filteredMovies.length === 0 ? (
         <span className="saved__movies_card-list-error">
-          Вы не добавили фильмы!
+          Нет сохраненных фильмов!
         </span>
       ) : (
         ""

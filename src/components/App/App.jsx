@@ -28,11 +28,12 @@ const App = () => {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [moreMovies, setMoreMovies] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState(false);
   const [errorRegBtn, setErrorRegBtn] = React.useState(false);
   const [errorLoginBtn, setErrorLoginBtn] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [success, setSuccess] = React.useState(true);
+  const [errorAddMessage, setErrorAddMessage] = React.useState(false);
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -150,7 +151,7 @@ const App = () => {
   };
 
   const handleShowingMoreMovies = () => {
-    const foundMovies = JSON.parse(localStorage.getItem("foundMovies"));
+    const foundMovies = JSON.parse(localStorage.getItem("receivedFilms"));
     setMovies(foundMovies.slice(0, movies.length + moreMovies));
   };
 
@@ -205,8 +206,13 @@ const App = () => {
       .catch((err) => {
         setIsLoading(false);
         console.log(err);
-        setErrorMessage();
-      });
+        setErrorMessage(true);
+      })
+      .finally(() =>
+        setTimeout(() => {
+          setErrorMessage(false);
+        }, 2000)
+      );
   };
 
   const handleSearch = (movieName, isShortFilms) => {
@@ -222,7 +228,13 @@ const App = () => {
       })
       .catch((err) => {
         console.log(`Не удалось добавить фильм ${err}`);
-      });
+        setErrorAddMessage(true);
+      })
+      .finally(() =>
+        setTimeout(() => {
+          setErrorAddMessage(false);
+        }, 2000)
+      );
   };
 
   // удаление фильма!
@@ -274,6 +286,7 @@ const App = () => {
                 handleDeleteMovie={handleDeleteMovie}
                 handleSaveMovie={handleSaveMovie}
                 errorMessage={errorMessage}
+                errorAddMessage={errorAddMessage}
               />
             </ProtectedRoute>
           }
