@@ -43,15 +43,15 @@ class MainApi {
         image: `https://api.nomoreparties.co/${movie.image.url}`,
         trailerLink: movie.trailerLink,
         thumbnail: `https://api.nomoreparties.co/${movie.image.formats.thumbnail.url}`,
-        movieId: movie.id,
+        movieId: movie.id.toString(),
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
       }),
     }).then((res) => this.checkResponseStatus(res));
   }
 
-  deleteMovie(_id) {
-    return fetch(`${this._url}/movies/${_id}`, {
+  deleteMovie(id) {
+    return fetch(`${this._url}/movies/${id}`, {
       method: "DELETE",
       // credentials: "include",
       headers: {

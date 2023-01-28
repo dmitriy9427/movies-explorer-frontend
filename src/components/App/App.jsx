@@ -218,7 +218,7 @@ const App = () => {
     mainApi
       .addMovie(movie)
       .then((data) => {
-        setSavedMovies([data, ...savedMovies]);
+        setSavedMovies([...savedMovies, data]);
       })
       .catch((err) => {
         console.log(`Не удалось добавить фильм ${err}`);
@@ -227,14 +227,17 @@ const App = () => {
 
   // удаление фильма!
   const handleDeleteMovie = (movie) => {
-    const deleteMovie = savedMovies.find((el) => {
-      return el.movieId === movie.movieId;
-    });
+    const deleteMovie = savedMovies.find(
+      (item) => item.movieId === movie.movieId
+    );
     mainApi
       .deleteMovie(deleteMovie._id)
+
       .then(() => {
-        setSavedMovies(savedMovies.filter((el) => el._id !== deleteMovie._id));
+        const a = savedMovies.filter((el) => el._id !== deleteMovie._id);
+        setSavedMovies(a);
       })
+
       .catch((err) => {
         console.log(`Не удалось удалить фильм. ${err}`);
       });

@@ -2,7 +2,7 @@ import React from "react";
 import "./SavedMoviesCard.scss";
 
 const SavedMoviesCard = ({
-  savedMovie,
+  movie,
   handleDeleteMovie,
   duration,
   thumbnail,
@@ -21,7 +21,7 @@ const SavedMoviesCard = ({
   };
 
   const handleMovieDelete = () => {
-    handleDeleteMovie(savedMovie);
+    handleDeleteMovie(movie);
   };
 
   return (

@@ -27,11 +27,11 @@ const SavedMovies = ({ isLoading, savedMovies, handleDeleteMovie }) => {
 
   React.useEffect(() => {
     setFilteredMovies(
-      filteredMovies.fill((item) =>
-        savedMovies.some((m) => item.movieId === m.movieId)
+      filteredMovies.filter((movie) =>
+        savedMovies.some((m) => movie.movieId === m.movieId)
       )
     );
-  }, []);
+  }, [savedMovies]);
 
   React.useEffect(() => {
     initialFilteredMovies();
@@ -45,7 +45,7 @@ const SavedMovies = ({ isLoading, savedMovies, handleDeleteMovie }) => {
         <Preloader />
       ) : (
         <SavedMoviesCardList
-          savedMovies={filteredMovies}
+        filteredMovies={filteredMovies}
           handleDeleteMovie={handleDeleteMovie}
         />
       )}

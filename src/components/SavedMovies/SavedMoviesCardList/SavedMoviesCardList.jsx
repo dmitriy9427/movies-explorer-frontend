@@ -2,21 +2,21 @@ import React from "react";
 import SavedMoviesCard from "../SavedMoviesCard/SavedMoviesCard";
 import "./SavedMoviesCardList.scss";
 
-const SavedMoviesCardList = ({ savedMovies, handleDeleteMovie }) => {
+const SavedMoviesCardList = ({ filteredMovies, handleDeleteMovie }) => {
   return (
     <section className="saved__movies_card-list">
-      {savedMovies.map((savedMovie) => {
+      {filteredMovies.map((movie) => {
         return (
           <SavedMoviesCard
-            {...savedMovie}
-            key={savedMovie._id}
-            savedMovie={savedMovie}
+            {...movie}
+            key={movie._id}
+            movie={movie}
             handleDeleteMovie={handleDeleteMovie}
           />
         );
       })}
 
-      {savedMovies.length === 0 ? (
+      {filteredMovies.length === 0 ? (
         <span className="saved__movies_card-list-error">
           Вы не добавили фильмы!
         </span>
