@@ -12,6 +12,7 @@ const SavedMovies = ({
   savedMovies,
   handleDeleteMovie,
   searchValue,
+  isErrorDeleteMessage
 }) => {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
 
@@ -51,7 +52,8 @@ const SavedMovies = ({
       ) : (
         <SavedMoviesCardList
           filteredMovies={filteredMovies}
-          handleDeleteMovie={handleDeleteMovie}
+            handleDeleteMovie={handleDeleteMovie}
+            isErrorDeleteMessage={isErrorDeleteMessage}
         />
       )}
       <Footer />

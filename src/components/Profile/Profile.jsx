@@ -4,7 +4,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Profile.scss";
 
-const Profile = ({ handleLogout, handleUpdateUserData, success }) => {
+const Profile = ({ handleLogout, handleUpdateUserData, success, errorEditing }) => {
   const currentUser = React.useContext(CurrentUserContext);
 
   const { handleChange, values, errors, isValid, resetForm, setValues } =
@@ -90,7 +90,7 @@ const Profile = ({ handleLogout, handleUpdateUserData, success }) => {
               <>
                 {success ? (
                   <span className="profile__success">
-                    Изменение данные прошло успешно
+                    Изменение данныx прошло успешно
                   </span>
                 ) : (
                   ""
@@ -109,6 +109,7 @@ const Profile = ({ handleLogout, handleUpdateUserData, success }) => {
               </>
             )}
           </form>
+          {errorEditing ? <span className="profie__error">Не удалось редактировать данные.</span> : ""}
           {disabledInput && (
             <ul className="profile__list">
               <li className="profile__item">

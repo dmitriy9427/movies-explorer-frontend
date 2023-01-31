@@ -30,16 +30,15 @@
         color: #fff;
         background-color: transparent;
     }
+}
 
-    // class Text Error
-    .movies__card_list-error {
-        display: flex;
-        margin: 0 auto;
-        font-weight: 400;
-        font-size: 19px;
-        text-align: center;
-        color: #3DDC84;
-    }
+.movies__card_list-error {
+    display: flex;
+    margin: 0 auto;
+    font-weight: 400;
+    font-size: 19px;
+    text-align: center;
+    color: #3DDC84;
 }
 
 @media screen and (max-width: 990px) {

@@ -4,7 +4,11 @@ import logo from "../../images/logo.svg";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Register.scss";
 
-const Register = ({ handleRegistrationUser, errorMessage, errorRegBtn }) => {
+const Register = ({
+  handleRegistrationUser,
+  errorRegisterInfo,
+  errorRegisterMessage,
+}) => {
   const { handleChange, values, errors, isValid, resetForm } =
     useFormValidation();
 
@@ -68,7 +72,7 @@ const Register = ({ handleRegistrationUser, errorMessage, errorRegBtn }) => {
                 name="password"
                 className="register__input register__input-password"
                 placeholder="Введите пароль"
-                value={values?.password || ""} 
+                value={values?.password || ""}
                 onChange={handleChange}
                 minLength="4"
                 required
@@ -78,8 +82,8 @@ const Register = ({ handleRegistrationUser, errorMessage, errorRegBtn }) => {
               <span className="register__error">{errors.password}</span>
             )}
           </fieldset>
-          {errorRegBtn ? (
-            <span className="register__error">{errorMessage}</span>
+          {errorRegisterInfo ? (
+            <span className="register__error">{errorRegisterMessage}</span>
           ) : (
             ""
           )}

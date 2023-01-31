@@ -3,7 +3,7 @@
   width: calc(100% - 43%);
   margin: 0 auto;
   border-radius: 20px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 24%;
 }

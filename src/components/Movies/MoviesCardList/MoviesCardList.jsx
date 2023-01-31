@@ -10,8 +10,9 @@ const MoviesCardList = ({
   handleSaveMovie,
   handleShowingMoreMovies,
   handleDeleteMovie,
-  errorMessage,
+  isErrorDeleteMessage,
   errorAddMessage,
+  errorServer,
 }) => {
   const receivedFilms = JSON.parse(localStorage.getItem("receivedFilms"));
 
@@ -33,11 +34,6 @@ const MoviesCardList = ({
 
         {movies.length === 0 ? (
           <span className="movies__card_list-error">Ничего не найдено!</span>
-        ) : (
-          ""
-        )}
-        {movies.length === 0 ? (
-          ""
         ) : movies.length < receivedFilms.length ? (
           <MoviestBtnStill
             movies={movies}
@@ -46,23 +42,29 @@ const MoviesCardList = ({
         ) : (
           ""
         )}
-      </section>
-
-      {errorMessage ? (
-        <div className="popup__error">
-          <span className="popup__error_movies">
+        {errorServer ? (
+          <span className="movies__card_list-error">
             Во время запроса произошла ошибка. Возможно, проблема с соединением
-            или сервер недоступен. Подождите немного и попробуйте ещё раз
+            или сервер недоступен. Подождите немного и попробуйте ещё раз.
           </span>
-        </div>
-      ) : (
-        ""
-      )}
+        ) : (
+          ""
+        )}
+      </section>
 
       {errorAddMessage ? (
         <div className="popup__error popup__error_active">
           <span className="popup__error_movies">
             Не удалось добавить фильм!
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
+      {isErrorDeleteMessage ? (
+        <div className="popup__error popup__error_active">
+          <span className="popup__error_movies">
+            Не удалось удалить фильм!
           </span>
         </div>
       ) : (

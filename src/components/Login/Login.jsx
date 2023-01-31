@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Login.scss";
 
-const Login = ({ handleLoginUser, errorMessage }) => {
+const Login = ({ handleLoginUser, errorLogin }) => {
   const { handleChange, values, errors, isValid, resetForm } =
     useFormValidation(handleLoginUser);
 
@@ -59,6 +59,13 @@ const Login = ({ handleLoginUser, errorMessage }) => {
               <span className="login__error">{errors.password}</span>
             )}
           </fieldset>
+          {errorLogin ? (
+            <span className="login__error">
+              Вы ввели неправильный логин или пароль.
+            </span>
+          ) : (
+            ""
+          )}
           <button
             type="submit"
             className={

@@ -10,7 +10,7 @@ import NotFound from "../NotFound/NotFound";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import {
   MAX_SCREEN_RESOLUTION_1280,
   MAX_SCREEN_RESOLUTION_519,
@@ -23,16 +23,22 @@ import "./App.css";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [moreMovies, setMoreMovies] = React.useState(0);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState(false);
-  const [errorRegBtn, setErrorRegBtn] = React.useState(false);
-  const [errorLoginBtn, setErrorLoginBtn] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [success, setSuccess] = React.useState(true);
+
+  const [errorRegisterMessage, setErrorRegisterMessage] = React.useState("");
+
+  const [isErrorDeleteMessage, setErrorDeleteMessage] = React.useState(false);
+  const [errorServer, setErrorServer] = React.useState(false);
+  const [errorRegisterInfo, setErrorRegisterInfo] = React.useState(false);
+  const [errorLogin, setErrorLogin] = React.useState(false);
+  const [errorEditing, setErrorEditing] = React.useState(false);
+
   const [errorAddMessage, setErrorAddMessage] = React.useState(false);
 
   const navigation = useNavigate();
@@ -98,13 +104,19 @@ const App = () => {
         if (res) {
           handleLoginUser(email, password);
         }
-        setErrorRegBtn(false);
       })
       .catch((err) => {
-        if (err.status !== 400) {
-          setErrorMessage("При регистрации пользователя произошла ошибка.");
-          setErrorRegBtn(true);
-        }
+        setErrorRegisterInfo(true);
+        err.status !== 400
+          ? setErrorRegisterMessage(
+              "Пользователь с таким email уже зарегистрирован."
+            )
+          : setErrorRegisterMessage(
+              "При регистрации пользователя произошла ошибка."
+            );
+      })
+      .finally(() => {
+        setTimeout(() => setErrorRegisterInfo(false), 5000);
       });
   };
 
@@ -115,7 +127,7 @@ const App = () => {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setErrorLoginBtn(false);
+          setErrorLogin(false);
           mainApi.checkToken(res.token).then((res) => {
             if (res) {
               setTimeout(() => navigation("/movies"), 600);
@@ -125,10 +137,16 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setErrorMessage("Вы ввели неправильный логин или пароль.");
-        setLoggedIn(false);
-        setErrorLoginBtn(true);
-        console.log(`Не удалось выполнить вход ${err}`);
+        if (err.includes(401)) {
+          setLoggedIn(false);
+          setErrorLogin(true);
+          console.log(`Вы ввели неправильный логин или пароль ${err}`);
+        }
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setErrorLogin(false);
+        }, 5000);
       });
   };
 
@@ -142,17 +160,19 @@ const App = () => {
       })
       .catch((err) => {
         console.log(`Не удалось редактировать данные ${err}`);
+        setErrorEditing(true);
       })
       .finally(() => {
         setTimeout(() => {
           setSuccess(false);
-        }, 1000);
+          setErrorEditing(false);
+        }, 2000);
       });
   };
 
   const handleShowingMoreMovies = () => {
-    const foundMovies = JSON.parse(localStorage.getItem("receivedFilms"));
-    setMovies(foundMovies.slice(0, movies.length + moreMovies));
+    const receivedFilms = JSON.parse(localStorage.getItem("receivedFilms"));
+    setMovies(receivedFilms.slice(0, movies.length + moreMovies));
   };
 
   const handleCheckWindowWidth = () => {
@@ -206,12 +226,14 @@ const App = () => {
       .catch((err) => {
         setIsLoading(false);
         console.log(err);
-        setErrorMessage(true);
+        if (err.status === 400) {
+          setErrorServer(true);
+        }
       })
       .finally(() =>
         setTimeout(() => {
-          setErrorMessage(false);
-        }, 2000)
+          setErrorServer(false);
+        }, 4000)
       );
   };
 
@@ -240,15 +262,19 @@ const App = () => {
     );
     mainApi
       .deleteMovie(deleteMovie._id)
-
       .then(() => {
         const a = savedMovies.filter((el) => el._id !== deleteMovie._id);
         setSavedMovies(a);
       })
-
       .catch((err) => {
         console.log(`Не удалось удалить фильм. ${err}`);
-      });
+        setErrorDeleteMessage(true);
+      })
+      .finally(() =>
+        setTimeout(() => {
+          setErrorDeleteMessage(false);
+        }, 2000)
+      );
   };
 
   // выход из системы
@@ -259,7 +285,6 @@ const App = () => {
     setCurrentUser({});
     setMovies([]);
     setSavedMovies([]);
-    setErrorRegBtn(false);
   };
 
   return (
@@ -282,8 +307,9 @@ const App = () => {
                 moreMovies={moreMovies}
                 handleDeleteMovie={handleDeleteMovie}
                 handleSaveMovie={handleSaveMovie}
-                errorMessage={errorMessage}
+                isErrorDeleteMessage={isErrorDeleteMessage}
                 errorAddMessage={errorAddMessage}
+                errorServer={errorServer}
               />
             </ProtectedRoute>
           }
@@ -298,6 +324,7 @@ const App = () => {
                 savedMovies={savedMovies}
                 setSavedMovies={setSavedMovies}
                 handleDeleteMovie={handleDeleteMovie}
+                isErrorDeleteMessage={isErrorDeleteMessage}
                 searchValue={localStorage.getItem("searchMovieName")}
               />
             </ProtectedRoute>
@@ -311,6 +338,7 @@ const App = () => {
                 handleLogout={handleLogout}
                 handleUpdateUserData={handleEditingUserData}
                 success={success}
+                errorEditing={errorEditing}
               />
             </ProtectedRoute>
           }
@@ -318,11 +346,7 @@ const App = () => {
         <Route
           path="/signin"
           element={
-            <Login
-              handleLoginUser={handleLoginUser}
-              errorMessage={errorMessage}
-              errorLoginBtn={errorLoginBtn}
-            />
+            <Login handleLoginUser={handleLoginUser} errorLogin={errorLogin} />
           }
         />
         <Route
@@ -330,8 +354,8 @@ const App = () => {
           element={
             <Register
               handleRegistrationUser={handleRegistrationUser}
-              errorMessage={errorMessage}
-              errorRegBtn={errorRegBtn}
+              errorRegisterInfo={errorRegisterInfo}
+              errorRegisterMessage={errorRegisterMessage}
             />
           }
         />
