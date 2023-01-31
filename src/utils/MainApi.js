@@ -1,5 +1,5 @@
 class MainApi {
-  constructor({ url, headers }) {
+  constructor({ url }) {
     this._url = url;
   }
 
@@ -10,7 +10,6 @@ class MainApi {
   getDataUser() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -53,7 +52,6 @@ class MainApi {
   deleteMovie(id) {
     return fetch(`${this._url}/movies/${id}`, {
       method: "DELETE",
-      // credentials: "include",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -64,7 +62,6 @@ class MainApi {
   registerUser(name, email, password) {
     return fetch(`${this._url}/signup`, {
       method: "POST",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -79,7 +76,6 @@ class MainApi {
   userLogin(email, password) {
     return fetch(`${this._url}/signin`, {
       method: "POST",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -93,7 +89,6 @@ class MainApi {
   getUserData() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      // credentials: "include",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -104,7 +99,6 @@ class MainApi {
   editedUserData(name, email) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -122,15 +116,6 @@ class MainApi {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => this.checkResponseStatus(res));
-  }
-
-  logout() {
-    return fetch(`${this._url}/signout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
       },
     }).then((res) => this.checkResponseStatus(res));
   }
