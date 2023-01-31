@@ -58,7 +58,7 @@ const Profile = ({ handleLogout, handleUpdateUserData, success }) => {
                 className="profile__input login__input-name"
                 disabled={disabledInput}
                 onChange={handleChange}
-                value={values?.name ?? currentUser.name}
+                value={(values?.name ?? currentUser.name) || ""}
                 required
               />
             </label>
@@ -77,7 +77,7 @@ const Profile = ({ handleLogout, handleUpdateUserData, success }) => {
                 className="profile__input login__input-email"
                 disabled={disabledInput}
                 onChange={handleChange}
-                value={values?.email || currentUser.email}
+                value={(values?.email || currentUser.email) || ""}
               />
             </label>
             {errors?.email ? (

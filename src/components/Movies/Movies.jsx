@@ -11,6 +11,7 @@ const Movies = ({
   movies,
   savedMovies,
   handleSearch,
+  searchValue,
   handleShowingMoreMovies,
   handleDeleteMovie,
   handleSaveMovie,
@@ -20,7 +21,7 @@ const Movies = ({
   return (
     <div className="movies">
       <Header />
-      <SearchForm handleSearch={handleSearch} />
+      <SearchForm searchValue={searchValue} handleSearch={handleSearch} />
       {isLoading ? (
         <Preloader />
       ) : (

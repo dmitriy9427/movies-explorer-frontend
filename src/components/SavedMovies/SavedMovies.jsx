@@ -6,19 +6,27 @@ import SavedMoviesCardList from "./SavedMoviesCardList/SavedMoviesCardList";
 import Footer from "../Footer/Footer";
 import "./SavedMovies.scss";
 
-const SavedMovies = ({ isLoading, savedMovies, handleDeleteMovie }) => {
+const SavedMovies = ({
+  isLoading,
+  setIsLoading,
+  savedMovies,
+  handleDeleteMovie,
+  searchValue,
+}) => {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
 
   const handleSearch = (movieName, isShortFilms) => {
-    const filteredMovies = savedMovies.filter((item) =>
+    setIsLoading(true);
+    const isSavedMovies = savedMovies.filter((item) =>
       item.nameRU.toLowerCase().includes(movieName.toLowerCase())
     );
 
     if (isShortFilms) {
-      setFilteredMovies(filteredMovies.filter((item) => item.duration <= 40));
+      setFilteredMovies(isSavedMovies.filter((item) => item.duration <= 40));
     } else {
-      setFilteredMovies(filteredMovies);
+      setFilteredMovies(isSavedMovies.filter((item) => item.duration > 40));
     }
+    setIsLoading(false);
   };
 
   const initialFilteredMovies = () => {
@@ -31,16 +39,13 @@ const SavedMovies = ({ isLoading, savedMovies, handleDeleteMovie }) => {
         savedMovies.some((m) => movie.movieId === m.movieId)
       )
     );
-  }, [savedMovies]);
-
-  React.useEffect(() => {
     initialFilteredMovies();
-  }, []);
+  }, [savedMovies]);
 
   return (
     <section className="saved__movies">
       <Header />
-      <SearchForm handleSearch={handleSearch} />
+      <SearchForm searchValue={searchValue} handleSearch={handleSearch} />
       {isLoading ? (
         <Preloader />
       ) : (

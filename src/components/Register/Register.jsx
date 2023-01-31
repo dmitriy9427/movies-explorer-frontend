@@ -68,7 +68,7 @@ const Register = ({ handleRegistrationUser, errorMessage, errorRegBtn }) => {
                 name="password"
                 className="register__input register__input-password"
                 placeholder="Введите пароль"
-                value={values?.password}
+                value={values?.password || ""} 
                 onChange={handleChange}
                 minLength="4"
                 required

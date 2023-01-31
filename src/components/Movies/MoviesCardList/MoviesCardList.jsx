@@ -13,7 +13,7 @@ const MoviesCardList = ({
   errorMessage,
   errorAddMessage,
 }) => {
-  const foundMovies = JSON.parse(localStorage.getItem("receivedFilms"));
+  const receivedFilms = JSON.parse(localStorage.getItem("receivedFilms"));
 
   return (
     <>
@@ -38,7 +38,7 @@ const MoviesCardList = ({
         )}
         {movies.length === 0 ? (
           ""
-        ) : movies.length < foundMovies.length ? (
+        ) : movies.length < receivedFilms.length ? (
           <MoviestBtnStill
             movies={movies}
             handleShowingMoreMovies={handleShowingMoreMovies}

@@ -186,7 +186,7 @@ const App = () => {
   }, [windowWidth]);
 
   // получение фильмов
-  const getMovies = (movieName, isShortFilms) => {
+  const handleSearch = (movieName, isShortFilms) => {
     setIsLoading(true);
     moviesApi
       .getMoviesApi()
@@ -194,12 +194,12 @@ const App = () => {
         const searchMovies = data.filter((movie) =>
           movie.nameRU.toLowerCase().includes(movieName.toLowerCase())
         );
-        const foundMovies = isShortFilms
+        const receivedFilms = isShortFilms
           ? searchMovies.filter((item) => item.duration <= 40)
-          : searchMovies;
-        localStorage.setItem("receivedFilms", JSON.stringify(foundMovies));
+          : searchMovies.filter((item) => item.duration > 40);
+        localStorage.setItem("receivedFilms", JSON.stringify(receivedFilms));
         localStorage.setItem("isShortFilms", isShortFilms);
-        localStorage.setItem("searchMovie", movieName);
+        localStorage.setItem("searchMovieName", movieName);
         setIsLoading(false);
         handleResize();
       })
@@ -213,10 +213,6 @@ const App = () => {
           setErrorMessage(false);
         }, 2000)
       );
-  };
-
-  const handleSearch = (movieName, isShortFilms) => {
-    getMovies(movieName, isShortFilms);
   };
 
   // добавление фильма!
@@ -280,6 +276,7 @@ const App = () => {
                 setMovies={setMovies}
                 savedMovies={savedMovies}
                 handleSearch={handleSearch}
+                searchValue={localStorage.getItem("searchMovieName")}
                 handleShowingMoreMovies={handleShowingMoreMovies}
                 setMoreMovies={setMoreMovies}
                 moreMovies={moreMovies}
@@ -297,8 +294,11 @@ const App = () => {
             <ProtectedRoute loggedIn={loggedIn}>
               <SavedMovies
                 isLoading={isLoading}
+                setIsLoading={setIsLoading}
                 savedMovies={savedMovies}
+                setSavedMovies={setSavedMovies}
                 handleDeleteMovie={handleDeleteMovie}
+                searchValue={localStorage.getItem("searchMovieName")}
               />
             </ProtectedRoute>
           }

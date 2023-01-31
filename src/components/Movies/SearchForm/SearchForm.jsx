@@ -2,7 +2,7 @@ import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.scss";
 
-const SearchForm = ({ searchMovie, handleSearch }) => {
+const SearchForm = ({ searchValue, handleSearch }) => {
   const [movieName, setMovieName] = React.useState("");
   const [checked, setChecked] = React.useState(false);
 
@@ -21,7 +21,7 @@ const SearchForm = ({ searchMovie, handleSearch }) => {
   };
 
   React.useEffect(() => {
-    setMovieName(localStorage.getItem("searchMovie"));
+    setMovieName(searchValue);
     setChecked(JSON.parse(localStorage.getItem("isShortFilms")));
   }, []);
 
