@@ -7,7 +7,7 @@ import "./HeaderMain.scss";
 
 const HeaderMain = ({ loggedIn }) => {
   return (
-    <div className="header__main">
+    <div className="header-main">
       {loggedIn ? <Header /> : <NavHeader />}
       <LearnProject />
       <NavTab />

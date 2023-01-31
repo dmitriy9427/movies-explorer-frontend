@@ -8,7 +8,7 @@
         "weekonespan weekfourspan"
     ;
 
-    .deadlines__week_one {
+    .deadlines__week-one {
         padding: 9px;
         background-color: #3DDC84;
         grid-area: weekone;
@@ -20,7 +20,7 @@
         color: #000000;
     }
 
-    .deadlines__week_one-span {
+    .deadlines__week-one-span {
         grid-area: weekonespan;
         font-style: normal;
         font-weight: 500;
@@ -31,13 +31,13 @@
         margin: 0;
     }
 
-    .deadlines__week_four {
+    .deadlines__week-four {
         grid-area: weekfour;
         background-color: #303030;
         color: #fff;
     }
 
-    .deadlines__week_four-span {
+    .deadlines__week-four-span {
         grid-area: weekfourspan;
     }
 }
@@ -47,7 +47,7 @@
         margin: 82px auto 40px;
         grid-template-columns: 140px 1fr;
 
-        .deadlines__week_one {
+        .deadlines__week-one {
             padding: 9px;
         }
     }
@@ -58,13 +58,13 @@
         grid-template-columns: 100px 1fr;
         margin: 55px auto 30px;
 
-        .deadlines__week_one {
+        .deadlines__week-one {
             font-size: 11px;
             line-height: 13px;
             padding: 9px;
         }
 
-        .deadlines__week_one-span {
+        .deadlines__week-one-span {
             font-size: 11px;
             line-height: 13px;
         }

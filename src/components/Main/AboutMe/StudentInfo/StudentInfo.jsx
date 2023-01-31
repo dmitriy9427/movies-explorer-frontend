@@ -7,7 +7,7 @@ const StudentInfo = () => {
     <div id="student" className="student__information">
       <div className="student__info">
         <h2 className="student__title">Дмитрий</h2>
-        <h4 className="student_profession">
+        <h4 className="student__profession">
           Фронтенд-разработчик, 28&nbsp;лет
         </h4>
         <p className="student__about">

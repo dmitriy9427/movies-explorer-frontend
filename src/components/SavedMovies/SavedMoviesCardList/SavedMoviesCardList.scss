@@ -1,4 +1,4 @@
-.saved__movies_card-list {
+.saved-movies__card-list {
     margin: 0 auto;
     padding: 77px 0 80px;
     width: calc(100% - 6.5%);
@@ -6,7 +6,7 @@
     grid-template-columns: 1fr;
     row-gap: 20px;
 
-    .saved__movies_card-list-error {
+    .saved-movies__card-list-error {
         display: flex;
         margin: 0 auto;
         font-weight: 400;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (max-width: 519px) {
-    .saved__movies_card-list {
+    .saved-movies__card-list {
         padding-bottom: 140px;
     }
 }

@@ -44,7 +44,7 @@ const SavedMovies = ({
   }, [savedMovies]);
 
   return (
-    <section className="saved__movies">
+    <section className="saved-movies">
       <Header />
       <SearchForm searchValue={searchValue} handleSearch={handleSearch} />
       {isLoading ? (

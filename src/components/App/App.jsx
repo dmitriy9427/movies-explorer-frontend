@@ -31,14 +31,13 @@ const App = () => {
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [success, setSuccess] = React.useState(true);
 
-  const [errorRegisterMessage, setErrorRegisterMessage] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const [isErrorDeleteMessage, setErrorDeleteMessage] = React.useState(false);
   const [errorServer, setErrorServer] = React.useState(false);
   const [errorRegisterInfo, setErrorRegisterInfo] = React.useState(false);
   const [errorLogin, setErrorLogin] = React.useState(false);
   const [errorEditing, setErrorEditing] = React.useState(false);
-
   const [errorAddMessage, setErrorAddMessage] = React.useState(false);
 
   const navigation = useNavigate();
@@ -106,14 +105,11 @@ const App = () => {
         }
       })
       .catch((err) => {
+        console.log(err);
         setErrorRegisterInfo(true);
         err.status !== 400
-          ? setErrorRegisterMessage(
-              "Пользователь с таким email уже зарегистрирован."
-            )
-          : setErrorRegisterMessage(
-              "При регистрации пользователя произошла ошибка."
-            );
+          ? setErrorMessage("Пользователь с таким email уже зарегистрирован.")
+          : setErrorMessage("При регистрации пользователя произошла ошибка.");
       })
       .finally(() => {
         setTimeout(() => setErrorRegisterInfo(false), 5000);
@@ -137,10 +133,13 @@ const App = () => {
         }
       })
       .catch((err) => {
+        console.log(`Не удается войти в аккаунт ${err}`);
+        setLoggedIn(false);
+        setErrorLogin(true);
         if (err.includes(401)) {
-          setLoggedIn(false);
-          setErrorLogin(true);
-          console.log(`Вы ввели неправильный логин или пароль ${err}`);
+          setErrorMessage("Вы ввели неправильный логин или пароль.");
+        } else {
+          setErrorMessage("Что-то пошло не так ...");
         }
       })
       .finally(() => {
@@ -346,7 +345,11 @@ const App = () => {
         <Route
           path="/signin"
           element={
-            <Login handleLoginUser={handleLoginUser} errorLogin={errorLogin} />
+            <Login
+              handleLoginUser={handleLoginUser}
+              errorMessage={errorMessage}
+              errorLogin={errorLogin}
+            />
           }
         />
         <Route
@@ -355,7 +358,7 @@ const App = () => {
             <Register
               handleRegistrationUser={handleRegistrationUser}
               errorRegisterInfo={errorRegisterInfo}
-              errorRegisterMessage={errorRegisterMessage}
+              errorMessage={errorMessage}
             />
           }
         />

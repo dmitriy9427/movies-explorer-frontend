@@ -7,7 +7,7 @@ import "./Register.scss";
 const Register = ({
   handleRegistrationUser,
   errorRegisterInfo,
-  errorRegisterMessage,
+  errorMessage,
 }) => {
   const { handleChange, values, errors, isValid, resetForm } =
     useFormValidation();
@@ -31,7 +31,7 @@ const Register = ({
         <form className="register__form" onSubmit={handleSubmit}>
           <fieldset className="register__form-content">
             <label className="register__form-label">
-              <span className="register__form_label-text">Имя</span>
+              <span className="register__form-text">Имя</span>
               <input
                 type="text"
                 name="name"
@@ -48,7 +48,7 @@ const Register = ({
               <span className="register__error">{errors.name}</span>
             )}
             <label className="register__form-label">
-              <span className="register__form_label-text">E-mail</span>
+              <span className="register__form-text">E-mail</span>
               <input
                 type="email"
                 name="email"
@@ -66,7 +66,7 @@ const Register = ({
               ""
             )}
             <label className="register__form-label" htmlFor="password">
-              <span className="register__form_label-text">Пароль</span>
+              <span className="register__form-text">Пароль</span>
               <input
                 type="password"
                 name="password"
@@ -83,7 +83,7 @@ const Register = ({
             )}
           </fieldset>
           {errorRegisterInfo ? (
-            <span className="register__error">{errorRegisterMessage}</span>
+            <span className="register__error">{errorMessage}</span>
           ) : (
             ""
           )}
@@ -92,7 +92,7 @@ const Register = ({
             className={
               isValid
                 ? "register__button"
-                : "register__button register__button_disabled"
+                : "register__button register__button-disabled"
             }
             disabled={!isValid}
           >

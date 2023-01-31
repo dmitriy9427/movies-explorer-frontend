@@ -4,7 +4,7 @@ import DiplomDesc from "../DiplomDesc/DiplomDesc";
 
 const DiplomAbout = () => {
   return (
-    <div className="diplom_about">
+    <div className="diplom-about">
       <DiplomDesc
         title="Дипломный проект включал 5 этапов"
         description="Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки."

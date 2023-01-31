@@ -40,7 +40,7 @@ const Header = () => {
           </NavLink>
         </ul>
       </nav>
-      <button onClick={openPopup} className="header__button_burger-menu" />
+      <button onClick={openPopup} className="header__button-burger-menu" />
       <BurgerMenu openModal={openModal} closePopup={closePopup} />
     </header>
   );

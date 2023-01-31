@@ -25,23 +25,23 @@ const SavedMoviesCard = ({
   };
 
   return (
-    <div className="movies__card-save">
-      <div className="movies__card_info-save">
-        <h3 className="movies__card_title-save">{nameRU}</h3>
-        <p className="movies__card_duration-save">{durationSavedMovie()}</p>
+    <div className="saved-movies__card">
+      <div className="saved-movies__card-info">
+        <h3 className="saved-movies__card-title">{nameRU}</h3>
+        <p className="saved-movies__card-duration">{durationSavedMovie()}</p>
         <button
           onClick={handleMovieDelete}
           type="button"
-          className="button movies__card_delete-save"
+          className="button saved-movies__card-delete"
         />
       </div>
       <a
         href={trailerLink}
         target="_blank"
         rel="noreferrer"
-        className="movies__card_image-save"
+        className="saved-movies__card-image"
       >
-        <img className="movies__card_img-save" src={thumbnail} alt={nameRU} />
+        <img className="saved-movies__card-img" src={thumbnail} alt={nameRU} />
       </a>
     </div>
   );

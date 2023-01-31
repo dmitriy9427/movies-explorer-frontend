@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Login.scss";
 
-const Login = ({ handleLoginUser, errorLogin }) => {
+const Login = ({ handleLoginUser, errorLogin, errorMessage }) => {
   const { handleChange, values, errors, isValid, resetForm } =
     useFormValidation(handleLoginUser);
 
@@ -29,7 +29,7 @@ const Login = ({ handleLoginUser, errorLogin }) => {
         <form className="login__form" onSubmit={handleSubmit}>
           <fieldset className="login__form-content">
             <label className="login__form-label">
-              <span className="login__form_label-text">E-mail</span>
+              <span className="login__form-text">E-mail</span>
               <input
                 type="email"
                 name="email"
@@ -44,7 +44,7 @@ const Login = ({ handleLoginUser, errorLogin }) => {
               <span className="login__error">{errors.email}</span>
             )}
             <label className="login__form-label">
-              <span className="login__form_label-text">Пароль</span>
+              <span className="login__form-text">Пароль</span>
               <input
                 type="password"
                 name="password"
@@ -60,16 +60,14 @@ const Login = ({ handleLoginUser, errorLogin }) => {
             )}
           </fieldset>
           {errorLogin ? (
-            <span className="login__error">
-              Вы ввели неправильный логин или пароль.
-            </span>
+            <span className="login__error">{errorMessage}</span>
           ) : (
             ""
           )}
           <button
             type="submit"
             className={
-              isValid ? "login__button" : "login__button login__button_disabled"
+              isValid ? "login__button" : "login__button login__button-disabled"
             }
             disabled={!isValid}
           >

@@ -45,17 +45,17 @@ const Profile = ({ handleLogout, handleUpdateUserData, success, errorEditing }) 
         <Header />
       </header>
       <main>
-        <div className="profile_content">
+        <div className="profile__content">
           <h3 className="profile__greeting">Привет, {currentUser.name}!</h3>
 
           <form className="profile__form" onSubmit={handleSubmit}>
             <label className="profile__form-label">
-              <span className="profile__form_label-text">Имя</span>
+              <span className="profile__form-label-text">Имя</span>
               <input
                 type="text"
                 name="name"
                 placeholder={currentUser.name}
-                className="profile__input login__input-name"
+                className="profile__input profile__input-name"
                 disabled={disabledInput}
                 onChange={handleChange}
                 value={(values?.name ?? currentUser.name) || ""}
@@ -70,11 +70,11 @@ const Profile = ({ handleLogout, handleUpdateUserData, success, errorEditing }) 
             )}
 
             <label className="profile__form-label">
-              <span className="profile__form_label-text">E-mail</span>
+              <span className="profile__form-label-text">E-mail</span>
               <input
                 type="email"
                 name="email"
-                className="profile__input login__input-email"
+                className="profile__input profile__input-email"
                 disabled={disabledInput}
                 onChange={handleChange}
                 value={(values?.email || currentUser.email) || ""}
@@ -100,8 +100,8 @@ const Profile = ({ handleLogout, handleUpdateUserData, success, errorEditing }) 
                   disabled={!isValid}
                   className={
                     isValid
-                      ? "button profile__button_type-save"
-                      : "profile__button_type-save-disabled"
+                      ? "button profile__button-type-save"
+                      : "profile__button-type-save-disabled"
                   }
                 >
                   Сохранить

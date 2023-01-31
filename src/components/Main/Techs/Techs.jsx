@@ -5,7 +5,7 @@ import "./Techs.scss";
 
 const Techs = () => {
   return (
-    <section id="techs" className="techs__section">
+    <section id="techs" className="techs-section">
       <div className="tech">
         <Promo title="Технологии" />
         <TechsSection />

@@ -6,7 +6,7 @@ import "./AboutProject.scss";
 
 const AboutProject = () => {
   return (
-    <div id="about-project" className="about__projects">
+    <div id="about-project" className="about-projects">
       <Promo title="О проекте" />
       <DiplomAbout />
       <Deadlines />

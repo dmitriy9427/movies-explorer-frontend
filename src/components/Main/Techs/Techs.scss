@@ -1,4 +1,4 @@
-.techs__section {
+.techs-section {
     background-color: #272727;
     color: #FFFFFF;
 
@@ -9,7 +9,6 @@
         .techs {
             letter-spacing: -0.04em;
             text-align: center;
-
             font-style: normal;
             padding: 18px 0 100px;
 
@@ -50,7 +49,7 @@
 }
 
 @media screen and (max-width: 900px) {
-    .techs__section {
+    .techs-section {
         .tech {
             .techs {
                 padding: 16px 0 85px;
@@ -67,17 +66,13 @@
                         margin-bottom: 83px;
                     }
                 }
-
-                .techs-elements {
-                    max-width: 650px;
-                }
             }
         }
     }
 }
 
 @media screen and (max-width: 400px) {
-    .techs__section {
+    .techs-section {
         background-color: transparent;
 
         .tech {

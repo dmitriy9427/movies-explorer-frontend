@@ -14,8 +14,8 @@ const Portfolio = () => {
             rel="noreferrer"
             className="portfolio__link-a"
           >
-            <p className="portfolio__link_text">Статичный сайт</p>
-            <img className="portfolio__link_img" src={strelka} alt="стрелка" />
+            <p className="portfolio__link-text">Статичный сайт</p>
+            <img className="portfolio__link-img" src={strelka} alt="стрелка" />
           </a>
         </li>
         <li className="portfolio__li">
@@ -25,8 +25,8 @@ const Portfolio = () => {
             rel="noreferrer"
             className="portfolio__link-a"
           >
-            <p className="portfolio__link_text">Адаптивный сайт</p>
-            <img className="portfolio__link_img" src={strelka} alt="стрелка" />
+            <p className="portfolio__link-text">Адаптивный сайт</p>
+            <img className="portfolio__link-img" src={strelka} alt="стрелка" />
           </a>
         </li>
 
@@ -37,8 +37,8 @@ const Portfolio = () => {
             rel="noreferrer"
             className="portfolio__link-a"
           >
-            <p className="portfolio__link_text">Одностраничное приложение</p>
-            <img className="portfolio__link_img" src={strelka} alt="стрелка" />
+            <p className="portfolio__link-text">Одностраничное приложение</p>
+            <img className="portfolio__link-img" src={strelka} alt="стрелка" />
           </a>
         </li>
       </ul>

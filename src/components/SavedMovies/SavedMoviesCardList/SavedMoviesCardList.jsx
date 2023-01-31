@@ -9,7 +9,7 @@ const SavedMoviesCardList = ({
 }) => {
   return (
     <>
-      <section className="saved__movies_card-list">
+      <section className="saved-movies__card-list">
         {filteredMovies.map((movie) => {
           return (
             <SavedMoviesCard
@@ -22,7 +22,7 @@ const SavedMoviesCardList = ({
         })}
 
         {filteredMovies.length === 0 ? (
-          <span className="saved__movies_card-list-error">
+          <span className="saved-movies__card-list-error">
             Нет сохраненных фильмов!
           </span>
         ) : (
@@ -30,8 +30,8 @@ const SavedMoviesCardList = ({
         )}
       </section>
       {isErrorDeleteMessage ? (
-        <div className="popup__error popup__error_active">
-          <span className="popup__error_movies">Не удалось удалить фильм!</span>
+        <div className="popup__error">
+          <span className="popup__error-movies">Не удалось удалить фильм!</span>
         </div>
       ) : (
         ""

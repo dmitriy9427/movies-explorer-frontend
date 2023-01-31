@@ -18,7 +18,7 @@ const MoviesCardList = ({
 
   return (
     <>
-      <section className="movies__card_list">
+      <section className="movies__card-list">
         {movies.map((movie) => {
           return (
             <MoviesCard
@@ -33,7 +33,7 @@ const MoviesCardList = ({
         })}
 
         {movies.length === 0 ? (
-          <span className="movies__card_list-error">Ничего не найдено!</span>
+          <span className="movies__card-list-error">Ничего не найдено!</span>
         ) : movies.length < receivedFilms.length ? (
           <MoviestBtnStill
             movies={movies}
@@ -43,7 +43,7 @@ const MoviesCardList = ({
           ""
         )}
         {errorServer ? (
-          <span className="movies__card_list-error">
+          <span className="movies__card-list-error">
             Во время запроса произошла ошибка. Возможно, проблема с соединением
             или сервер недоступен. Подождите немного и попробуйте ещё раз.
           </span>
@@ -53,8 +53,8 @@ const MoviesCardList = ({
       </section>
 
       {errorAddMessage ? (
-        <div className="popup__error popup__error_active">
-          <span className="popup__error_movies">
+        <div className="popup__error">
+          <span className="popup__error-movies">
             Не удалось добавить фильм!
           </span>
         </div>
@@ -62,8 +62,8 @@ const MoviesCardList = ({
         ""
       )}
       {isErrorDeleteMessage ? (
-        <div className="popup__error popup__error_active">
-          <span className="popup__error_movies">
+        <div className="popup__error">
+          <span className="popup__error-movies">
             Не удалось удалить фильм!
           </span>
         </div>

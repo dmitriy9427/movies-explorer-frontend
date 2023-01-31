@@ -105,7 +105,7 @@
                 opacity: 0.5;
             }
 
-            &_disabled {
+            &-disabled {
                 background: rgba(248, 248, 248, .5);
                 cursor: not-allowed;
                 pointer-events: none;

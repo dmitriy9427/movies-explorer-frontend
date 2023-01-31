@@ -1,18 +1,18 @@
-.movies__card-save {
+.saved-movies__card {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #2F2F2F;
 
-    .movies__card_info-save {
+    .saved-movies__card-info {
         color: #ffffff;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin: 22px 0 22px 22px;
 
-        .movies__card_title-save {
+        .saved-movies__card-title {
             font-style: normal;
             font-weight: 500;
             font-size: 18px;
@@ -20,7 +20,7 @@
             margin: 0;
         }
 
-        .movies__card_duration-save {
+        .saved-movies__card-duration {
             font-style: normal;
             font-weight: 400;
             font-size: 11px;
@@ -29,7 +29,7 @@
             margin: 13px 0 30px;
         }
 
-        .movies__card_delete-save {
+        .saved-movies__card-delete {
             width: 8px;
             height: 8px;
             background-image: url("../../../images/X.svg");
@@ -42,10 +42,10 @@
         }
     }
 
-    .movies__card_image-save {
+    .saved-movies__card-image {
         display: flex;
 
-        .movies__card_img-save {
+        .saved-movies__card-img {
             margin: 6px 6px;
             width: 220px;
             height: 122px;
@@ -54,12 +54,12 @@
 }
 
 @media screen and (max-width: 519px) {
-    .movies__card-save {
+    .saved-movies__card {
         flex-direction: column-reverse;
         max-width: 300px;
         margin: 0 auto;
 
-        .movies__card_info-save {
+        .saved-movies__card-info {
             width: calc(100% - 7%);
             background-color: #2F2F2F;
             padding: 14px 0;
@@ -75,29 +75,28 @@
             justify-items: start;
             align-items: center;
 
-            .movies__card_title-save {
+            .saved-movies__card-title {
                 font-size: 12px;
                 line-height: 15px;
                 grid-area: title;
                 max-width: 228px;
             }
 
-            .movies__card_duration-save {
+            .saved-movies__card-duration {
                 grid-area: duration;
-                margin: 8px 0 0 12px;
+                margin: 8px 0 0 0;
             }
 
-            .movies__card_delete-save {
+            .saved-movies__card-delete {
                 grid-area: delete;
                 margin-left: auto;
-                // margin-right: 19px;
             }
         }
 
-        .movies__card_image-save {
+        .saved-movies__card-image {
             margin: 0;
 
-            .movies__card_img-save {
+            .saved-movies__card-img {
                 width: 300px;
                 height: 168px;
                 margin: 0;

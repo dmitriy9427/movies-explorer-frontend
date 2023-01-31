@@ -26,8 +26,8 @@ const MoviesCard = ({
   const isSaved = savedMovies.some((item) => item.movieId === movie.id);
 
   let buttonClassName = isSaved
-    ? "button movies__card_like movies__card_like-active"
-    : "button movies__card_like";
+    ? "button movies__card-like movies__card-like-active"
+    : "button movies__card-like";
 
   const handleSaveClick = () => {
     if (isSaved) {
@@ -40,9 +40,9 @@ const MoviesCard = ({
 
   return (
     <div className="movies__card">
-      <div className="movies__card_info">
-        <h3 className="movies__card_title">{nameRU}</h3>
-        <p className="movies__card_duration">{durationMovie()}</p>
+      <div className="movies__card-info">
+        <h3 className="movies__card-title">{nameRU}</h3>
+        <p className="movies__card-duration">{durationMovie()}</p>
         <button
           type="button"
           onClick={handleSaveClick}
@@ -50,12 +50,12 @@ const MoviesCard = ({
         />
       </div>
       <a
-        className="movies__card_image"
+        className="movies__card-image"
         target="_blank"
         rel="noreferrer"
         href={trailerLink}
       >
-        <img className="movies__card_img" src={thumbnailMovie} alt={nameRU} />
+        <img className="movies__card-img" src={thumbnailMovie} alt={nameRU} />
       </a>
     </div>
   );

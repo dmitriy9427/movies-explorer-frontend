@@ -27,19 +27,19 @@ const SearchForm = ({ searchValue, handleSearch }) => {
 
   return (
     <div className="form">
-      <form name="search-form" className="search__form" onSubmit={handleSubmit}>
-        <fieldset className="search-form-fieldset">
-          <button className="search__form_image"></button>
+      <form name="search-form" className="search-form" onSubmit={handleSubmit}>
+        <fieldset className="search-form__fieldset">
+          <button className="search-form__image"></button>
           <input
             type="text"
-            className="search__form_input"
+            className="search-form__input"
             placeholder="Фильм"
             id="movie"
             value={movieName || ""}
             onChange={handleChangeMovieName}
             required
           />
-          <button type="submit" className="search__form_btn">
+          <button type="submit" className="search-form__btn">
             Найти
           </button>
         </fieldset>
@@ -48,7 +48,6 @@ const SearchForm = ({ searchValue, handleSearch }) => {
           handleChangeCheckbox={handleChangeCheckbox}
         />
       </form>
-      <span className="search__form_input-error"></span>
     </div>
   );
 };
