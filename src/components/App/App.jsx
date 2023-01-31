@@ -29,7 +29,7 @@ const App = () => {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [moreMovies, setMoreMovies] = React.useState(0);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
-  const [success, setSuccess] = React.useState(true);
+  const [success, setSuccess] = React.useState(false);
 
   const [errorMessage, setErrorMessage] = React.useState("");
 
@@ -202,6 +202,9 @@ const App = () => {
 
   React.useEffect(() => {
     window.addEventListener("resize", handleCheckWindowWidth);
+    return () => {
+      window.removeEventListener("resize", handleCheckWindowWidth);
+    };
   }, [windowWidth]);
 
   // получение фильмов
