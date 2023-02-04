@@ -7,11 +7,10 @@ const SearchForm = ({
   searchKey,
   errorMessage,
   setErrorMessage,
-  checked,
-  setChecked,
 }) => {
   const [movieName, setMovieName] = React.useState("");
   const [isFormValid, setIsFormValid] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   const handleChangeMovieName = (e) => {
     setMovieName(e.target.value);
@@ -20,6 +19,7 @@ const SearchForm = ({
   const handleChangeCheckbox = (e) => {
     const isShortFilms = e.target.checked;
     setChecked(isShortFilms);
+    console.log(isShortFilms);
     handleSearch(movieName, isShortFilms);
   };
 
@@ -29,13 +29,14 @@ const SearchForm = ({
     if (!isFormValid) {
       return setErrorMessage("Нужно ввести ключевое слово.");
     }
-    handleSearch(searchKey);
+    handleSearch("");
   };
-
+  console.log(searchKey);
   React.useEffect(() => {
     setMovieName(searchKey);
-    setChecked(JSON.parse(localStorage.getItem("isShortFilms")));
-  }, []);
+
+    setChecked(localStorage.getItem("isShortFilms"));
+  }, [searchKey]);
 
   return (
     <div className="form">

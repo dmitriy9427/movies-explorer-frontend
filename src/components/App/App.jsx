@@ -14,10 +14,10 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import {
   MAX_SCREEN_RESOLUTION_1280,
   MAX_SCREEN_RESOLUTION_519,
+  SHOW_MOWIES_ON_THE_PAGE_7,
   SHOW_MOWIES_ON_THE_PAGE_5,
-  SHOW_MOWIES_ON_THE_PAGE_4,
-  SHOW_MOWIES_ON_THE_PAGE_3,
-  ADD_MOVIES_3,
+  ADD_MOVIES_7,
+  ADD_MOVIES_5,
 } from "../../utils/constants";
 import "./App.css";
 
@@ -30,7 +30,6 @@ const App = () => {
   const [moreMovies, setMoreMovies] = React.useState(0);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [success, setSuccess] = React.useState(false);
-  const [checked, setChecked] = React.useState(false);
 
   const [errorMessage, setErrorMessage] = React.useState("");
 
@@ -93,6 +92,9 @@ const App = () => {
     if (loggedIn) {
       getUserData();
       getDataMovies();
+      if (JSON.parse(localStorage.getItem("receivedFilms"))) {
+        setMovies(JSON.parse(localStorage.getItem("receivedFilms")));
+      }
     }
   }, [loggedIn]);
 
@@ -185,19 +187,19 @@ const App = () => {
       return;
     }
     if (windowWidth >= MAX_SCREEN_RESOLUTION_1280) {
-      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_5));
-      setMoreMovies(ADD_MOVIES_3);
+      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_7));
+      setMoreMovies(ADD_MOVIES_7);
     }
     if (
       windowWidth > MAX_SCREEN_RESOLUTION_519 &&
       windowWidth < MAX_SCREEN_RESOLUTION_1280
     ) {
-      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_4));
-      setMoreMovies(ADD_MOVIES_3);
+      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_7));
+      setMoreMovies(ADD_MOVIES_7);
     }
     if (windowWidth <= MAX_SCREEN_RESOLUTION_519) {
-      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_3));
-      setMoreMovies(ADD_MOVIES_3);
+      setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_5));
+      setMoreMovies(ADD_MOVIES_5);
     }
   };
 
@@ -208,21 +210,37 @@ const App = () => {
     };
   }, [windowWidth]);
 
+  const searchMovies = (movie, movieName) =>
+    movie.filter((movie) =>
+      movie.nameRU.toLowerCase().includes(movieName.toLowerCase())
+    );
+
   // получение фильмов
   const handleSearch = (movieName, isShortFilms) => {
     setIsLoading(true);
     moviesApi
       .getMoviesApi()
-      .then((data) => {
-        const searchMovies = data.filter((movie) =>
-          movie.nameRU.toLowerCase().includes(movieName.toLowerCase())
+      .then((movies) => {
+        const before = movies.slice(0, 23);
+        const after = movies.slice(24);
+        const arrMovies = before.concat(after);
+        localStorage.setItem("allMovies", JSON.stringify(arrMovies));
+      })
+      .then(() => {
+        const searchArr = searchMovies(
+          JSON.parse(localStorage.getItem("allMovies")),
+          movieName
         );
-        const receivedFilms = isShortFilms
-          ? searchMovies.filter((item) => item.duration <= 40)
-          : searchMovies;
-        localStorage.setItem("receivedFilms", JSON.stringify(receivedFilms));
-        localStorage.setItem("isShortFilms", isShortFilms);
+
+        const filterFilms = isShortFilms
+          ? searchArr.filter((item) => item.duration <= 40)
+          : searchArr;
+
+        console.log(filterFilms);
+        setMovies(filterFilms);
+        localStorage.setItem("receivedFilms", JSON.stringify(filterFilms));
         localStorage.setItem("searchMovieName", movieName);
+        localStorage.setItem("isShortFilms", isShortFilms);
         setIsLoading(false);
         handleResize();
       })
@@ -310,8 +328,6 @@ const App = () => {
                 moreMovies={moreMovies}
                 handleDeleteMovie={handleDeleteMovie}
                 handleSaveMovie={handleSaveMovie}
-                checked={checked}
-                setChecked={setChecked}
                 isErrorDeleteMessage={isErrorDeleteMessage}
                 errorAddMessage={errorAddMessage}
                 errorServer={errorServer}

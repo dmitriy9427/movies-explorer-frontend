@@ -34,7 +34,7 @@ const MoviesCardList = ({
 
         {movies.length === 0 ? (
           <span className="movies__card-list-error">
-            Введите что нибудь в поисковике.
+            Ни чего не найдено.
           </span>
         ) : movies.length < receivedFilms.length ? (
           <MoviestBtnStill

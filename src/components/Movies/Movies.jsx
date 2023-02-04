@@ -20,8 +20,6 @@ const Movies = ({
   errorServer,
   errorMessage,
   setErrorMessage,
-  checked,
-  setChecked,
 }) => {
   return (
     <div className="movies">
@@ -31,8 +29,6 @@ const Movies = ({
         handleSearch={handleSearch}
         errorMessage={errorMessage}
         setErrorMessage={setErrorMessage}
-        checked={checked}
-        setChecked={setChecked}
       />
       {isLoading ? (
         <Preloader />
