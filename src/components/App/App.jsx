@@ -165,7 +165,7 @@ const App = () => {
         setTimeout(() => {
           setSuccess(false);
           setErrorEditing(false);
-        }, 2000);
+        }, 3000);
       });
   };
 
@@ -218,7 +218,7 @@ const App = () => {
         );
         const receivedFilms = isShortFilms
           ? searchMovies.filter((item) => item.duration <= 40)
-          : searchMovies.filter((item) => item.duration > 40);
+          : searchMovies;
         localStorage.setItem("receivedFilms", JSON.stringify(receivedFilms));
         localStorage.setItem("isShortFilms", isShortFilms);
         localStorage.setItem("searchMovieName", movieName);
@@ -303,7 +303,6 @@ const App = () => {
                 setMovies={setMovies}
                 savedMovies={savedMovies}
                 handleSearch={handleSearch}
-                searchValue={localStorage.getItem("searchMovieName")}
                 handleShowingMoreMovies={handleShowingMoreMovies}
                 setMoreMovies={setMoreMovies}
                 moreMovies={moreMovies}
@@ -312,6 +311,8 @@ const App = () => {
                 isErrorDeleteMessage={isErrorDeleteMessage}
                 errorAddMessage={errorAddMessage}
                 errorServer={errorServer}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
               />
             </ProtectedRoute>
           }
@@ -322,12 +323,12 @@ const App = () => {
             <ProtectedRoute loggedIn={loggedIn}>
               <SavedMovies
                 isLoading={isLoading}
-                setIsLoading={setIsLoading}
                 savedMovies={savedMovies}
                 setSavedMovies={setSavedMovies}
                 handleDeleteMovie={handleDeleteMovie}
                 isErrorDeleteMessage={isErrorDeleteMessage}
-                searchValue={localStorage.getItem("searchMovieName")}
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
               />
             </ProtectedRoute>
           }

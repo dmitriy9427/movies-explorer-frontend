@@ -7,17 +7,15 @@ import Footer from "../Footer/Footer";
 import "./SavedMovies.scss";
 
 const SavedMovies = ({
-  isLoading,
-  setIsLoading,
   savedMovies,
   handleDeleteMovie,
-  searchValue,
-  isErrorDeleteMessage
+  isErrorDeleteMessage,
+  errorMessage,
+  setErrorMessage,
 }) => {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
 
   const handleSearch = (movieName, isShortFilms) => {
-    setIsLoading(true);
     const isSavedMovies = savedMovies.filter((item) =>
       item.nameRU.toLowerCase().includes(movieName.toLowerCase())
     );
@@ -27,11 +25,10 @@ const SavedMovies = ({
     } else {
       setFilteredMovies(isSavedMovies.filter((item) => item.duration > 40));
     }
-    setIsLoading(false);
   };
 
   const initialFilteredMovies = () => {
-    setFilteredMovies(savedMovies);
+    setFilteredMovies(filteredMovies);
   };
 
   React.useEffect(() => {
@@ -46,16 +43,17 @@ const SavedMovies = ({
   return (
     <section className="saved-movies">
       <Header />
-      <SearchForm searchValue={searchValue} handleSearch={handleSearch} />
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <SavedMoviesCardList
-          filteredMovies={filteredMovies}
-            handleDeleteMovie={handleDeleteMovie}
-            isErrorDeleteMessage={isErrorDeleteMessage}
-        />
-      )}
+      <SearchForm
+        searchValue=""
+        handleSearch={handleSearch}
+        errorMessage={errorMessage}
+        setErrorMessage={setErrorMessage}
+      />
+      <SavedMoviesCardList
+        filteredMovies={filteredMovies}
+        handleDeleteMovie={handleDeleteMovie}
+        isErrorDeleteMessage={isErrorDeleteMessage}
+      />
       <Footer />
     </section>
   );

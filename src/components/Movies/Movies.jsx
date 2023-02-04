@@ -18,11 +18,18 @@ const Movies = ({
   isErrorDeleteMessage,
   errorAddMessage,
   errorServer,
+  errorMessage,
+  setErrorMessage,
 }) => {
   return (
     <div className="movies">
       <Header />
-      <SearchForm searchValue={searchValue} handleSearch={handleSearch} />
+      <SearchForm
+        searchValue={searchValue}
+        handleSearch={handleSearch}
+        errorMessage={errorMessage}
+        setErrorMessage={setErrorMessage}
+      />
       {isLoading ? (
         <Preloader />
       ) : (
