@@ -33,7 +33,9 @@ const MoviesCardList = ({
         })}
 
         {movies.length === 0 ? (
-          <span className="movies__card-list-error">Ничего не найдено!</span>
+          <span className="movies__card-list-error">
+            Введите что нибудь в поисковике.
+          </span>
         ) : movies.length < receivedFilms.length ? (
           <MoviestBtnStill
             movies={movies}
@@ -63,9 +65,7 @@ const MoviesCardList = ({
       )}
       {isErrorDeleteMessage ? (
         <div className="popup__error">
-          <span className="popup__error-movies">
-            Не удалось удалить фильм!
-          </span>
+          <span className="popup__error-movies">Не удалось удалить фильм!</span>
         </div>
       ) : (
         ""

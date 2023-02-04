@@ -30,6 +30,7 @@ const App = () => {
   const [moreMovies, setMoreMovies] = React.useState(0);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [success, setSuccess] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   const [errorMessage, setErrorMessage] = React.useState("");
 
@@ -303,11 +304,14 @@ const App = () => {
                 setMovies={setMovies}
                 savedMovies={savedMovies}
                 handleSearch={handleSearch}
+                searchKey={localStorage.getItem("searchMovieName")}
                 handleShowingMoreMovies={handleShowingMoreMovies}
                 setMoreMovies={setMoreMovies}
                 moreMovies={moreMovies}
                 handleDeleteMovie={handleDeleteMovie}
                 handleSaveMovie={handleSaveMovie}
+                checked={checked}
+                setChecked={setChecked}
                 isErrorDeleteMessage={isErrorDeleteMessage}
                 errorAddMessage={errorAddMessage}
                 errorServer={errorServer}

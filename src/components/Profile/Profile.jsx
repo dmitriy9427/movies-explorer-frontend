@@ -17,9 +17,11 @@ const Profile = ({
 
   const [disabledInput, setDisabledInput] = React.useState(true);
 
-  React.useEffect(() => {
-    setValues(currentUser);
-  }, [currentUser]);
+  let disableUserCurrentCheck =
+    (currentUser.name === values?.name &&
+      typeof values?.email === "undefined") ||
+    (currentUser.email === values?.email &&
+      typeof values?.email === "undefined");
 
   const handleProfileEdit = (e) => {
     e.preventDefault();
@@ -40,7 +42,6 @@ const Profile = ({
     setTimeout(() => {
       setDisabledInput((disabledInput) => !disabledInput);
     }, 1000);
-
     resetForm();
   };
 
@@ -61,9 +62,9 @@ const Profile = ({
                 name="name"
                 placeholder={currentUser.name}
                 className="profile__input profile__input-name"
-                disabled={disabledInput}
                 onChange={handleChange}
-                value={(values?.name ?? currentUser.name) || ""}
+                value={values?.name ?? currentUser.name}
+                {...(!disabledInput ? {} : { disabled: true })}
                 required
               />
             </label>
@@ -80,9 +81,10 @@ const Profile = ({
                 type="email"
                 name="email"
                 className="profile__input profile__input-email"
-                disabled={disabledInput}
                 onChange={handleChange}
-                value={values?.email || currentUser.email || ""}
+                value={values?.email || currentUser.email}
+                {...(!disabledInput ? {} : { disabled: true })}
+                required
               />
             </label>
             {errors?.email ? (
@@ -102,9 +104,9 @@ const Profile = ({
                 )}
                 <button
                   type="submit"
-                  disabled={!isValid}
+                  disabled={!isValid || disableUserCurrentCheck}
                   className={
-                    isValid
+                    isValid || !disableUserCurrentCheck
                       ? "button profile__button-type-save"
                       : "profile__button-type-save-disabled"
                   }

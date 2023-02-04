@@ -86,7 +86,10 @@
                 &:disabled {
                     background-color: #8893a6;
                     opacity: 0.5;
-                    cursor: auto;
+                    cursor: not-allowed;
+                    pointer-events: all !important;
+                    border: 0;
+                    outline: 0;
                 }
             }
 
@@ -98,6 +101,8 @@
                 padding: 10px 0;
                 border: 0;
                 outline: 0;
+                cursor: not-allowed;
+                pointer-events: all !important;
             }
         }
 

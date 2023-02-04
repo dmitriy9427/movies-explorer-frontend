@@ -2,10 +2,16 @@ import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.scss";
 
-const SearchForm = ({ handleSearch, errorMessage, setErrorMessage }) => {
+const SearchForm = ({
+  handleSearch,
+  searchKey,
+  errorMessage,
+  setErrorMessage,
+  checked,
+  setChecked,
+}) => {
   const [movieName, setMovieName] = React.useState("");
   const [isFormValid, setIsFormValid] = React.useState(false);
-  const [checked, setChecked] = React.useState(false);
 
   const handleChangeMovieName = (e) => {
     setMovieName(e.target.value);
@@ -23,11 +29,11 @@ const SearchForm = ({ handleSearch, errorMessage, setErrorMessage }) => {
     if (!isFormValid) {
       return setErrorMessage("Нужно ввести ключевое слово.");
     }
-    handleSearch("");
+    handleSearch(searchKey);
   };
 
   React.useEffect(() => {
-    setMovieName("");
+    setMovieName(searchKey);
     setChecked(JSON.parse(localStorage.getItem("isShortFilms")));
   }, []);
 

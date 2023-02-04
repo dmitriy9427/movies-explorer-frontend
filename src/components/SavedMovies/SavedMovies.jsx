@@ -7,6 +7,7 @@ import Footer from "../Footer/Footer";
 import "./SavedMovies.scss";
 
 const SavedMovies = ({
+  isLoading,
   savedMovies,
   handleDeleteMovie,
   isErrorDeleteMessage,
@@ -23,7 +24,7 @@ const SavedMovies = ({
     if (isShortFilms) {
       setFilteredMovies(isSavedMovies.filter((item) => item.duration <= 40));
     } else {
-      setFilteredMovies(isSavedMovies.filter((item) => item.duration > 40));
+      setFilteredMovies(isSavedMovies);
     }
   };
 
@@ -44,16 +45,20 @@ const SavedMovies = ({
     <section className="saved-movies">
       <Header />
       <SearchForm
-        searchValue=""
+        searchKey=""
         handleSearch={handleSearch}
         errorMessage={errorMessage}
         setErrorMessage={setErrorMessage}
       />
-      <SavedMoviesCardList
-        filteredMovies={filteredMovies}
-        handleDeleteMovie={handleDeleteMovie}
-        isErrorDeleteMessage={isErrorDeleteMessage}
-      />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <SavedMoviesCardList
+          filteredMovies={filteredMovies}
+          handleDeleteMovie={handleDeleteMovie}
+          isErrorDeleteMessage={isErrorDeleteMessage}
+        />
+      )}
       <Footer />
     </section>
   );
