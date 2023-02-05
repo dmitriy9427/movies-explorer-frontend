@@ -21,8 +21,6 @@ const SavedMovies = ({
       item.nameRU.toLowerCase().includes(movieName.toLowerCase())
     );
 
-    console.log(isSavedMovies);
-
     if (isShortFilms) {
       setFilteredMovies(isSavedMovies.filter((item) => item.duration <= 40));
     } else {
@@ -42,7 +40,7 @@ const SavedMovies = ({
       )
     );
     initialFilteredMovies();
-  }, [savedMovies]);
+  }, []);
 
   return (
     <section className="saved-movies">
