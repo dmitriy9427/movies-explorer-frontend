@@ -34,8 +34,10 @@ const MoviesCardList = ({
 
         {movies.length === 0 ? (
           <span className="movies__card-list-error">
-            Ни чего не найдено.
+            Введите что нибудь в строку поиска.
           </span>
+        ) : movies.length === 0 && receivedFilms.length === 0 ? (
+          <span className="movies__card-list-error">Ни чего не найдено.</span>
         ) : movies.length < receivedFilms.length ? (
           <MoviestBtnStill
             movies={movies}

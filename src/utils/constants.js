@@ -5,4 +5,4 @@ export const SHOW_MOWIES_ON_THE_PAGE_7 = 7;
 export const SHOW_MOWIES_ON_THE_PAGE_5 = 5;
 
 export const ADD_MOVIES_7 = 7;
-export const ADD_MOVIES_5 = 5;
+export const ADD_MOVIES_2 = 2;

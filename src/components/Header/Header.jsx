@@ -24,12 +24,26 @@ const Header = () => {
       <nav className="header__nav">
         <ul className="header__links">
           <li>
-            <NavLink className="button header__link" to="/movies">
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "button header__link header__link-ative"
+                  : "button header__link"
+              }
+              to="/movies"
+            >
               Фильмы
             </NavLink>
           </li>
           <li>
-            <NavLink className="button header__link link" to="/saved-movies">
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "button header__link header__link-ative link"
+                  : "button header__link link"
+              }
+              to="/saved-movies"
+            >
               Сохранённые фильмы
             </NavLink>
           </li>

@@ -17,7 +17,7 @@ import {
   SHOW_MOWIES_ON_THE_PAGE_7,
   SHOW_MOWIES_ON_THE_PAGE_5,
   ADD_MOVIES_7,
-  ADD_MOVIES_5,
+  ADD_MOVIES_2,
 } from "../../utils/constants";
 import "./App.css";
 
@@ -166,9 +166,8 @@ const App = () => {
       })
       .finally(() => {
         setTimeout(() => {
-          setSuccess(false);
           setErrorEditing(false);
-        }, 3000);
+        }, 4000);
       });
   };
 
@@ -199,7 +198,7 @@ const App = () => {
     }
     if (windowWidth <= MAX_SCREEN_RESOLUTION_519) {
       setMovies(receivedFilms.slice(0, SHOW_MOWIES_ON_THE_PAGE_5));
-      setMoreMovies(ADD_MOVIES_5);
+      setMoreMovies(ADD_MOVIES_2);
     }
   };
 
@@ -236,7 +235,6 @@ const App = () => {
           ? searchArr.filter((item) => item.duration <= 40)
           : searchArr;
 
-        console.log(filterFilms);
         setMovies(filterFilms);
         localStorage.setItem("receivedFilms", JSON.stringify(filterFilms));
         localStorage.setItem("searchMovieName", movieName);
@@ -354,6 +352,7 @@ const App = () => {
           }
         />
         <Route
+          exact
           path="/profile"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
@@ -367,6 +366,7 @@ const App = () => {
           }
         />
         <Route
+          exact
           path="/signin"
           element={
             <Login
@@ -377,6 +377,7 @@ const App = () => {
           }
         />
         <Route
+          exact
           path="/signup"
           element={
             <Register
@@ -386,7 +387,7 @@ const App = () => {
             />
           }
         />
-        <Route path="*" element={<NotFound />} />
+        <Route exact path="*" element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>
   );

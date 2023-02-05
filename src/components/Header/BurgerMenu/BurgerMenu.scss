@@ -123,12 +123,12 @@
                 line-height: 22px;
                 text-decoration: none;
                 color: #fff;
+              }
 
-                &:hover,
-                &:focus {
-                  border-bottom: 1px solid rgb(255, 255, 255);
-                  padding-bottom: 4px;
-                }
+              .burger-menu__link-active {
+                color: #3DDC84;
+                border-bottom: 1px solid #3DDC84;
+                padding-bottom: 4px;
               }
             }
           }

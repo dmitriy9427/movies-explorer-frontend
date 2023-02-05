@@ -104,13 +104,20 @@
                 background-color: #754f4f;
                 opacity: 0.5;
             }
+        }
 
-            &-disabled {
-                background: rgba(248, 248, 248, .5);
-                cursor: not-allowed;
-                pointer-events: none;
-                color: #FFFFFF;
-            }
+        .login__button-disabled {
+            border: none;
+            padding: 13px 178px 15px 176px;
+            margin: 190px auto 16px;
+            border-radius: 3px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            text-align: center;
+            background: rgba(248, 248, 248, .5);
+            cursor: not-allowed;
+            pointer-events: all !important;
         }
 
         .login__box {

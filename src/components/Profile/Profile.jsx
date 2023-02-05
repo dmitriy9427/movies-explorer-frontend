@@ -12,7 +12,7 @@ const Profile = ({
 }) => {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const { handleChange, values, errors, isValid, resetForm, setValues } =
+  const { handleChange, values, errors, isValid } =
     useFormValidation(handleUpdateUserData);
 
   const [disabledInput, setDisabledInput] = React.useState(true);
@@ -41,8 +41,7 @@ const Profile = ({
 
     setTimeout(() => {
       setDisabledInput((disabledInput) => !disabledInput);
-    }, 1000);
-    resetForm();
+    }, 3000);
   };
 
   return (

@@ -9,14 +9,12 @@ const Register = ({
   errorRegisterInfo,
   errorMessage,
 }) => {
-  const { handleChange, values, errors, isValid, resetForm } =
-    useFormValidation();
+  const { handleChange, values, errors, isValid } = useFormValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = values;
     handleRegistrationUser(name, email, password);
-    resetForm();
   };
 
   return (
@@ -90,9 +88,7 @@ const Register = ({
           <button
             type="submit"
             className={
-              isValid
-                ? "register__button"
-                : "register__button register__button-disabled"
+              isValid ? "register__button" : "register__button-disabled"
             }
             disabled={!isValid}
           >

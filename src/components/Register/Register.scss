@@ -103,13 +103,6 @@
             cursor: pointer;
             transition: all 0.5s ease;
 
-            &_disabled {
-                background: rgba(248, 248, 248, .5);
-                cursor: not-allowed;
-                pointer-events: none;
-                color: #FFFFFF;
-            }
-
             &:hover {
                 background-color: #754f4f;
                 opacity: 0.5;
@@ -128,8 +121,7 @@
             text-align: center;
             background: rgba(248, 248, 248, .5);
             cursor: not-allowed;
-            pointer-events: none;
-
+            pointer-events: all !important;
         }
 
         .register__box {

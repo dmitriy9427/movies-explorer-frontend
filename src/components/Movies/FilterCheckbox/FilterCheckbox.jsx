@@ -10,7 +10,6 @@ const FilterCheckbox = ({ checked, handleChangeCheckbox }) => {
         className="checkbox__button"
         id="custom-checkbox"
         name="custom-checkbox"
-        value=""
         checked={checked}
         onChange={handleChangeCheckbox}
       />

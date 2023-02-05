@@ -5,14 +5,13 @@ import useFormValidation from "../../utils/hooks/useFormValidation";
 import "./Login.scss";
 
 const Login = ({ handleLoginUser, errorLogin, errorMessage }) => {
-  const { handleChange, values, errors, isValid, resetForm } =
+  const { handleChange, values, errors, isValid } =
     useFormValidation(handleLoginUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = values;
     handleLoginUser(email, password);
-    resetForm();
   };
 
   return (
@@ -67,7 +66,7 @@ const Login = ({ handleLoginUser, errorLogin, errorMessage }) => {
           <button
             type="submit"
             className={
-              isValid ? "login__button" : "login__button login__button-disabled"
+              isValid ? "login__button" : "login__button-disabled"
             }
             disabled={!isValid}
           >

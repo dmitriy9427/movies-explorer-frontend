@@ -21,15 +21,18 @@ const SavedMovies = ({
       item.nameRU.toLowerCase().includes(movieName.toLowerCase())
     );
 
+    console.log(isSavedMovies);
+
     if (isShortFilms) {
       setFilteredMovies(isSavedMovies.filter((item) => item.duration <= 40));
     } else {
       setFilteredMovies(isSavedMovies);
     }
+    localStorage.setItem("isSavedMovies", JSON.stringify(isSavedMovies));
   };
 
   const initialFilteredMovies = () => {
-    setFilteredMovies(filteredMovies);
+    setFilteredMovies(savedMovies);
   };
 
   React.useEffect(() => {

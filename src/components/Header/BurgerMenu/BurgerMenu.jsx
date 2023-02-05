@@ -1,6 +1,6 @@
 import React from "react";
 import "./BurgerMenu.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import account from "../../../images/iconAccount.svg";
 
 const BurgerMenu = ({ openModal, closePopup }) => {
@@ -17,19 +17,40 @@ const BurgerMenu = ({ openModal, closePopup }) => {
           <nav className="burger-menu__link-wrapper">
             <ul className="burger-menu__links">
               <li className="burger-menu__link-li">
-                <Link to="/" className="button burger-menu__link">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "button burger-menu__link burger-menu__link-active"
+                      : "button burger-menu__link"
+                  }
+                >
                   Главная
-                </Link>
+                </NavLink>
               </li>
               <li className="burger-menu__link-li">
-                <Link to="/movies" className="button burger-menu__link">
+                <NavLink
+                  to="/movies"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "button burger-menu__link burger-menu__link-active"
+                      : "button burger-menu__link"
+                  }
+                >
                   Фильмы
-                </Link>
+                </NavLink>
               </li>
               <li className="burger-menu__link-li">
-                <Link to="/saved-movies" className="button burger-menu__link">
+                <NavLink
+                  to="/saved-movies"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "button burger-menu__link burger-menu__link-active"
+                      : "button burger-menu__link"
+                  }
+                >
                   Сохраненные фильмы
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>

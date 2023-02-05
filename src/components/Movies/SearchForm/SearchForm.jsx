@@ -16,10 +16,11 @@ const SearchForm = ({
     setMovieName(e.target.value);
     setIsFormValid(e.target.closest("form").checkValidity());
   };
+
   const handleChangeCheckbox = (e) => {
     const isShortFilms = e.target.checked;
+    localStorage.setItem("checked", JSON.stringify(isShortFilms));
     setChecked(isShortFilms);
-    console.log(isShortFilms);
     handleSearch(movieName, isShortFilms);
   };
 
@@ -29,14 +30,13 @@ const SearchForm = ({
     if (!isFormValid) {
       return setErrorMessage("Нужно ввести ключевое слово.");
     }
-    handleSearch("");
+    handleSearch(movieName, checked);
   };
-  console.log(searchKey);
+
   React.useEffect(() => {
     setMovieName(searchKey);
-
-    setChecked(localStorage.getItem("isShortFilms"));
-  }, [searchKey]);
+    setChecked(JSON.parse(localStorage.getItem("checked")));
+  }, []);
 
   return (
     <div className="form">
@@ -53,7 +53,7 @@ const SearchForm = ({
             className="search-form__input"
             placeholder="Фильм"
             id="movie"
-            value={movieName || ""}
+            value={movieName}
             onChange={handleChangeMovieName}
             required
           />
@@ -64,11 +64,11 @@ const SearchForm = ({
         {!isFormValid && (
           <span className="search-form__error">{errorMessage}</span>
         )}
-        <FilterCheckbox
-          checked={checked}
-          handleChangeCheckbox={handleChangeCheckbox}
-        />
       </form>
+      <FilterCheckbox
+        checked={checked}
+        handleChangeCheckbox={handleChangeCheckbox}
+      />
     </div>
   );
 };
