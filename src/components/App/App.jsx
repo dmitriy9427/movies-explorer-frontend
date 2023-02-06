@@ -1,5 +1,12 @@
 import React from "react";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useNavigate,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import * as Redirect from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -20,11 +27,14 @@ import {
   ADD_MOVIES_2,
 } from "../../utils/constants";
 import "./App.css";
+import ProtectedRouteNav from "../ProtectedRoute/ProtectedRouteNav";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [movies, setMovies] = React.useState([]);
+  const [movies, setMovies] = React.useState(
+    JSON.parse(localStorage.getItem("allMovies")) || []
+  );
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [moreMovies, setMoreMovies] = React.useState(0);
@@ -40,7 +50,7 @@ const App = () => {
   const [errorEditing, setErrorEditing] = React.useState(false);
   const [errorAddMessage, setErrorAddMessage] = React.useState(false);
 
-  const navigation = useNavigate();
+  const navigati = useNavigate();
   const location = useLocation();
 
   // получение токена!
@@ -51,7 +61,7 @@ const App = () => {
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            navigation(location.pathname);
+            navigati(location.pathname);
           }
         })
         .catch((err) => {
@@ -129,7 +139,7 @@ const App = () => {
           setErrorLogin(false);
           mainApi.checkToken(res.token).then((res) => {
             if (res) {
-              setTimeout(() => navigation("/movies"), 600);
+              setTimeout(() => navigati("/movies"), 600);
               setLoggedIn(true);
             }
           });
@@ -167,7 +177,8 @@ const App = () => {
       .finally(() => {
         setTimeout(() => {
           setErrorEditing(false);
-        }, 4000);
+          setSuccess(false);
+        }, 3000);
       });
   };
 
@@ -215,13 +226,13 @@ const App = () => {
     );
 
   // получение фильмов
-  const handleSearch = (movieName, isShortFilms) => {
+  const getMovies = (movieName, isShortFilms) => {
     setIsLoading(true);
     moviesApi
       .getMoviesApi()
       .then((movies) => {
-        const before = movies.slice(0, 23);
-        const after = movies.slice(24);
+        const before = movies.slice(0, 7);
+        const after = movies.slice(8);
         const arrMovies = before.concat(after);
         localStorage.setItem("allMovies", JSON.stringify(arrMovies));
       })
@@ -235,7 +246,7 @@ const App = () => {
           ? searchArr.filter((item) => item.duration <= 40)
           : searchArr;
 
-        setMovies(filterFilms);
+        setMovies(searchArr);
         localStorage.setItem("receivedFilms", JSON.stringify(filterFilms));
         localStorage.setItem("searchMovieName", movieName);
         localStorage.setItem("isShortFilms", isShortFilms);
@@ -254,6 +265,10 @@ const App = () => {
           setErrorServer(false);
         }, 4000)
       );
+  };
+
+  const handleSearch = (movieName, isShortFilms) => {
+    getMovies(movieName, isShortFilms);
   };
 
   // добавление фильма!
@@ -299,7 +314,7 @@ const App = () => {
   // выход из системы
   const handleLogout = () => {
     localStorage.clear();
-    navigation("/");
+    navigati("/");
     setLoggedIn(false);
     setCurrentUser({});
     setMovies([]);
@@ -365,28 +380,35 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
         <Route
           exact
           path="/signin"
           element={
-            <Login
-              handleLoginUser={handleLoginUser}
-              errorMessage={errorMessage}
-              errorLogin={errorLogin}
-            />
+            <ProtectedRouteNav loggedIn={loggedIn}>
+              <Login
+                handleLoginUser={handleLoginUser}
+                errorMessage={errorMessage}
+                errorLogin={errorLogin}
+              />
+            </ProtectedRouteNav>
           }
         />
+
         <Route
           exact
           path="/signup"
           element={
-            <Register
-              handleRegistrationUser={handleRegistrationUser}
-              errorRegisterInfo={errorRegisterInfo}
-              errorMessage={errorMessage}
-            />
+            <ProtectedRouteNav loggedIn={loggedIn}>
+              <Register
+                handleRegistrationUser={handleRegistrationUser}
+                errorRegisterInfo={errorRegisterInfo}
+                errorMessage={errorMessage}
+              />
+            </ProtectedRouteNav>
           }
         />
+
         <Route exact path="*" element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>

@@ -19,7 +19,6 @@ const SearchForm = ({
 
   const handleChangeCheckbox = (e) => {
     const isShortFilms = e.target.checked;
-    localStorage.setItem("checked", JSON.stringify(isShortFilms));
     setChecked(isShortFilms);
     handleSearch(movieName, isShortFilms);
   };
@@ -35,7 +34,7 @@ const SearchForm = ({
 
   React.useEffect(() => {
     setMovieName(searchKey);
-    setChecked(JSON.parse(localStorage.getItem("checked")));
+    setChecked(JSON.parse(localStorage.getItem("isShortFilms")));
   }, []);
 
   return (

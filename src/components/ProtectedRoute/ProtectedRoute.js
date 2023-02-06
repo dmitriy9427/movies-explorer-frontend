@@ -5,4 +5,6 @@ const ProtectedRoute = ({ loggedIn, children }) => {
   return loggedIn ? children : <Navigate to='/' />;
 };
 
+
 export default ProtectedRoute;
+

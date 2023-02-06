@@ -30,7 +30,9 @@ const SavedMovies = ({
   };
 
   const initialFilteredMovies = () => {
-    setFilteredMovies(savedMovies);
+    setFilteredMovies(
+      savedMovies || JSON.parse(localStorage.setItem("isSavedMovies"))
+    );
   };
 
   React.useEffect(() => {
@@ -40,7 +42,7 @@ const SavedMovies = ({
       )
     );
     initialFilteredMovies();
-  }, []);
+  }, [savedMovies]);
 
   return (
     <section className="saved-movies">
