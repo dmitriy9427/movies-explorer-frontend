@@ -1,0 +1,119 @@
+.movies__card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2F2F2F;
+
+    .movies__card-info {
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 22px 0 22px 22px;
+
+        .movies__card-title {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            margin: 0;
+        }
+
+        .movies__card-duration {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 11px;
+            line-height: 13px;
+            color: #8B8B8B;
+            margin: 13px 0 30px;
+        }
+
+        .movies__card-like {
+            width: 14px;
+            height: 12px;
+            background-image: url("../../../images/likedis.svg");
+            background-position: center;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 0;
+            outline: 0;
+
+            &.movies__card-like-active {
+                width: 14px;
+                height: 12px;
+                background-image: url("../../../images/likeactive.svg");
+                background-position: center;
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-size: cover;
+                border: 0;
+                outline: 0;
+            }
+        }
+    }
+
+    .movies__card-image {
+        display: flex;
+
+        .movies__card-img {
+            margin: 6px 6px;
+            width: 220px;
+            height: 122px;
+        }
+    }
+}
+
+@media screen and (max-width: 519px) {
+    .movies__card {
+        max-width: 300px;
+        margin: 0 auto;
+        flex-direction: column-reverse;
+
+        .movies__card-info {
+            width: calc(100% - 7%);
+            background-color: #2F2F2F;
+            padding: 14px 0;
+            margin: 0;
+            display: grid;
+            justify-content: space-between;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas:
+                'title title like'
+                'duration duration duration'
+            ;
+            justify-items: start;
+            align-items: center;
+
+
+            .movies__card-title {
+                font-size: 12px;
+                line-height: 15px;
+                grid-area: title;
+                max-width: 228px;
+            }
+
+            .movies__card-duration {
+                grid-area: duration;
+                margin: 8px 0 0;
+            }
+
+            .movies__card-like {
+                grid-area: like;
+                margin-left: 74px;
+            }
+        }
+
+        .movies__card-image {
+            margin: 0;
+
+            .movies__card-img {
+                width: 300px;
+                height: 168px;
+                margin: 0;
+            }
+        }
+    }
+}

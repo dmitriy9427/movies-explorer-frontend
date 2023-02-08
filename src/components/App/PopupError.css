@@ -1,0 +1,44 @@
+.popup__error {
+  background-color: aliceblue;
+  width: calc(100% - 43%);
+  margin: 0 auto;
+  border-radius: 20px;
+  position: fixed;
+  top: 50%;
+  left: 24%;
+}
+
+.popup__error-movies {
+  color: rgb(255, 38, 0);
+  width: 97%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 10px 25px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 900px) {
+  .popup__error-movies {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .popup__error-movies {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 539px) {
+  .popup__error-movies {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .popup__error-movies {
+    font-size: 10px;
+  }
+}

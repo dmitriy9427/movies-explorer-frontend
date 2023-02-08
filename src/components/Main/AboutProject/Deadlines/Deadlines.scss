@@ -1,0 +1,72 @@
+.deadlines {
+    margin: 95px auto 57px;
+    display: grid;
+    grid-template-columns: 228px 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "weekone weekfour"
+        "weekonespan weekfourspan"
+    ;
+
+    .deadlines__week-one {
+        padding: 9px;
+        background-color: #3DDC84;
+        grid-area: weekone;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        color: #000000;
+    }
+
+    .deadlines__week-one-span {
+        grid-area: weekonespan;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 121%;
+        text-align: center;
+        color: #8B8B8B;
+        margin: 0;
+    }
+
+    .deadlines__week-four {
+        grid-area: weekfour;
+        background-color: #303030;
+        color: #fff;
+    }
+
+    .deadlines__week-four-span {
+        grid-area: weekfourspan;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .deadlines {
+        margin: 82px auto 40px;
+        grid-template-columns: 140px 1fr;
+
+        .deadlines__week-one {
+            padding: 9px;
+        }
+    }
+}
+
+@media screen and (max-width: 519px) {
+    .deadlines {
+        grid-template-columns: 100px 1fr;
+        margin: 55px auto 30px;
+
+        .deadlines__week-one {
+            font-size: 11px;
+            line-height: 13px;
+            padding: 9px;
+        }
+
+        .deadlines__week-one-span {
+            font-size: 11px;
+            line-height: 13px;
+        }
+    }
+}

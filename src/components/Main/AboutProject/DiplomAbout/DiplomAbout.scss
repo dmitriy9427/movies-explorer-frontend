@@ -1,0 +1,19 @@
+.diplom-about {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 40px;
+    align-items: center;
+}
+
+@media screen and (max-width: 900px) {
+    .diplom-about {
+        column-gap: 30px;
+    }
+}
+
+@media screen and (max-width: 519px) {
+    .diplom-about {
+        grid-template-columns: 1fr;
+    }
+}

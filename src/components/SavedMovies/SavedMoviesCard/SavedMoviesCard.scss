@@ -1,0 +1,106 @@
+.saved-movies__card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2F2F2F;
+
+    .saved-movies__card-info {
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 22px 0 22px 22px;
+
+        .saved-movies__card-title {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            margin: 0;
+        }
+
+        .saved-movies__card-duration {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 11px;
+            line-height: 13px;
+            color: #8B8B8B;
+            margin: 13px 0 30px;
+        }
+
+        .saved-movies__card-delete {
+            width: 8px;
+            height: 8px;
+            background-image: url("../../../images/X.svg");
+            background-position: center;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 0;
+            outline: 0;
+        }
+    }
+
+    .saved-movies__card-image {
+        display: flex;
+
+        .saved-movies__card-img {
+            margin: 6px 6px;
+            width: 220px;
+            height: 122px;
+        }
+    }
+}
+
+@media screen and (max-width: 519px) {
+    .saved-movies__card {
+        flex-direction: column-reverse;
+        max-width: 300px;
+        margin: 0 auto;
+
+        .saved-movies__card-info {
+            width: calc(100% - 7%);
+            background-color: #2F2F2F;
+            padding: 14px 0;
+            margin: 0;
+            display: grid;
+            justify-content: space-between;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas:
+                'title title delete'
+                'duration duration duration'
+            ;
+            justify-items: start;
+            align-items: center;
+
+            .saved-movies__card-title {
+                font-size: 12px;
+                line-height: 15px;
+                grid-area: title;
+                max-width: 228px;
+            }
+
+            .saved-movies__card-duration {
+                grid-area: duration;
+                margin: 8px 0 0 0;
+            }
+
+            .saved-movies__card-delete {
+                grid-area: delete;
+                margin-left: auto;
+            }
+        }
+
+        .saved-movies__card-image {
+            margin: 0;
+
+            .saved-movies__card-img {
+                width: 300px;
+                height: 168px;
+                margin: 0;
+            }
+        }
+    }
+}

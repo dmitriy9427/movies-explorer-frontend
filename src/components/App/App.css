@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  background-color: #202020;
+}
+#root {
+  display: block;
+  background-color: #202020;
+  margin: 0 auto;
+  max-width: 1280px;
+  min-width: 320px;
+  height: 100vh;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: #fff;
+}
+.main {
+  background-color: #202020;
+}
+
+.button {
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.button:hover {
+  opacity: 0.5;
+}

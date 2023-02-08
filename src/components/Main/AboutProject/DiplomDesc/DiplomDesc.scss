@@ -1,0 +1,54 @@
+.diplom {
+    margin: 0;
+    max-width: 550px;
+
+    .diplom__title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: -0.04em;
+        color: #FFFFFF;
+        margin: 6px 0 22px;
+    }
+
+    .diplom__description {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 143%;
+        color: #FFFFFF;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .diplom {
+
+        .diplom__description {
+            font-size: 12px;
+            line-height: 150%;
+        }
+    }
+}
+
+@media screen and (max-width: 519px) {
+    .diplom {
+        margin: 0 auto 56px;
+
+        &:last-of-type {
+            margin: 0;
+        }
+
+        .diplom__title {
+            font-size: 18px;
+            line-height: 22px;
+            margin: 0 auto 16px;
+        }
+
+        .diplom__description {
+            font-size: 11px;
+            line-height: 145%;
+        }
+    }
+}
