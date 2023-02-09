@@ -107,22 +107,24 @@
                 background-color: #754f4f;
                 opacity: 0.5;
             }
+
+            .register__button-disabled {
+                border: none;
+                padding: 13px 126px 15px 124px;
+                margin: 55px auto 16px;
+                border-radius: 3px;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                text-align: center;
+                background: rgba(248, 248, 248, .5);
+                cursor: not-allowed;
+                pointer-events: all !important;
+            }
         }
 
-        .register__button-disabled {
-            border: none;
-            padding: 13px 126px 15px 124px;
-            margin: 55px auto 16px;
-            border-radius: 3px;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 17px;
-            text-align: center;
-            background: rgba(248, 248, 248, .5);
-            cursor: not-allowed;
-            pointer-events: all !important;
-        }
+
 
         .register__box {
             display: flex;
@@ -172,6 +174,10 @@
             .register__button {
                 margin-top: 66px;
             }
+
+            .register__button-disabled {
+                margin-top: 66px;
+            }
         }
 
     }
@@ -205,6 +211,13 @@
             }
 
             .register__button {
+                padding: 15px 68px 15px 67px;
+                font-size: 12px;
+                line-height: 15px;
+                margin: 137px auto 14px;
+            }
+
+            .register__button-disabled {
                 padding: 15px 68px 15px 67px;
                 font-size: 12px;
                 line-height: 15px;

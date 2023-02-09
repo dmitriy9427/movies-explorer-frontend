@@ -164,6 +164,10 @@
             .login__button {
                 margin: 179px auto 16px;
             }
+
+            .login__button-disabled {
+                margin: 179px auto 16px;
+            }
         }
     }
 }
@@ -192,6 +196,13 @@
             }
 
             .login__button {
+                padding: 15px 113px 15px 111px;
+                margin: 275px auto 14px;
+                font-size: 12px;
+                line-height: 15px;
+            }
+
+            .login__button-disabled {
                 padding: 15px 113px 15px 111px;
                 margin: 275px auto 14px;
                 font-size: 12px;
