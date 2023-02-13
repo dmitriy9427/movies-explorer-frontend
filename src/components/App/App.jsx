@@ -409,7 +409,7 @@ const App = () => {
           }
         />
 
-        <Route exact path="*" element={<NotFound />} />
+        <Route exact path="/*" element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>
   );
