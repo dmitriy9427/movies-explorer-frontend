@@ -88,7 +88,7 @@ const Register = ({
           <button
             type="submit"
             className={
-              isValid ? "register__button" : "register__button-disabled"
+              isValid ? "register__button" : "register__button register__button-disabled"
             }
             disabled={!isValid}
           >

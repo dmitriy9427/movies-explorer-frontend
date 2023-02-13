@@ -66,7 +66,7 @@ const Login = ({ handleLoginUser, errorLogin, errorMessage }) => {
           <button
             type="submit"
             className={
-              isValid ? "login__button" : "login__button-disabled"
+              isValid ? "login__button" : "login__button login__button-disabled"
             }
             disabled={!isValid}
           >
