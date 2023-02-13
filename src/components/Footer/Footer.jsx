@@ -32,6 +32,6 @@ const Footer = () => {
       </div>
     </section>
   );
-}
+};
 
 export default Footer;

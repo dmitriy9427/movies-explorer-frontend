@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Route,
-  Routes,
-  useNavigate,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
-import * as Redirect from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -324,7 +317,8 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
-        <Route path="/" element={<Main loggedIn={loggedIn} />} />
+        <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
+        <Route exact path="*" element={<NotFound />} />
         <Route
           path="/movies"
           element={
@@ -367,7 +361,6 @@ const App = () => {
           }
         />
         <Route
-          exact
           path="/profile"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
@@ -382,7 +375,6 @@ const App = () => {
         />
 
         <Route
-          exact
           path="/signin"
           element={
             <ProtectedRouteNav loggedIn={loggedIn}>
@@ -396,7 +388,6 @@ const App = () => {
         />
 
         <Route
-          exact
           path="/signup"
           element={
             <ProtectedRouteNav loggedIn={loggedIn}>
@@ -408,8 +399,6 @@ const App = () => {
             </ProtectedRouteNav>
           }
         />
-
-        <Route exact path="/*" element={<NotFound />} />
       </Routes>
     </CurrentUserContext.Provider>
   );
