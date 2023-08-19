@@ -122,7 +122,9 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  url: "https://bac.domainname.diplomryb.nomoredomains.club",
+  url: "http://localhost:3000/",
 });
 
 export default mainApi;
+
+//https://bac.domainname.diplomryb.nomoredomains.club

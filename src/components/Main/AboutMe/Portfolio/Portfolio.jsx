@@ -32,7 +32,7 @@ const Portfolio = () => {
 
         <li className="portfolio__li">
           <a
-            href="https://domainname.ryabov1994.nomoredomains.icu/"
+            href="https://dmitriy9427.github.io/react-mesto-auth/"
             target="_blank"
             rel="noreferrer"
             className="portfolio__link-a"
