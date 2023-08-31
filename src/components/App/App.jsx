@@ -317,7 +317,11 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Routes>
-        <Route exact path="/" element={<Main loggedIn={loggedIn} />} />
+        <Route
+          exact
+          path="/movies-explorer-frontend"
+          element={<Main loggedIn={loggedIn} />}
+        />
         <Route exact path="*" element={<NotFound />} />
         <Route
           path="/movies"
