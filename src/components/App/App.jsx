@@ -307,7 +307,7 @@ const App = () => {
   // выход из системы
   const handleLogout = () => {
     localStorage.clear();
-    navigati("/");
+    navigati("/movies-explorer-frontend");
     setLoggedIn(false);
     setCurrentUser({});
     setMovies([]);
